@@ -36,7 +36,7 @@ movies.each_value {|v| v_array.push(v)}
 
 puts v_array
 
-# calculate the factorial
+# calculates the factorial
 
 def factoryal(num)
   num = num.to_i
