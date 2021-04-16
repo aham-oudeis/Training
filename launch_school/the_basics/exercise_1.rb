@@ -1,6 +1,6 @@
 # adding two strings
 
-puts "Gagan " + "Sapkota"
+puts "Gasan " + "Atkopa"
 
 # finding each digit of a four digits number
 
