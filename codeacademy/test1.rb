@@ -19,11 +19,11 @@
 
 # # we could substitute the curly braces with do-end pair
 # words.each { |word| 
-#     if word != redact
-#         print word + " "
-#     else
-#         print "REDACTED" + " "
-#     end }
+#   if word != redact
+#     print word + " "
+#    else
+#      print "REDACTED" + " "
+#    end }
   
 
 # pets = Hash.new
@@ -35,12 +35,12 @@
 num_list = (1..16).to_a
 
 def alphabetize(arr, rev=false)
-    arr.sort!
-    if rev == true
-        return arr.reverse!
-    else
-        return arr
-    end
+  arr.sort!
+  if rev == true
+      return arr.reverse!
+  else
+    return arr
+  end
 
 end
 
