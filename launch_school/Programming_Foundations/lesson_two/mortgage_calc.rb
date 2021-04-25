@@ -34,7 +34,7 @@ def monthly_payments(arr)
   numerator / denominator
 end
 
-def mortgage_calculator
+def mortgage_calculator_params
   prompt('What is your loan amount?')
   loan_amount = valid_num_check
 
@@ -59,7 +59,7 @@ name = gets.chomp
 prompt("Hi #{name.capitalize}! Welcome to Mortgage Calculator!")
 
 loop do
-  arr_params = mortgage_calculator
+  arr_params = mortgage_calculator_params
   result = monthly_payments(arr_params).to_f.round(2)
   prompt('calc')
   prompt("Your monthly interest payment is: #{result}")
