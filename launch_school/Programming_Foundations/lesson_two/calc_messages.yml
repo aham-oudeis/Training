@@ -1,0 +1,22 @@
+
+welcome: "Welcome to the Calculator!"
+name: "What is your name?"
+command_prompt: "What operation would you like to perform?\n
+    \tadd:        press a\n 
+    \tsubstract:  press s\n
+    \tmultiply:   press m\n
+    \tdivision:   press d"
+valid_name: "Please enter a valid name!"
+valid_num: "Please enter a valid number!"
+no_zero_div: "Division by O is not allowed!"
+valid_oper: "Please input a valid operation! Choose a, s, m, or d."
+repeat_again?: "Do you want to calculate again?
+    Press Y to calculate again."
+add: "Adding the two numbers..."
+subs: "Substracting the two numbers..."
+mult: "Multiplying the two numbers..."
+divd: "Dividing the two numbers..."
+result: "The result is: "
+first_num: "Please enter the first number: "
+second_num: "Please enter the second number: "
+thank_you: "Thank you for using the calculator. Goodbye!"
