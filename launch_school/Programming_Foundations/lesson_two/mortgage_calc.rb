@@ -31,26 +31,35 @@ def monthly_payments(arr)
   loan_duration = arr[2]
   numerator = loan_amount * monthly_interest
   denominator = (1 - (1 + monthly_interest)**(-loan_duration))
+  return loan_amount / loan_duration if monthly_interest == 0
   numerator / denominator
 end
 
-def mortgage_calculator_params
+def ask_loan_amount
   prompt('What is your loan amount?')
-  loan_amount = valid_num_check
+  valid_num_check
+end
 
+def ask_apr_percent
   prompt('What is your APR in percentage(%)?')
   apr_percent = Rational(valid_num_check, 100)
-  monthly_interest = Rational(apr_percent, 12)
+  Rational(apr_percent, 12)
+end
 
+def ask_loan_duration
   prompt("Lets figure out the loan duration.
     Let's input years first and then months second.")
   prompt("Loan duration in years?")
   loan_duration_years = valid_num_check * 12
   prompt("Remaining months?")
   remaining_months = valid_num_check
+  loan_duration_years + remaining_months
+end
 
-  loan_duration_months = loan_duration_years + remaining_months
-
+def mortgage_calculator_params
+  loan_amount = ask_loan_amount
+  monthly_interest = ask_apr_percent
+  loan_duration_months = ask_loan_duration
   [loan_amount, monthly_interest, loan_duration_months]
 end
 
@@ -59,9 +68,10 @@ name = gets.chomp
 prompt("Hi #{name.capitalize}! Welcome to Mortgage Calculator!")
 
 loop do
-  arr_params = mortgage_calculator_params
-  result = monthly_payments(arr_params).to_f.round(2)
+  mortgage_info = mortgage_calculator_params
+  result = monthly_payments(mortgage_info).to_f.round(2)
   prompt('calc')
+  sleep(1)
   prompt("Your monthly interest payment is: #{result}")
 
   prompt("Do you want to calculate again?
