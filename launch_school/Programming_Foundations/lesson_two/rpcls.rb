@@ -43,19 +43,16 @@ end
 def score_msg(num)
   case num
   when 0
-    prompt "It's a tie!"
+    "It's a tie!"
   when 1
-    prompt "You win!"
+    "You win!"
   else
-    prompt "Computer wins!"
+    "Computer wins!"
   end
 end
 
-prompt("What's your name?")
-name = gets.chomp
-
 intro = <<-MSG
-Hi #{name.capitalize}! Let's play Rock, Paper, Scissors, Lizard, Spock game!
+Let's play Rock, Paper, Scissors, Lizard, Spock game!
 
   Rules: Rock crushes Scissors cuts Paper
   covers Rock crushes Lizard poisons Spock
@@ -77,10 +74,10 @@ sets = 0
 user_wins = 0
 computer_wins = 0
 a_tie = 0
-game_total = {}
+game_data = {}
 
 loop do
-  prompt("Round #{round + 1}") if sets % 5 == 0
+  puts("\n***   Round #{round + 1}   ***") if sets % 5 == 0
   user_choice = valid_choice
   computer_choice = OPTIONS.sample
 
@@ -89,10 +86,9 @@ loop do
   u_choic = OPTIONS_FULL[user_choice]
   c_choic = OPTIONS_FULL[computer_choice]
 
-  prompt("You chose #{u_choic} and computer chose #{c_choic}")
-
   score = game_eval(user_choice, computer_choice)
-  score_msg(score)
+  msg = score_msg(score)
+  prompt("You chose #{u_choic} and computer chose #{c_choic}. #{msg}")
 
   case score
   when 0
@@ -103,32 +99,35 @@ loop do
     computer_wins += 1
   end
 
-  game_total["Round #{round + 1}"] =
+  game_data["Round #{round + 1}"] =
     ["#{user_wins} wins", "#{computer_wins} losses", "#{a_tie} ties"]
   round += (sets / 5)
 
   if sets % 5 == 0
+    prompt("Tallying score for round #{round}...")
+    sleep(1)
 
     tally = <<-MSG
-Wins: #{user_wins}  |  Losses: #{computer_wins}  |  Ties: #{a_tie}
+\nWins: #{user_wins}  |  Losses: #{computer_wins}  |  Ties: #{a_tie}\n
     MSG
-    prompt(tally)
+    puts(tally)
     prompt("Round #{round} is tied!") if computer_wins == user_wins
     prompt("You won round Round #{round}!") if user_wins > computer_wins
     prompt("Computer won Round #{round}!") if computer_wins > user_wins
 
-    prompt("Press Y to play again.")
+    puts("\nPress Y to play again (S for game summary); anything else to quit.")
     response = gets.chomp
-    if response.downcase().start_with?('y') == false
-      game_total.each do |k, v|
+
+    if response.downcase().start_with?('s')
+      game_data.each do |k, v|
         v1 = v[0]
         v2 = v[1]
         v3 = v[2]
-        puts(k + ": " + v1 + " | " + v2 + " | " + v3)
+        puts("\n"+ k + ": " + v1 + " | " + v2 + " | " + v3)
       end
 
-      prompt("You played #{round} rounds.")
-      prompt("Thank you for playing Rock, Paper, Scissors, Spock, Lizard.
+    elsif response.downcase().start_with?('y') == false
+      prompt("Thank you for playing Rock, Paper, Scissors, Lizard, Spock.
     Goodbye!")
       break
     end
