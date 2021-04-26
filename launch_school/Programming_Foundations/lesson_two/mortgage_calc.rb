@@ -41,7 +41,7 @@ def ask_loan_amount
 end
 
 def ask_apr_percent
-  prompt('What is your APR in percentage(%)?')
+  prompt('What is your APR in percentage(%)? (omit % sign)')
   apr_percent = Rational(valid_num_check, 100)
   Rational(apr_percent, 12)
 end
@@ -70,8 +70,8 @@ prompt("Hi #{name.capitalize}! Welcome to Mortgage Calculator!")
 loop do
   mortgage_info = mortgage_calculator_params
   result = monthly_payments(mortgage_info).to_f.round(2)
-  prompt('calc')
-  sleep(1)
+  prompt('calc') # unnecessary step 
+  sleep(1)  # unnecessary step, dramatic pause
   prompt("Your monthly interest payment is: #{result}")
 
   prompt("Do you want to calculate again?
