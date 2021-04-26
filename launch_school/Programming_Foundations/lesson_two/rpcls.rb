@@ -123,7 +123,7 @@ loop do
         v1 = v[0]
         v2 = v[1]
         v3 = v[2]
-        puts("\n"+ k + ": " + v1 + " | " + v2 + " | " + v3)
+        puts("\n" + k + ": " + v1 + " | " + v2 + " | " + v3)
       end
 
     elsif response.downcase().start_with?('y') == false
