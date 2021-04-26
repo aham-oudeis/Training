@@ -86,7 +86,10 @@ loop do
 
   sets += 1
 
-  prompt("You chose #{OPTIONS_FULL[user_choice]} and computer chose #{OPTIONS_FULL[computer_choice]}")
+  u_choic = OPTIONS_FULL[user_choice]
+  c_choic = OPTIONS_FULL[computer_choice]
+
+  prompt("You chose #{u_choic} and computer chose #{c_choic}")
 
   score = game_eval(user_choice, computer_choice)
   score_msg(score)
@@ -100,17 +103,20 @@ loop do
     computer_wins += 1
   end
 
-  game_total["Round #{round + 1}"] = ["#{user_wins} wins", "#{computer_wins} losses", "#{a_tie} ties"]
+  game_total["Round #{round + 1}"] =
+    ["#{user_wins} wins", "#{computer_wins} losses", "#{a_tie} ties"]
   round += (sets / 5)
 
   if sets % 5 == 0
-    tally = <<-MSG 
+
+    tally = <<-MSG
 Wins: #{user_wins}  |  Losses: #{computer_wins}  |  Ties: #{a_tie}
     MSG
     prompt(tally)
     prompt("Round #{round} is tied!") if computer_wins == user_wins
     prompt("You won round Round #{round}!") if user_wins > computer_wins
     prompt("Computer won Round #{round}!") if computer_wins > user_wins
+
     prompt("Press Y to play again.")
     response = gets.chomp
     if response.downcase().start_with?('y') == false
@@ -118,7 +124,7 @@ Wins: #{user_wins}  |  Losses: #{computer_wins}  |  Ties: #{a_tie}
         v1 = v[0]
         v2 = v[1]
         v3 = v[2]
-        puts(k + ": " + v1 + " | " + v2 + " | "+ v3)
+        puts(k + ": " + v1 + " | " + v2 + " | " + v3)
       end
 
       prompt("You played #{round} rounds.")
@@ -127,9 +133,9 @@ Wins: #{user_wins}  |  Losses: #{computer_wins}  |  Ties: #{a_tie}
       break
     end
 
-  sets = 0
-  user_wins = 0
-  computer_wins = 0
-  a_tie = 0
+    sets = 0
+    user_wins = 0
+    computer_wins = 0
+    a_tie = 0
   end
 end
