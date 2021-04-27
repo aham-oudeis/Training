@@ -1,19 +1,64 @@
 OPTIONS = ['r', 'p', 'c', 'l', 's']
 OPTIONS_FULL = { "r" => "ROCK", "p" => "PAPER", "c" => "SCISSORS",
                  "l" => "LIZARD", "s" => "SPOCK" }
+SET_LIMIT = 5
+
+intro = <<-MSG
+Let's play Rock, Paper, Scissors, Lizard, Spock game!
+
+  Rules: Rock crushes Scissors cuts Paper
+  covers Rock crushes Lizard poisons Spock
+  smashes Scissors decapitates Lizard eats
+  Paper disproves Spock vaporizes Rock.
+
+  For this game each one is represented as follows:
+    Rock as       r
+    Paper as      p
+    SCissors as   c
+    Lizard as     l
+    Spock as      s
+  
+  We shall play #{SET_LIMIT} number of sets in each round.
+
+  Press ENTER to continue. or, Q to quit.
+  MSG
 
 def prompt(str)
   puts "==> #{str}"
 end
 
-def valid_choice
-  prompt "Press one of the following keys: r, p, c, l, s"
-  choice = gets.chomp.downcase
-  if OPTIONS.include?(choice)
-    return choice
+def parting_msg
+  prompt("Thank you for playing Rock, Paper, Scissors, Lizard, Spock.
+    Goodbye!")
+end
+
+def play_again_get_summary_or_quit
+  puts("\nPress Y to play again (S for game summary); anything else to quit.")
+end
+
+def sleep_until_enter(response)
+  if response.nil?
+    sleep
   end
-  puts "Invalid input...Let's try again!"
-  valid_choice
+end
+
+def get_valid_choice
+  choice = ''
+
+  loop do
+    prompt "Press one of the following keys: r, p, c, l, s"
+    choice = gets.chomp.downcase
+    break if OPTIONS.include?(choice)
+    puts "Invalid input...Let's try again!"
+  end
+
+  choice
+end
+
+def who_chose_what(user_choice, computer_choice)
+  user_choice_name = OPTIONS_FULL[user_choice]
+  computer_choice_name = OPTIONS_FULL[computer_choice]
+  prompt("You chose #{user_choice_name} and computer chose #{computer_choice_name}.")
 end
 
 def win?(user, comp)
@@ -22,12 +67,6 @@ def win?(user, comp)
                     ['s', 'c'], ['s', 'r']]
 
   user_win_combs.include?([user, comp])
-
-  # ['c', 'l'].include?(comp) && user == 'r' ||
-  #   ['r', 's'].include?(comp) && user == 'p' ||
-  #   ['p', 'l'].include?(comp) && user == 'c' ||
-  #   ['s', 'p'].include?(comp) && user == 'l' ||
-  #   ['c', 'r'].include?(comp) && user == 's'
 end
 
 def game_eval(user, comp)
@@ -51,90 +90,102 @@ def score_msg(num)
   end
 end
 
-intro = <<-MSG
-Let's play Rock, Paper, Scissors, Lizard, Spock game!
+def display_who_wins(user_score, comp_score, round)
+  if comp_score == user_score
+    prompt "Round #{round} is tied!"
+  elsif user_score > comp_score
+    prompt "You won round Round #{round}!"
+  else
+    prompt "Computer won Round #{round}!"
+  end
+end
 
-  Rules: Rock crushes Scissors cuts Paper
-  covers Rock crushes Lizard poisons Spock
-  smashes Scissors decapitates Lizard eats
-  Paper disproves Spock vaporizes Rock.
+def display_round_result(wins, loss, ties)
+  tally = <<-MSG
+  \nWins: #{wins}  |  Losses: #{loss}  |  Ties: #{ties}\n
+      MSG
+  puts(tally)
+end
 
-  For this game each one is represented as follows:
-    Rock as       r
-    Paper as      p
-    SCissors as   c
-    Lizard as     l
-    Spock as      s
-  
-  MSG
+def display_game_summary(game_data)
+  game_data.each do |k, v|
+    puts("\n #{k} : Wins #{v[:wins]} | Losses #{v[:losses]} | Ties #{v[:ties]}")
+  end
+end
+
+# start game
 prompt(intro)
 
-round = 0
-sets = 0
-user_wins = 0
-computer_wins = 0
-a_tie = 0
-game_data = {}
+continue_or_not = gets.chomp
 
-loop do
-  puts("\n***   Round #{round + 1}   ***") if sets % 5 == 0
-  user_choice = valid_choice
-  computer_choice = OPTIONS.sample
+if continue_or_not.downcase != 'q'
+  system('clear')
+  round = 0
+  sets = 0
+  user_wins = 0
+  computer_wins = 0
+  a_tie = 0
+  update_game_results = {}
 
-  sets += 1
-
-  u_choic = OPTIONS_FULL[user_choice]
-  c_choic = OPTIONS_FULL[computer_choice]
-
-  score = game_eval(user_choice, computer_choice)
-  msg = score_msg(score)
-  prompt("You chose #{u_choic} and computer chose #{c_choic}. #{msg}")
-
-  case score
-  when 0
-    a_tie += 1
-  when 1
-    user_wins += 1
-  else
-    computer_wins += 1
-  end
-
-  game_data["Round #{round + 1}"] =
-    ["#{user_wins} wins", "#{computer_wins} losses", "#{a_tie} ties"]
-  round += (sets / 5)
-
-  if sets % 5 == 0
-    prompt("Tallying score for round #{round}...")
-    sleep(1)
-
-    tally = <<-MSG
-\nWins: #{user_wins}  |  Losses: #{computer_wins}  |  Ties: #{a_tie}\n
-    MSG
-    puts(tally)
-    prompt("Round #{round} is tied!") if computer_wins == user_wins
-    prompt("You won round Round #{round}!") if user_wins > computer_wins
-    prompt("Computer won Round #{round}!") if computer_wins > user_wins
-
-    puts("\nPress Y to play again (S for game summary); anything else to quit.")
-    response = gets.chomp
-
-    if response.downcase().start_with?('s')
-      game_data.each do |k, v|
-        v1 = v[0]
-        v2 = v[1]
-        v3 = v[2]
-        puts("\n" + k + ": " + v1 + " | " + v2 + " | " + v3)
-      end
-
-    elsif response.downcase().start_with?('y') == false
-      prompt("Thank you for playing Rock, Paper, Scissors, Lizard, Spock.
-    Goodbye!")
-      break
+  loop do
+    # clear the sets data when the number of sets hits the SET_LIMIT
+    if sets % SET_LIMIT == 0
+      sets = 0
+      user_wins = 0
+      computer_wins = 0
+      a_tie = 0
+      system('clear')
     end
 
-    sets = 0
-    user_wins = 0
-    computer_wins = 0
-    a_tie = 0
+    puts("\n***   Round #{round + 1}   ***") if sets % SET_LIMIT == 0
+    user_choice = get_valid_choice
+    computer_choice = OPTIONS.sample
+    sets += 1
+
+    score = game_eval(user_choice, computer_choice)
+    eval_msg = score_msg(score)
+
+    who_chose_what(user_choice, computer_choice)
+    prompt(eval_msg)
+
+    case score
+    when 0
+      a_tie += 1
+    when 1
+      user_wins += 1
+    else
+      computer_wins += 1
+    end
+
+    update_game_results["Round #{round + 1}"] =
+      { wins: user_wins, losses: computer_wins, ties: a_tie }
+
+    # add 1 to the round when sets reaches the SET_LIMIT
+    round += (sets / SET_LIMIT)
+
+    if sets % SET_LIMIT == 0
+      prompt("Tallying score for round #{round}...")
+      sleep(1)
+      display_round_result(user_wins, computer_wins, a_tie)
+      display_who_wins(user_wins, computer_wins, round)
+
+      play_again_get_summary_or_quit
+      response = gets.chomp
+
+      if response.downcase().start_with?('s')
+        system('clear')
+        display_game_summary(update_game_results)
+
+        puts "\n Press Enter to continue playing..."
+
+        sleep_until_enter(gets.chomp)
+
+      elsif response.downcase().start_with?('y') == false
+        parting_msg
+        break
+      end
+    end
   end
+else
+  parting_msg
 end
