@@ -17,7 +17,7 @@ Let's play Rock, Paper, Scissors, Lizard, Spock game!
     SCissors as   c
     Lizard as     l
     Spock as      s
-  
+
   We shall play #{SET_LIMIT} number of sets in each round.
 
   Press ENTER to continue. or, Q to quit.
@@ -58,7 +58,8 @@ end
 def who_chose_what(user_choice, computer_choice)
   user_choice_name = OPTIONS_FULL[user_choice]
   computer_choice_name = OPTIONS_FULL[computer_choice]
-  prompt("You chose #{user_choice_name} and computer chose #{computer_choice_name}.")
+  prompt("You chose #{user_choice_name} and computer chose"\
+    " #{computer_choice_name}.")
 end
 
 def win?(user, comp)
