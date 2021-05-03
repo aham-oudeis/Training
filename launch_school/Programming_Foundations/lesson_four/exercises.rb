@@ -73,80 +73,79 @@
 # puts change_me("") == ""
 # puts change_me("I LOVE my mom and dad equally") == "I LOVE my MOM and DAD equally"
 
-
-def palindrome?(str)
-  #case insensitive palindrome test
-  # str.downcase == str.reverse.downcase
-  
-  # a case sensitive would be:
-  str == str.reverse if str.size > 1
-end
-
-# palindrome substrings problem with looping method
-
-def palindrome_substrings(str)
-  palindrome_substrings = []
-  size = str.size
-  idx_limit = str.size - 1
-  return palindrome_substrings if size == 0
-  
-  loop do
-    break if idx_limit == 0
-    string = str[..idx_limit]
-    # puts string
-    length = string.size
-    palindrome_substrings << string if palindrome?(string)
-    count = 1
-
-    loop do
-      break if count >= length - 1
-      sub_string = string[count..]
-      # puts sub_string
-      palindrome_substrings << sub_string if palindrome?(sub_string)
-
-      count += 1
-    end
-
-    idx_limit -= 1
-  end
-
-  palindrome_substrings
-end
-
-# Palindrome substrings problem with a bit of recursion
-
-# def palindrome_substrings(str)
-#   arr_palin_substrs = []
-#   size = str.size
-#   return arr_palin_substrs if size == 0
-
-#   if size == 2
-#     arr_palin_substrs << str if palindrome?(str)
-#     arr_palin_substrs
-#   else
-#     idx = size - 1
-#     loop do
-#       break if idx == 0
-#       arr_palin_substrs << str[..idx] if palindrome?(str[..idx])
-#       idx -= 1
-#     end
-
-#     arr_palin_substrs + palindrome_substrings(str[1..])
-#   end
-  
-# end
-
-p palindrome_substrings('pupupllel')
-
 # PROBLEM:
 
 # Given a string, write a method `palindrome_substrings` which returns
 # all the substrings from a given string which are palindromes. Consider
 # palindrome words case sensitive.
 
-# Test cases:
+def palindrome?(str)
+  #case insensitive palindrome test
+  # str.downcase == str.reverse.downcase
+  
+  # a case sensitive would be:
+  str == str.reverse
+end
 
-puts palindrome_substrings("supercalifragilisticexpialidocious") == ["ili"]
+# palindrome substrings problem with looping method
+# def substrings(str)
+#   substrings = []
+#   size_of_string = str.size
+#   from_idx = 0
+
+#   loop do
+#     length_of_substring = str[from_idx..].length
+#     how_many_next_chars = 2
+
+#     loop do
+#       substrings << str[from_idx, how_many_next_chars]
+#       break if how_many_next_chars == length_of_substring
+
+#       how_many_next_chars += 1
+#     end
+
+#     from_idx += 1
+#     break if from_idx > size_of_string - 2
+#   end
+
+#   substrings
+# end
+
+# puts substrings('bell') # => ['be', 'bel', 'bell', 'el', 'ell', 'll']
+
+# # Palindrome substrings problem with a bit of recursion
+
+def substrings_of_fixed_index(str)
+  if str.size == 0
+    []
+  elsif str.size == 2
+    [str]
+  else
+    [str] + substrings_of_fixed_index(str[..-2])
+  end
+end
+
+def substrings(str)
+  if str.size <= 2
+    substrings_of_fixed_index(str)
+  else
+    substrings_of_fixed_index(str) + substrings(str[1..])
+  end
+end
+
+p substrings('hell')
+
+# p substrings('pupupllel')
+
+
+def palindrome_substrings(str)
+  substrings(str).select {|substring| palindrome?(substring)}
+end
+
+p palindrome_substrings('hell')
+# # Test cases:
+
+# puts palindrome_substrings("supercalifragilisticexpialidocious") == ["ili"]
 # puts palindrome_substrings("abcddcbA") == ["bcddcb", "cddc", "dd"]
 # puts palindrome_substrings("palindrome") == []
-# puts palindrome_substrings("") == []
+# p palindrome_substrings("") == []
