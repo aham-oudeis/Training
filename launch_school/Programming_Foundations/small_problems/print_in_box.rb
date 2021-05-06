@@ -25,18 +25,16 @@ PADDING = 4 # 2 on each side of the text
 MARGIN_CONSTANT = MARGIN_ALLOWED - PADDING
 
 def wrap(msg)
-  length = msg.length
-  # horizontal_lines = 1 + length / line_margin
-  line_adjusted_msg = ''
   line_margin = MARGIN_CONSTANT
   start_index = 0
+  
   loop do
     line_msg = msg[start_index..line_margin].strip
 
     puts "| " + line_msg.ljust(MARGIN_CONSTANT) + " |"
 
-    break if line_margin > length
-    line_adjusted_msg << "\n"
+    break if line_margin > msg.length
+
     start_index = line_margin + 1
     line_margin += MARGIN_CONSTANT
   end
