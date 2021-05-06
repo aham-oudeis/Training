@@ -41,12 +41,12 @@ def reverse!(arr)
   arr
 end
 
-# def new_reverse(arr)
+# def reverse(arr)
 #   arr.length < 2 ? arr : [arr[-1]] + new_reverse(arr[1..-2]) + [arr[0]]
 # end
 
 # def reverse!(arr)
-#   arr.replace(new_reverse(arr))
+#   arr.replace(reverse(arr))
 # end
 
 list = [1,2,3,4]
