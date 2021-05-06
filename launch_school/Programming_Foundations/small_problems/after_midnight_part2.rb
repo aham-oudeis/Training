@@ -5,6 +5,7 @@
 -that means the time stamp gives an easy clue to the hour and minutes
 -but if it is 2 hours before midnight, the time stamp has to be normalized
 -for normalization, the time stamp can be substracted from 1440
+-to accomodate for 0 and 1440, we can get the modulo of the minutes by diving it by 1440
 =end
 
 def after_midnight(str)
