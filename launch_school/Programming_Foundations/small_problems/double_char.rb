@@ -15,11 +15,8 @@ CONSONANTS = ALPHABETS - VOWELS
 def double_consonants(str)
   new_str = ''
   str.chars.each do |char|
-    if CONSONANTS.include?(char.upcase)
-      new_str << char << char
-    else
-      new_str << char
-    end
+      new_str << char 
+      new_str << char if CONSONANTS.include?(char.upcase)
   end
   new_str
 end
