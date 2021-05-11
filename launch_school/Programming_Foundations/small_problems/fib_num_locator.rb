@@ -27,6 +27,7 @@ def find_fibonacci_index_by_length(num)
   loop do
     number = fibonacchi_num_arr[-2] + fibonacchi_num_arr[-1]
     fibonacchi_num_arr.push(number)
+
     break if number.to_s.length == num
   end
   fibonacchi_num_arr.size
