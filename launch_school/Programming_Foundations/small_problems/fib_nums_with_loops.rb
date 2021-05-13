@@ -16,8 +16,8 @@ def fibonacci_last(n)
   last_two_nums = [1, 1]
   #the last digit of a fibonacci number repeats every 60 cycles
   3.upto(n % 60) do
-    last_two_nums = [last_two_nums[1] % 10, 
-                      (last_two_nums[0] + last_two_nums[1]) % 10]
+    last_two_nums = [last_two_nums[1] % 10,
+                    (last_two_nums[0] + last_two_nums[1]) % 10]
   end
 
   last_two_nums[1]
