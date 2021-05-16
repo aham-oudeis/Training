@@ -23,21 +23,26 @@ Algorithm: [3, 2, 1, 7]
 =end
 
 def bubble_sort!(arr)
-  idx = 0
-  switches = 0
+  last_idx = arr.size - 1
 
   loop do
-    if arr[idx] > arr[idx + 1]
-      arr[idx], arr[idx + 1] = arr[idx + 1], arr[idx]
-      switches += 1
+    start_idx = 0
+    switches = 0
+
+    loop do
+      if arr[start_idx] > arr[start_idx + 1]
+        arr[start_idx], arr[start_idx + 1] = arr[start_idx + 1], arr[start_idx]
+        switches += 1
+      end
+
+      start_idx += 1
+      break if start_idx == last_idx
     end
 
-    idx += 1
-    break if idx == (arr.size - 1)
-  end
+    last_idx -= 1
 
-  return arr if switches == 0
-  bubble_sort!(arr)
+    return arr if switches == 0
+  end
 end
 
 sample = [1, 8, 9, 10]
