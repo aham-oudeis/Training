@@ -1,3 +1,5 @@
+require 'pry'
+
 EMPTY_BOARD = {
   1=>" ",
   2=>" ",
@@ -24,6 +26,10 @@ def display_board(input=EMPTY_BOARD)
   puts "\t       |       |       "
 end
 
+def prompt(str)
+  puts "==> #{str}"
+end
+
 def game_intro()
   slot_numbers = { 1=>"1", 2=>"2", 3=>"3", 4=>"4", 5=>"5", 6=>"6",
     7=>"7", 8=>"8", 9=>"9"}
@@ -45,10 +51,6 @@ def continue_game()
   puts "  Press ENTER/RETURN to continue."
   sleep_until_enter(gets.chomp)
   system('clear')
-end
-
-def prompt(str)
-  puts "==> #{str}"
 end
 
 def parting_msg
@@ -81,7 +83,7 @@ def get_valid_choice(options)
 end
 
 def game_eval(board_state)
-  three_sq_rows = [
+  win_possibility = [
     [board_state[1], board_state[2], board_state[3]],
     [board_state[4], board_state[5], board_state[6]],
     [board_state[7], board_state[8], board_state[9]],
@@ -89,44 +91,45 @@ def game_eval(board_state)
     [board_state[2], board_state[5], board_state[8]],
     [board_state[3], board_state[6], board_state[9]],
     [board_state[1], board_state[5], board_state[9]],
-    [board_state[3], board_state[5], board_state[8]],
+    [board_state[3], board_state[5], board_state[7]],
   ]
 
-  user_win = three_sq_rows.any? {|arr| arr.all? {|el| el == 'X'}}
-  computer_win = three_sq_rows.any? {|arr| arr.all? {|el| el == 'O'}}
+  user_win = win_possibility.any? {|arr| arr.all? {|el| el == 'X'}}
+  computer_win = win_possibility.any? {|arr| arr.all? {|el| el == 'O'}}
 
   [user_win, computer_win]
 end
 
-def play_game(board_state)
-  valid_inputs = %w(1 2 3 4 5 6 7 8 9)
-
+def play_game()
   game_intro()
   continue_game()
   puts "Pick a slot number to place a mark on that position."
-  user_choice = get_valid_choice(valid_inputs)
 
   loop do
+    board_state = EMPTY_BOARD.dup
+    valid_inputs = %w(1 2 3 4 5 6 7 8 9)
+    user_choice = get_valid_choice(valid_inputs)
+
     loop do
-      exit_condition = game_eval(board_state).any? ||
-                              valid_inputs.empty? ||
-                                user_choice == 'q'
+      break if (valid_inputs.empty? || user_choice == 'q')
 
       valid_inputs.delete(user_choice)
 
       update_board(user_choice.to_i, 'X', board_state)
       display_board(board_state)
-      break if exit_condition
+
+      break if game_eval(board_state).any?
 
       puts "Computer's turn."
-      sleep(3)
+      sleep(1)
       system('clear')
 
       computer_choice = valid_inputs.sample
       update_board(computer_choice.to_i, 'O', board_state)
       valid_inputs.delete(computer_choice)
       display_board(board_state)
-      break if exit_condition
+
+      break if game_eval(board_state).any?
 
       user_choice = get_valid_choice(valid_inputs)
     end
@@ -135,6 +138,8 @@ def play_game(board_state)
       puts "You Won!"
     elsif game_eval(board_state)[1]
       puts "Computer Won!"
+    elsif user_choice == 'q'
+      puts "Thank you for playing Tic Tac Toe. Goodbye!"
     else
       puts "It's a tie!"
     end
@@ -145,6 +150,5 @@ def play_game(board_state)
   end
 end
 
-initial_board = EMPTY_BOARD.dup
-play_game(initial_board)
+play_game()
 # display_board(update_board(3, initial_board))
