@@ -93,6 +93,7 @@ end
 ########################################################
 # Methods for small shortcuts
 #########################################################
+
 def clear_screen
   system('clear')
 end
@@ -117,6 +118,7 @@ def initialize_board(board_size)
   total_slots = (board_size**2)
   (1..total_slots).map { |k| [k, format('%2d', k)] }.to_h
 end
+
 ########################################################
 # Destructive methods
 #########################################################
@@ -189,6 +191,7 @@ end
 def game_end?(board, board_size)
   there_a_winner(board, board_size).any? || board_full?(board)
 end
+
 ########################################################
 # Methods for calculations
 #########################################################
