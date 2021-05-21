@@ -3,15 +3,7 @@ require 'pry'
 USER_MARK = 'X'
 COMPUTER_MARK = 'O'
 
-EMPTY_BOARD = {  1 => " ",
-                 2 => " ",
-                 3 => " ",
-                 4 => " ",
-                 5 => " ",
-                 6 => " ",
-                 7 => " ",
-                 8 => " ",
-                 9 => " " }
+EMPTY_BOARD = (1..9).each_with_object({}) {|i, h| h[i] = " "}
 
 GAME_INTRO = <<-MSG
   Let's play a Tic Tac Toe game! It is a 2 player game played
