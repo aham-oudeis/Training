@@ -3,6 +3,7 @@ COMPUTER_MARK = '∆∆'
 EMPTY_MARKER = " "
 NUMBER_OF_SETS = [3, 5, 7, 9]
 BOX_HEIGHT = 4
+MIN_BOARD_SIZE = 3
 MAX_BOARD_SIZE = 9
 
 GAME_INTRO = <<~MSG
@@ -21,7 +22,8 @@ GAME_INTRO = <<~MSG
 
 def get_board_size
   loop do
-    puts "==> Please input the board size between 3 and #{MAX_BOARD_SIZE}."
+    prompt "Please input the board size between #{MIN_BOARD_SIZE}"\
+           " and #{MAX_BOARD_SIZE}."
     size = gets.chomp
 
     return size.to_i if ('3'..MAX_BOARD_SIZE.to_s).include?(size)
@@ -108,7 +110,7 @@ end
 
 def join_or(arr)
   if arr.size > 1
-    arr[..-2].join(", ") + ", or #{arr[-1]}"
+    arr[..-2].join(", ") + " or #{arr[-1]}"
   else
     arr[0]
   end
@@ -124,20 +126,31 @@ end
 #########################################################
 
 def update_board!(num, board, player)
-  if player == 'user'
-    board[num] = USER_MARK
-  else
-    board[num] = COMPUTER_MARK
-  end
+  board[num] = if player == 'user'
+                 USER_MARK
+               else
+                 COMPUTER_MARK
+               end
 end
 
-def update_score!(score, round, eval)
-  if eval[0]
+def update_score!(score, round, winner)
+  case winner
+  when :user
     score[round][:user] += 1
-  elsif eval[1]
+  when :computer
     score[round][:computer] += 1
   else
     score[round][:tie] += 1
+  end
+end
+
+def determine_winner!(board, board_size)
+  if there_a_winner(board, board_size)[:user]
+    :user
+  elsif there_a_winner(board, board_size)[:computer]
+    :computer
+  else
+    ''
   end
 end
 
@@ -188,8 +201,16 @@ def middle_square_available?(board, board_size)
   end
 end
 
-def game_end?(board, board_size)
-  there_a_winner(board, board_size).any? || board_full?(board)
+def game_end?(board, winner)
+  !winner.empty? || board_full?(board)
+end
+
+def won?(mark, board, board_size)
+  win_combinations = win_combinations(board_size)
+
+  win_combinations.any? do |arr|
+    arr.all? { |el| board[el] == mark }
+  end
 end
 
 ########################################################
@@ -201,19 +222,8 @@ def sqrt(num)
 end
 
 def there_a_winner(board, board_size)
-  win_combinations = win_combinations(board_size)
-
-  user_win =
-    win_combinations.any? do |arr|
-      arr.all? { |el| board[el] == USER_MARK }
-    end
-
-  computer_win =
-    win_combinations.any? do |arr|
-      arr.all? { |el| board[el] == COMPUTER_MARK }
-    end
-
-  [user_win, computer_win]
+  { user: won?(USER_MARK, board, board_size),
+    computer: won?(COMPUTER_MARK, board, board_size) }
 end
 
 def win_rows(board_size)
@@ -263,15 +273,23 @@ def find_winning_square(board, board_size)
   end).flatten.find { |item| board[item] != COMPUTER_MARK }
 end
 
+def find_middle_square(board)
+  (board.size / 2) + 1
+end
+
+def find_random_square(board)
+  board.select { |k, v| k == v.to_i }.keys.sample
+end
+
 def computer_chooses(board, board_size)
   if about_to_win?(board, board_size)
     find_winning_square(board, board_size)
   elsif about_to_lose?(board, board_size)
     find_losing_square(board, board_size)
   elsif middle_square_available?(board, board_size)
-    (board.size / 2) + 1
+    find_middle_square(board)
   else
-    board.select { |k, v| k == v.to_i }.keys.sample
+    find_random_square(board)
   end
 end
 
@@ -337,9 +355,9 @@ def display_round_result(score, round)
 end
 
 def display_game_result(board, board_size)
-  if there_a_winner(board, board_size)[0]
+  if there_a_winner(board, board_size)[:user]
     puts "******* You Won! ********"
-  elsif there_a_winner(board, board_size)[1]
+  elsif there_a_winner(board, board_size)[:computer]
     puts "******* Computer Won! ********"
   else
     puts "******* It's a tie! ********"
@@ -367,6 +385,7 @@ score = {}
 initialize_round!(score, round)
 
 loop do
+  winner = ''
   board = initialize_board(board_size)
   display_board(board_size, board)
 
@@ -379,13 +398,14 @@ loop do
     display_board(board_size, board)
     player = switch!(player)
 
-    break if game_end?(board, board_size)
+    winner = determine_winner!(board, board_size)
+    break if game_end?(board, winner)
   end
 
   break if choice == 'q'
   display_game_result(board, board_size)
   sleep_until_enter
-  update_score!(score, round, there_a_winner(board, board_size))
+  update_score!(score, round, winner)
   display_round_result(score, round)
 
   set += 1
