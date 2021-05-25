@@ -1,10 +1,10 @@
 require 'pry'
 FULL_DECK = %w(Ace Two Three Four Five Six Seven Eight Nine Ten Jack
-  Queen King).product(%w(Hearts Diamonds Spades Clubs))
+               Queen King).product(%w(Hearts Diamonds Spades Clubs))
 CARD_VALUE = %w(Two Three Four Five Six Seven Eight Nine Ten Jack
-  Queen King Ace).zip((2..10).to_a + [10, 10, 10, 11]).to_h
+                Queen King Ace).zip((2..10).to_a + [10, 10, 10, 11]).to_h
 ALTERNATE_ACE_VALUE = 1
-ACE_VALUE_DIFF = 11 - 1
+ACE_VALUE_DIFF = 10
 MAX_TOTAL = 21
 MIN_TOTAL = 17
 NUMBER_OF_SETS = [3, 5, 7, 9]
@@ -13,19 +13,46 @@ PARTING_MSG = "Thank you for playing Twenty-One. Goodbye!"
 GAME_INTRO = <<~MSG
 Let's play TWENTY-ONE!
 
-Starting with a normal 52-card deck, the goal of Twenty-One is to try to get as close to 21 as possible, without going over. If you go over 21, it's a "bust" and you lose.
+It's played with a normal 52-card deck. The goal of Twenty-One
+is to try to get as close to 21 as possible, without going over.
+If you go over 21, it's a "bust" and you lose.
 
-The numbers 2 through 10 are worth their face value. The jack, queen, and king are each worth 10, and the ace can be worth 1 or 11.
+The numbers 2 through 10 are worth their face value. The jack, queen,
+and king are each worth 10, and the ace can be worth 1 or 11.
 
-You go first. You and the dealer are dealt two cards. You can see one of the dealer's cards. You can decide to either "hit" or "stay". A hit means 'Get Another Card'. If the total exceeds 21, then you are busted and you lose. A stay means 'I will hold now' and then the dealer starts dealing cards to itself.
+You go first. You and the dealer are dealt two cards. You can see
+one of the dealer's cards. You can decide to either "hit" or "stay".
+A hit means 'Get Another Card'. If the total exceeds 21, then
+you are busted and you lose. A stay means 'I will hold now'.
+Then it's dealer turns. If the dealer busts, you win. Otherwise,
+whoever is closer to twenty-one wins.
 MSG
 
+########################################################################
+# little helper methods
+########################################################################
 def initialize_deck
   FULL_DECK.dup.shuffle
 end
 
 def prompt(str)
   puts "==> #{str}"
+end
+
+def clear_screen
+  system('clear')
+end
+
+def framed(msg)
+  frame_length = msg.size + 4
+  row_border = "\t" + "*" * frame_length
+  col_border = "\t" + "*" + " " * (frame_length - 2) + '*'
+  puts
+  puts row_border
+  puts col_border
+  puts "\t*" + " #{msg} " + "*"
+  puts col_border
+  puts row_border
 end
 
 def join_or(arr)
@@ -36,11 +63,28 @@ def join_or(arr)
   end
 end
 
+########################################################################
+# Methods for getting user-input
+########################################################################
+
 def sleep_until_enter
   prompt "Press ENTER to continue..."
   response = gets.chomp
   if response.nil?
     sleep
+  end
+end
+
+def get_number_of_sets
+  puts "\nPlease input the number of sets you want to play in a given round."
+  loop do
+    prompt "Pick #{join_or(NUMBER_OF_SETS)}.\n"
+
+    num = gets.chomp
+
+    return num.to_i if NUMBER_OF_SETS.map(&:to_s).include?(num)
+
+    puts "Ooops! Invalid input!"
   end
 end
 
@@ -57,9 +101,20 @@ def get_hit_or_stay
   end
 end
 
+def ask_play_again_or_quit
+  prompt "Press Y to play another round; anything else to quit."
+  gets.chomp.downcase
+end
+
+########################################################################
+# Methods for displaying output
+########################################################################
+
 def print_both_first_cards(user_cards, dealer_cards)
+  # first picks the number, last picks the color of the card
   print "\t#{user_cards.first.first} of #{user_cards.first.last}".ljust(30)
-  print "#{dealer_cards.first.first } of #{dealer_cards.first.last}".rjust(30) + "\n"
+  print "#{dealer_cards.first.first} of #{dealer_cards.first.last}".rjust(30) +
+        "\n"
 end
 
 def puts_only(user_cards, index)
@@ -67,7 +122,7 @@ def puts_only(user_cards, index)
 end
 
 def print_one_computer_card(user_cards, dealer_cards, index)
-  if index ==  0
+  if index == 0
     print_both_first_cards(user_cards, dealer_cards)
   else
     puts_only(user_cards, index)
@@ -78,7 +133,7 @@ def fill_user_column(user_cards, index)
   if user_cards[index].nil?
     print "\t ".ljust(30)
   else
-    #first picks the number, last picks the color of the card
+    # first picks the number, last picks the color of the card
     user_card =
       "\t#{user_cards[index].first} of #{user_cards[index].last}"
     print user_card.ljust(30)
@@ -90,7 +145,7 @@ def fill_dealer_column(dealer_cards, index)
     print "\n"
   else
     dealer_card =
-      "#{dealer_cards[index].first } of #{dealer_cards[index].last}"
+      "#{dealer_cards[index].first} of #{dealer_cards[index].last}"
 
     print dealer_card.rjust(30) + "\n"
   end
@@ -101,39 +156,85 @@ def print_both_cards(user_cards, dealer_cards, index)
   fill_dealer_column(dealer_cards, index)
 end
 
-def display_overall(game_state, player)
+def print_card_each(user_cards, dealer_cards, index, player)
+  if player == :user
+    print_one_computer_card(user_cards, dealer_cards, index)
+  else
+    print_both_cards(user_cards, dealer_cards, index)
+  end
+end
+
+# rubocop: disable Metrics/AbcSize
+def display_cards_in_play(game_state, player)
   clear_screen
   user_cards = game_state[:user][:cards]
   user_total = game_state[:user][:total]
   dealer_cards = game_state[:dealer][:cards]
-  dealer_total = (player == :user) ? " " : game_state[:dealer][:total]
-  table_header = "\tYour Cards:".ljust(30) + "||" +
-                 "Dealer Cards:".rjust(28)
+  dealer_total = (player == :user ? " " : game_state[:dealer][:total])
   seperator = "\t".ljust(60, "_")
 
-  puts table_header
+  puts "\tYour Cards:".ljust(30) + "||" + "Dealer Cards:".rjust(28)
   puts seperator
-
   lines = [user_cards.size, dealer_cards.size].max
 
   lines.times do |index|
-    if player == :user
-      print_one_computer_card(user_cards, dealer_cards, index)
-    else
-      print_both_cards(user_cards, dealer_cards, index)
-    end
+    print_card_each(user_cards, dealer_cards, index, player)
   end
+
   puts seperator
-  puts "Total:" + "\t#{user_total}".ljust(30) + "||" +
-  "#{dealer_total}".rjust(28)
+  puts "Total:\t" + user_total.to_s.ljust(30) + "||" +
+       dealer_total.to_s.rjust(27)
 end
+# rubocop: enable Metrics/AbcSize
 
 def display_dealing_to(player)
-  current_player = (player == :user) ? 'you' : 'the dealer'
+  current_player = (player == :user ? 'you' : 'the dealer')
   prompt "Dealing another card to #{current_player} ..."
   sleep(1)
   system('clear')
 end
+
+def display_round_result(score, round)
+  if score[round][:user] > score[round][:dealer]
+    prompt "You won Round #{round}!"
+  elsif score[round][:user] < score[round][:dealer]
+    prompt "Dealer won Round #{round}!"
+  else
+    prompt "Round #{round} is tied!"
+  end
+end
+
+def display_game_stats(score, round)
+  puts
+  starting_num = if round < MAX_ROUNDS_TO_DISPLAY
+                   1
+                 else
+                   (round - (MAX_ROUNDS_TO_DISPLAY - 1))
+                 end
+  (starting_num..round).each do |i|
+    puts "< Round #{i} > Wins: #{score[i][:user]} ||"\
+    " Losses: #{score[i][:dealer]} || Ties: #{score[i][:tie]}\n"
+  end
+end
+
+def display_game(winner)
+  puts
+  puts case winner
+       when 'user'      then "\t******* You Won! ********".center(60)
+       when 'dealer'    then "\t******* Dealer won! *******".center(60)
+       else                  "\t******* It's a tie! *******".center(60)
+       end
+  puts
+end
+
+def display_busted(player)
+  prompt "You busted!" if player == :user
+  prompt "Dealer busted!" if player == :dealer
+end
+
+########################################################################
+# Methods for evaluations
+########################################################################
 
 def possible_sums(cards)
   card_value_array = cards.map { |sub_arr| CARD_VALUE[sub_arr.first] }
@@ -175,45 +276,11 @@ def winner(game_state)
   end
 end
 
-def display_game_eval(winner)
-  prompt case winner
-         when 'user'      then "You won!"
-         when 'dealer'    then "Dealer won!"
-         else                  "It's tied!"
-         end
-end
+########################################################################
+# Mutating Methods
+########################################################################
 
-def ask_play_again_or_quit
-  prompt "Press Y to play again; anything else to quit."
-  gets.chomp.downcase
-end
-
-def clear_screen
-  system('clear')
-end
-
-def prompt(str)
-  puts "==> #{str}"
-end
-
-def framed(msg)
-  frame_length = msg.size + 4
-  row_border = "\t#{"*" * frame_length}"
-  col_border = "\t*" + "#{" " * (frame_length - 2)}" + '*'
-  puts
-  puts row_border
-  puts col_border
-  puts "\t*" + " #{msg} " + "*"
-  puts col_border
-  puts row_border
-end
-
-def display_busted(player)
-  prompt "You busted!" if player == :user
-  prompt "Dealer busted!" if player == :dealer
-end
-
-def update_total!(game_state, *players)
+def update_cards_total!(game_state, *players)
   players.each do |player|
     cards = game_state[player][:cards]
     game_state[player][:total] = cards_sum(cards)
@@ -222,30 +289,7 @@ end
 
 def deal_two_cards!(game_state, deck)
   game_state[:user][:cards] = deck.pop(2)
-  game_state[:dealer][:cards]= deck.pop(2)
-end
-
-def get_number_of_sets
-  puts "\nPlease input the number of sets you want to play in a given round."
-  loop do
-    prompt "Pick #{join_or(NUMBER_OF_SETS)}.\n"
-
-    num = gets.chomp
-
-    return num.to_i if NUMBER_OF_SETS.map(&:to_s).include?(num)
-
-    puts "Ooops! Invalid input!"
-  end
-end
-
-def display_game_stats(score, round)
-  puts
-  starting_num = round < MAX_ROUNDS_TO_DISPLAY ?
-                  1 : (round - (MAX_ROUNDS_TO_DISPLAY - 1))
-  (starting_num..round).each do |i|
-    puts "< Round #{i} > Wins: #{score[i][:user]} ||"\
-    " Losses: #{score[i][:dealer]} || Ties: #{score[i][:tie]}\n"
-  end
+  game_state[:dealer][:cards] = deck.pop(2)
 end
 
 def update_score!(score, round, winner)
@@ -259,21 +303,15 @@ def update_score!(score, round, winner)
   end
 end
 
-def display_round_result(score, round)
-  if score[round][:user] > score[round][:dealer]
-    prompt "You won this round!"
-  elsif score[round][:user] < score[round][:dealer]
-    prompt "Computer won this round!"
-  else
-    prompt "This round is tied!"
-  end
-end
-
 def initialize_round!(score, round)
   score[round] = { user: 0, dealer: 0, tie: 0 }
 end
 
-system('clear')
+########################################################################
+# Start Game
+########################################################################
+
+clear_screen
 puts GAME_INTRO
 sets_to_play = get_number_of_sets
 round = 1
@@ -283,16 +321,16 @@ initialize_round!(score, round)
 
 loop do
   deck = initialize_deck
-  winner, to_do = ''
-  game_state = { :user => { cards: nil, total: 0 , busted: 'n'},
-                 :dealer => {cards: nil, total: 0, busted: 'n' } }
+  to_do = ''
+  game_state = { user: { cards: nil, total: 0, busted: 'n' },
+                 dealer: { cards: nil, total: 0, busted: 'n' } }
 
   deal_two_cards!(game_state, deck)
-  update_total!(game_state, :user, :dealer)
+  update_cards_total!(game_state, :user, :dealer)
 
   player = :user
   current_cards = game_state[player][:cards]
-  display_overall(game_state, player)
+  display_cards_in_play(game_state, player)
   display_game_stats(score, round)
 
   loop do
@@ -307,17 +345,16 @@ loop do
       current_cards.push(deck.pop) unless cards_sum(current_cards) >= MIN_TOTAL
     end
 
-    update_total!(game_state, player)
+    update_cards_total!(game_state, player)
     player = :dealer if to_do == 's'
     current_cards = game_state[player][:cards]
     unless player == :dealer && current_cards.size == 2 || to_do == 'q'
       display_dealing_to(player)
     end
-    display_overall(game_state, player)
+    display_cards_in_play(game_state, player)
     display_game_stats(score, round)
 
     if busted?(current_cards)
-      display_busted(player)
       game_state[player][:busted] = 'y'
       break
     end
@@ -327,7 +364,10 @@ loop do
 
   winner = winner(game_state)
   update_score!(score, round, winner)
-  display_game_eval(winner)
+  display_cards_in_play(game_state, player)
+  display_game_stats(score, round)
+  display_busted(player) if busted?(current_cards)
+  display_game(winner)
 
   set += 1
   sleep_until_enter unless set > sets_to_play
@@ -341,5 +381,5 @@ loop do
     set = 1
   end
 end
-
+clear_screen
 framed(PARTING_MSG)
