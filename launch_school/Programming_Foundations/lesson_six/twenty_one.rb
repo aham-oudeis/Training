@@ -1,42 +1,3 @@
-=begin
-**Problem**
--structure a two user_cards game, where the computer_cards will be the dealer and user_cards the user_cards
--keep track of all the cards in the deck, cards in user_cards's hands, and with the computer_cards
--remove the cards from the deck that are dealt
--show one of dealer's cards to the user_cards (no need for the other way?)
--the user_cards can either 'hit' or 'stay'
--detect if the playe has busted
--keep the loop for 'hit' or 'stay' untill 'stay' or 'busted'
--once 'stay', go to the dealer
--for the dealer, 'hit' until 17; if the computer_cards busts, the user_cards wins
--if the computer_cards does not bust, then reveal both cards to see who won
--a clarification would be helpful here: does ace have a variable value or one of the aces must carry the value of 10? For instance, a person has ace and 5, then ace and 10.
--i shall assume that in such a case the person is not busted, but has 17 total.
-
-**Data Structure and Algorithsm**
--There are two ways implementing a deck of cards:
-  --nested array wiith 52 items, each item with the number and color
-  --hash with 4 keys, with each key containing 13 items
--I feel like a nested array would be a good way to implement a deck because
-  it allows for shuffling of cards
--now that we have a nested array for a deck of card, we can deal 2 cards to the user_cards and 2 cards to the dealer
--that means we can pop four cards (does it matter if we deal alternatively or at once?)
--two cards goes to the user_cards and two goes to the computer_cards
--one of the two cards of the computer_cards is visible to the user_cards
-  --do we want to show a random card or the card of particular index?
--we display the user's cards to the user and show on the side one of dealer cards
--start a loop and give the user_cards an option to 'hit' or 'stay'
--break the loop if the user hits 'stay' or the user is busted
--define the method busted?(cards) to add the value of the user's card
--if the card is an ace, then
-  --choose ace = 11 unless it adss up to 22 or greater
-  --choose ace = 1 if the total adds up to 22 or greater
--then calculate the total; if the sum adds more than 21, it's a bust
--since we need to keep track of the sum of numbers, we need to have a hash that maps
-  the numbers to their integer values
--then once the user stays, go to the dealer
--hit  untill 17; if it hits 17 or greater, stay unless it is a bust.
-=end
 require 'pry'
 FULL_DECK = %w(Ace Two Three Four Five Six Seven Eight Nine Ten Jack
   Queen King).product(%w(Hearts Diamonds Spades Clubs))
@@ -45,13 +6,42 @@ CARD_VALUE = %w(Two Three Four Five Six Seven Eight Nine Ten Jack
 ALTERNATE_ACE_VALUE = 1
 ACE_VALUE_DIFF = 11 - 1
 MAX_TOTAL = 21
+MIN_TOTAL = 17
+NUMBER_OF_SETS = [3, 5, 7, 9]
+MAX_ROUNDS_TO_DISPLAY = 5
+PARTING_MSG = "Thank you for playing Twenty-One. Goodbye!"
+GAME_INTRO = <<~MSG
+Let's play TWENTY-ONE!
+
+Starting with a normal 52-card deck, the goal of Twenty-One is to try to get as close to 21 as possible, without going over. If you go over 21, it's a "bust" and you lose.
+
+The numbers 2 through 10 are worth their face value. The jack, queen, and king are each worth 10, and the ace can be worth 1 or 11.
+
+You go first. You and the dealer are dealt two cards. You can see one of the dealer's cards. You can decide to either "hit" or "stay". A hit means 'Get Another Card'. If the total exceeds 21, then you are busted and you lose. A stay means 'I will hold now' and then the dealer starts dealing cards to itself.
+MSG
 
 def initialize_deck
-  FULL_DECK.dup
+  FULL_DECK.dup.shuffle
 end
 
 def prompt(str)
   puts "==> #{str}"
+end
+
+def join_or(arr)
+  if arr.size > 1
+    arr[..-2].join(", ") + " or #{arr[-1]}"
+  else
+    arr[0]
+  end
+end
+
+def sleep_until_enter
+  prompt "Press ENTER to continue..."
+  response = gets.chomp
+  if response.nil?
+    sleep
+  end
 end
 
 def get_hit_or_stay
@@ -67,40 +57,82 @@ def get_hit_or_stay
   end
 end
 
-def shuffle!(deck, num)
-  num.times {deck.shuffle!}
+def print_both_first_cards(user_cards, dealer_cards)
+  print "\t#{user_cards.first.first} of #{user_cards.first.last}".ljust(30)
+  print "#{dealer_cards.first.first } of #{dealer_cards.first.last}".rjust(30) + "\n"
 end
 
-def print_one_computer_card(arr1, arr2, index)
+def puts_only(user_cards, index)
+  puts "\t#{user_cards[index].first} of #{user_cards[index].last}".ljust(30)
+end
+
+def print_one_computer_card(user_cards, dealer_cards, index)
   if index ==  0
-    print "\t#{arr1[index].first} of #{arr1[index].last}".ljust(30)
-    print "#{arr2.first.first } of #{arr2.first.last}".rjust(30) + "\n"
+    print_both_first_cards(user_cards, dealer_cards)
   else
-    puts "\t#{arr1[index].first} of #{arr1[index].last}".ljust(30)
+    puts_only(user_cards, index)
   end
 end
 
-def print_both_cards(arr1, arr2, index)
-  print "\t#{arr1[index].first} of #{arr1[index].last}".ljust(30) unless arr1[index].nil?
-  print "\t ".ljust(30) if arr1[index].nil?
-  if arr2[index].nil?
+def fill_user_column(user_cards, index)
+  if user_cards[index].nil?
+    print "\t ".ljust(30)
+  else
+    #first picks the number, last picks the color of the card
+    user_card =
+      "\t#{user_cards[index].first} of #{user_cards[index].last}"
+    print user_card.ljust(30)
+  end
+end
+
+def fill_dealer_column(dealer_cards, index)
+  if dealer_cards[index].nil?
     print "\n"
   else
-    print "#{arr2[index].first } of #{arr2[index].last}".rjust(30) + "\n"
+    dealer_card =
+      "#{dealer_cards[index].first } of #{dealer_cards[index].last}"
+
+    print dealer_card.rjust(30) + "\n"
   end
 end
 
-def display_card(arr1, arr2, show = 'no')
+def print_both_cards(user_cards, dealer_cards, index)
+  fill_user_column(user_cards, index)
+  fill_dealer_column(dealer_cards, index)
+end
+
+def display_overall(game_state, player)
   clear_screen
-  puts "\tYour Cards:".ljust(30) + "||" + "Dealer Cards:".rjust(28)
-  puts "\t".ljust(60, "_")
-  lines = [arr1.size, arr2.size].max
+  user_cards = game_state[:user][:cards]
+  user_total = game_state[:user][:total]
+  dealer_cards = game_state[:dealer][:cards]
+  dealer_total = (player == :user) ? " " : game_state[:dealer][:total]
+  table_header = "\tYour Cards:".ljust(30) + "||" +
+                 "Dealer Cards:".rjust(28)
+  seperator = "\t".ljust(60, "_")
+
+  puts table_header
+  puts seperator
+
+  lines = [user_cards.size, dealer_cards.size].max
 
   lines.times do |index|
-    show == 'no' ? print_one_computer_card(arr1, arr2, index) :
-                   print_both_cards(arr1, arr2, index)
+    if player == :user
+      print_one_computer_card(user_cards, dealer_cards, index)
+    else
+      print_both_cards(user_cards, dealer_cards, index)
+    end
   end
-  puts
+  puts seperator
+  puts "Total:" + "\t#{user_total}".ljust(30) + "||" +
+  "#{dealer_total}".rjust(28)
+end
+
+def display_dealing_to(player)
+  current_player = (player == :user) ? 'you' : 'the dealer'
+  prompt "Dealing another card to #{current_player} ..."
+  sleep(1)
+  system('clear')
 end
 
 def possible_sums(cards)
@@ -124,17 +156,20 @@ def cards_sum(cards)
   end
 end
 
-def winner(user_cards, computer_cards)
-  score = cards_sum(user_cards) <=> cards_sum(computer_cards)
+def winner(game_state)
+  user_total = game_state[:user][:total]
+  dealer_total = game_state[:dealer][:total]
 
-  if busted?(computer_cards)
+  score = user_total <=> dealer_total
+
+  if game_state[:dealer][:busted] == 'y'
     'user'
-  elsif busted?(user_cards)
-    'computer'
+  elsif game_state[:user][:busted] == 'y'
+    'dealer'
   elsif score == 1
     'user'
   elsif score == -1
-    'computer'
+    'dealer'
   else
     ''
   end
@@ -143,7 +178,7 @@ end
 def display_game_eval(winner)
   prompt case winner
          when 'user'      then "You won!"
-         when 'computer'  then "Computer won!"
+         when 'dealer'    then "Dealer won!"
          else                  "It's tied!"
          end
 end
@@ -161,52 +196,150 @@ def prompt(str)
   puts "==> #{str}"
 end
 
-def parting_msg
-  prompt("Thank you for playing Twenty-One. Goodbye!")
+def framed(msg)
+  frame_length = msg.size + 4
+  row_border = "\t#{"*" * frame_length}"
+  col_border = "\t*" + "#{" " * (frame_length - 2)}" + '*'
+  puts
+  puts row_border
+  puts col_border
+  puts "\t*" + " #{msg} " + "*"
+  puts col_border
+  puts row_border
 end
 
 def display_busted(player)
   prompt "You busted!" if player == :user
-  prompt "Computer busted!" if player == :computer
+  prompt "Dealer busted!" if player == :dealer
 end
+
+def update_total!(game_state, *players)
+  players.each do |player|
+    cards = game_state[player][:cards]
+    game_state[player][:total] = cards_sum(cards)
+  end
+end
+
+def deal_two_cards!(game_state, deck)
+  game_state[:user][:cards] = deck.pop(2)
+  game_state[:dealer][:cards]= deck.pop(2)
+end
+
+def get_number_of_sets
+  puts "\nPlease input the number of sets you want to play in a given round."
+  loop do
+    prompt "Pick #{join_or(NUMBER_OF_SETS)}.\n"
+
+    num = gets.chomp
+
+    return num.to_i if NUMBER_OF_SETS.map(&:to_s).include?(num)
+
+    puts "Ooops! Invalid input!"
+  end
+end
+
+def display_game_stats(score, round)
+  puts
+  starting_num = round < MAX_ROUNDS_TO_DISPLAY ?
+                  1 : (round - (MAX_ROUNDS_TO_DISPLAY - 1))
+  (starting_num..round).each do |i|
+    puts "< Round #{i} > Wins: #{score[i][:user]} ||"\
+    " Losses: #{score[i][:dealer]} || Ties: #{score[i][:tie]}\n"
+  end
+end
+
+def update_score!(score, round, winner)
+  case winner
+  when 'user'
+    score[round][:user] += 1
+  when 'dealer'
+    score[round][:dealer] += 1
+  else
+    score[round][:tie] += 1
+  end
+end
+
+def display_round_result(score, round)
+  if score[round][:user] > score[round][:dealer]
+    prompt "You won this round!"
+  elsif score[round][:user] < score[round][:dealer]
+    prompt "Computer won this round!"
+  else
+    prompt "This round is tied!"
+  end
+end
+
+def initialize_round!(score, round)
+  score[round] = { user: 0, dealer: 0, tie: 0 }
+end
+
+system('clear')
+puts GAME_INTRO
+sets_to_play = get_number_of_sets
+round = 1
+set = 1
+score = {}
+initialize_round!(score, round)
 
 loop do
   deck = initialize_deck
-  shuffle!(deck, 5)
-  user_cards = deck.pop(2)
-  computer_cards = deck.pop(2)
-  display_card(user_cards, computer_cards)
   winner, to_do = ''
-  player, player_cards = :user, user_cards
+  game_state = { :user => { cards: nil, total: 0 , busted: 'n'},
+                 :dealer => {cards: nil, total: 0, busted: 'n' } }
+
+  deal_two_cards!(game_state, deck)
+  update_total!(game_state, :user, :dealer)
+
+  player = :user
+  current_cards = game_state[player][:cards]
+  display_overall(game_state, player)
+  display_game_stats(score, round)
 
   loop do
+    break if to_do == 'q'
+
     if player == :user
       to_do = get_hit_or_stay
-      user_cards.push(deck.pop) unless to_do == 's'
-      display_card(user_cards, computer_cards)
+      current_cards.push(deck.pop) unless %w(s q).include?(to_do)
     else
+      break if game_state[player][:total] >= MIN_TOTAL
       sleep(2)
-      computer_cards.push(deck.pop) unless cards_sum(computer_cards) >= 17
-      display_card(user_cards, computer_cards, 'yes')
-      break if cards_sum(computer_cards) >= 17
+      current_cards.push(deck.pop) unless cards_sum(current_cards) >= MIN_TOTAL
     end
 
-    display_busted(player) if busted?(player_cards)
-    break if busted?(player_cards) || to_do == 'q'
+    update_total!(game_state, player)
+    player = :dealer if to_do == 's'
+    current_cards = game_state[player][:cards]
+    unless player == :dealer && current_cards.size == 2 || to_do == 'q'
+      display_dealing_to(player)
+    end
+    display_overall(game_state, player)
+    display_game_stats(score, round)
 
-    if to_do == 's'
-      player = :computer
-      player_cards = computer_cards
-      display_card(user_cards, computer_cards, 'yes')
+    if busted?(current_cards)
+      display_busted(player)
+      game_state[player][:busted] = 'y'
+      break
     end
   end
 
   break if to_do == 'q'
 
-  winner = winner(user_cards, computer_cards)
+  winner = winner(game_state)
+  update_score!(score, round, winner)
   display_game_eval(winner)
-  break unless ask_play_again_or_quit == 'y'
+
+  set += 1
+  sleep_until_enter unless set > sets_to_play
+
+  if set > sets_to_play
+    display_round_result(score, round)
+    break unless ask_play_again_or_quit == 'y'
+    puts "Let's play again!"
+    round += 1
+    initialize_round!(score, round)
+    set = 1
+  end
 end
 
-parting_msg
-# display_one_card(computer_cards)
+framed(PARTING_MSG)
