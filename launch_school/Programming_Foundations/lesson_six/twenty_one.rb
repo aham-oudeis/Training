@@ -23,7 +23,7 @@ You go first. You and the dealer are dealt two cards. You can see
 one of the dealer's cards. You can decide to either "hit" or "stay".
 A hit means 'Get Another Card'. If the total exceeds 21, then
 you are busted and you lose. A stay means 'I will hold now'.
-Then it's dealer turns. If the dealer busts, you win. Otherwise,
+Then it's dealer turn. If the dealer busts, you win. Otherwise,
 whoever is closer to twenty-one wins.
 MSG
 
