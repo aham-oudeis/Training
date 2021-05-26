@@ -1,10 +1,9 @@
-require 'pry'
 FULL_DECK = %w(Ace Two Three Four Five Six Seven Eight Nine Ten Jack
                Queen King).product(%w(Hearts Diamonds Spades Clubs))
 CARD_VALUE = %w(Two Three Four Five Six Seven Eight Nine Ten Jack
                 Queen King Ace).zip((2..10).to_a + [10, 10, 10, 11]).to_h
 ALTERNATE_ACE_VALUE = 1
-ACE_VALUE_DIFF = 10
+ACE_VALUE_DIFF = CARD_VALUE['Ace'] - ALTERNATE_ACE_VALUE
 MAX_TOTAL = 21
 MIN_TOTAL = 17
 NUMBER_OF_SETS = [3, 5, 7, 9]
@@ -57,7 +56,7 @@ end
 
 def join_or(arr)
   if arr.size > 1
-    arr[..-2].join(", ") + " or #{arr[-1]}"
+    arr[0..-2].join(", ") + " or #{arr[-1]}"
   else
     arr[0]
   end
@@ -80,7 +79,7 @@ def get_number_of_sets
   loop do
     prompt "Pick #{join_or(NUMBER_OF_SETS)}.\n"
 
-    num = gets.chomp
+    num = gets.strip
 
     return num.to_i if NUMBER_OF_SETS.map(&:to_s).include?(num)
 
@@ -164,17 +163,12 @@ def print_card_each(user_cards, dealer_cards, index, player)
   end
 end
 
-# rubocop: disable Metrics/AbcSize
-def display_cards_in_play(game_state, player)
-  clear_screen
-  user_cards = game_state[:user][:cards]
-  user_total = game_state[:user][:total]
-  dealer_cards = game_state[:dealer][:cards]
-  dealer_total = (player == :user ? " " : game_state[:dealer][:total])
+def print_cards_table(user_cards, dealer_cards, player)
   seperator = "\t".ljust(60, "_")
 
   puts "\tYour Cards:".ljust(30) + "||" + "Dealer Cards:".rjust(28)
   puts seperator
+
   lines = [user_cards.size, dealer_cards.size].max
 
   lines.times do |index|
@@ -182,10 +176,23 @@ def display_cards_in_play(game_state, player)
   end
 
   puts seperator
+end
+
+def print_cards_total(user_total, dealer_total)
   puts "Total:\t" + user_total.to_s.ljust(30) + "||" +
        dealer_total.to_s.rjust(27)
 end
-# rubocop: enable Metrics/AbcSize
+
+def display_cards_in_play(game_state, player)
+  clear_screen
+  user_cards = game_state[:user][:cards]
+  user_total = game_state[:user][:total]
+  dealer_cards = game_state[:dealer][:cards]
+  dealer_total = (player == :user ? " " : game_state[:dealer][:total])
+
+  print_cards_table(user_cards, dealer_cards, player)
+  print_cards_total(user_total, dealer_total)
+end
 
 def display_dealing_to(player)
   current_player = (player == :user ? 'you' : 'the dealer')
