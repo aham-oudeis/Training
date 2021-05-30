@@ -120,7 +120,7 @@ some_method(a)
 # "undefined local variable or method `a' for main:Object"
 ```
 
-A bit more interesting example.
+A bit more interesting example using 'variable as pointers'
 
 ```ruby
 a = 'something'
@@ -133,7 +133,7 @@ some_method(a)
 p a # => 'something'
 ```
 
-Unlike the case of blocks that are able to reassign the variable from the inner scope, method definition cannot do so. Here, we define a method with parameter `var` and we reassign the variable `var` to a new string object produced by calling `upcase` method on what `var` points to. 
+Unlike the case of blocks that are able to reassign the variable from the inner scope, method definition cannot do so. Here, we define a method with a parameter `var` and we reassign the variable `var` to a new string object produced by calling `upcase` method on what `var` points to. 
 
 When we pass `a` as an argument, initially both `var` and `a` point to the same string object `'something'` but then `var` points to the string object that is returned when we call `upcase` method on `'something'`. Then on, the string object that `a` points is no longer available within the methd body. 
 
@@ -156,5 +156,7 @@ p a # => "SOMETHING!!!!"
 That is, although the method cannot change what the variable points to, it can mutate the object it points to, provided we passed the object to the method as an argument. 
 
 That means, method definition can access __objects__ passed in.
+
+It gets a bit more complicated when we define a method that can take a block as an argument. `map` is one such method that can access the return values of the block passed to it. Since blocks can access local variables, a method can somehow interact with the local variables used in the block. (I am a bit unclear on this issue.)
 
 Things are slightly different with CONSTANTS, which are accessible from within a method definition. 
