@@ -1,4 +1,4 @@
-# Write a recursive method that computes the nth Fibonacci number, where nth is an argument 
+# Write a recursive method that computes the nth Fibonacci number, where nth is an argument
 # to the method.
 
 =begin
@@ -11,11 +11,11 @@
 =end
 
 # fibonacci series is produced by summing up previous two numbers
-# let's say in a series of numbers, sum of acc1 and acc2 
+# let's say in a series of numbers, sum of acc1 and acc2
 # produces the fibonacci number for that position, then we can use
 # num, acc1, and acc2 to designate three parts of our equation
-# for any given number, its corresponding fibonacci number is 
-# a sum of acc1 and acc2. The main difficulty lies in finding a way of 
+# for any given number, its corresponding fibonacci number is
+# a sum of acc1 and acc2. The main difficulty lies in finding a way of
 # breaking down the problem to these three parts.
 # for a base case, acc1 = 1, acc2 == 1
 # for nth place, the sequence works as follows:
@@ -23,11 +23,11 @@
 # fibonacci_tal(n - 1, 1, 2)
 # fibonacci_tal(n - 2, 2, 3)
 # fibonacci_tal(n - 3, 3, 5)
-# fibonacci_tal(n - 4, 5, 8); 
-# if n = 6, then (5, 1, 2) ==> (4, 2, 3) ==> (3, 3, 5) ==> (2, 5, 8) 
+# fibonacci_tal(n - 4, 5, 8);
+# if n = 6, then (5, 1, 2) ==> (4, 2, 3) ==> (3, 3, 5) ==> (2, 5, 8)
 
 def fibonacci_tail(num, acc1, acc2)
-  return acc2 if num == 1 || num == 2
+  return acc2 if num <= 2
   fibonacci_tail(num - 1, acc2, acc1 + acc2)
 end
 
