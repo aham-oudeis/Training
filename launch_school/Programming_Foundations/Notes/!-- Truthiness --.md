@@ -1,6 +1,6 @@
 <!-- Truthiness -->
 
-In Ruby any expression that does not return true or nil is considered truthy. 
+In Ruby any expression that does not return `false` or `nil` is considered truthy. 
 
 In Ruby every object other than `false` and `nil` are considered truthy; although only the boolean object `true` is, strictly speaking, true.
 
