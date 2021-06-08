@@ -13,7 +13,7 @@ puts b
 
 The code outputs `Goodbye` and `Hello` and returns nil, because 
 
-* on `line 4` we invoke `puts` method and pass in `a` as an argument. Since `a` is initialized to string object `'Hello'` in `line 1` and then reassigned to string object `Goodbye` in `line 3`. Since there is no further reassignment of `a`, `puts` method outputs `Goodbye` and returns `nil`
+* on `line 4` we invoke `puts` method and pass in `a` as an argument.  `a` is initialized to the string object `'Hello'` in `line 1` and then reassigned to string object `Goodbye` in `line 3`. Since there is no further reassignment of `a`, `puts` method outputs `Goodbye` and returns `nil`
 * on `line 4` we invoke `puts` method and pass in `b` as an argument. Since `b` is initialized to string object that `a` points to, i.e., `'Hello'`,  in `line 1`  and  there is no further reassignment of `b`, `puts` method outputs `Hello` and returns `nil`.
 * Since the last expression `puts b` returns `nil`, the code returns `nil`. 
 
@@ -40,8 +40,8 @@ puts b
 
 `line 9` outputs `5` and `line 10` throws an error, because
 
-* in `line 9` we invoke the `puts` method and pass in the local variable `a` as an argument. The local variable `a` is initialized in `line 1` to the Integer object `4` but reassigned to the interger object `5` inside the block, which is passed in as an argument to the `loop` method call. The loop break after initializing the local variable `b` to the integer object `3`. Since there is no further reassignment of `a`, `line 9` outputs `5` and returns `nil`. 
-* in `line 10` we invoke the puts on the local variable `b` but since the variable initialized inside the block is not accessible outside the block, the program throws an error saying that the variable or method is not defined. 
+* in `line 9` we invoke the `puts` method and pass in the local variable `a` as an argument. The local variable `a` is initialized in `line 1` to the Integer object `4` but reassigned to the interger object `5` inside the block, which is passed in as an argument to the `loop` method call. The loop breaks after initializing the local variable `b` to the integer object `3`. Since there is no further reassignment of `a`, `line 9` outputs `5` and returns `nil`. 
+* in `line 10` we invoke the puts on the local variable `b` ; since the variable initialized inside the block is not accessible outside the block, the program throws an error saying that the variable or method is not defined. 
 
 This demonstrates the concept of variable scope, specially the idea that variables initialized outside the block is accessible inside the block but not vice versa. 
 
@@ -96,7 +96,7 @@ On `line 10` we invoke the method `example` and pass in the string literal `'hel
 * This string object is passed in as an argument to the `puts` method call in line 4 within the block passed in as an argument to the `loop` method call. 
 * the loop runs three times and breaks by reassigning the value of `i` to `i - 1`. 
 
-This demonstrates the variable scoping. In particular, it demonstrates the idea that within the method body the variables initialized outside the block is accessible inside the block. 
+This demonstrates the concept of variable scoping. In particular, it demonstrates the idea that within the method body the variables initialized outside the block is accessible inside the block. 
 
 ### Example 5
 
@@ -119,7 +119,7 @@ greetings(word)
 * inside the method body, we invoke the `puts` method and pass in `str` as an argument. This outputs `Hello` to the console and returns nil.
 * Next, we invoke the `puts` method and pass in `'Goodbye'` as an argument. This outputs  `'Goodbye'` and returns `nil`.
 
-This demonstrates the concept of variable scope, in particular, the idea that local variables initialized outside the method is acccessible inside the method only if they are passed in as arguments.
+This demonstrates the concept of variable scope, in particular, the idea that local variables initialized outside the method are acccessible inside the method only if they are passed in as arguments.
 
 ### Example 6
 
@@ -147,7 +147,7 @@ puts "Your total is #{sum}"
 * the local variable `counter` is initialized in `line 3` to `0` .
 * the local variable `sum` is initialized in `line 4` to `0` .
 * in `line 6` we invoke the `loop` method and pass in the `do..end` block within which we reassign the value of `sum` by adding each element of `arr`. 
-* we break the loop when it iterates through the array `arr`
+* we break the loop when it is done iterating through the array `arr`
 * At this point, the value of `sum` is `10`. 
 
 This demonstrates the concept of variable scoping, especially, the idea that the local variable initialized outside the block is accessible inside the block. 
@@ -168,7 +168,7 @@ p a
 
 `line 7` outputs `"Bill"` to the console and returns the same string object, because
 
-the local variable `a` initialized in `line 1`  to the string object `Bob` is then reassigned inside the block in `line 4` to the string object `"Bill"` This reassignment happens 5 times because the block is part of the `times` method invocation. Hence, in `line 7` the local variable `a` points to the string object `"Bill"` and since `a` is passed in as an argument to the `p` method invocation, it outputs  `"Bill"` to the console and returns the same string object.
+the local variable `a` initialized in `line 1`  to the string object `Bob` and `a` is  reassigned inside the block in `line 4` to the string object `"Bill"` This reassignment happens 5 times because the block is part of the `times` method invocation. Hence, in `line 7` the local variable `a` points to the string object `"Bill"` and since `a` is passed in as an argument to the `p` method invocation, it outputs  `"Bill"` to the console and returns the same string object.
 
 This demonstrates the concept of variable scoping, in particular, the idea that local variable initialized outside the block is accessible inside the block.
 
@@ -194,12 +194,10 @@ puts b
 The code outputs `5`, `5`, `4`, `2` in that order and returns `nil`, because
 
 1. in `line 4-7`, we invoke the method `times` on the integer object `2` and pass in the block with parameter `a`. Since the parameter shares the same name `a` with the local variable, the inner scope created by the block does not have access to the local variable `a` defined outside the block. Inside the block the local variable `a` is reassigned to the integer object `5` and it is output to the console two times. 
-2. in `line 9` the local variable `a` is passed in as an argument to the method `puts`. Since the value of `a` is initialized to the integer object `4` in `line 1` and not reassigned later, it `a` retains the same value. Hence, `line 9` outputs `4` and returns `nil`
+2. in `line 9` the local variable `a` is passed in as an argument to the method `puts`. Since the value of `a` is initialized to the integer object `4` in `line 1` and not reassigned later,  `a` retains the same value. Hence, `line 9` outputs `4` and returns `nil`
 3. in `line 10` the local variable `b` is passed in as an argument to the `puts`  method. since the value of `b` is initialiized to the integer object `2` and is not reassigned later, it still points to the same object. Hence, `line 10` outputs `2` and returns `nil`. Since this is the last line of the code, the code returns `nil`. 
 
 This demonstrates the concept of variable shadowing. In particular, the `line 4-5` shows an instance of variable shadowing, which implies that when the block parameter shares the same name as the local variable initialized outside the block, access to the local variable outside the block is prevented access inside the block. Hence, the value of `a` is not reassigned. 
-
-
 
 ### Example 2
 
@@ -215,7 +213,7 @@ puts n
 
 This code outputs `10` to the console and returns `nil`, because
 
-1. the local variable `n`  initialized in `line 1` to the integer object `10` is no reassigned later in the program.
+1. the local variable `n`  initialized in `line 1` to the integer object `10` is not reassigned later in the program.
 2. the local variable `n` is passed in as an argument to the `puts` method
 3. Hence, the output is `10` and return value is `nil`.
 
@@ -268,7 +266,7 @@ a << ", Bob"
 
 The code returns `"hi there, Bob"` and does not output anything, because the local variable `a` is initialized to the string object `"hi there"` and we call the `<<` method on `a` and pass in the string `", Bob"` as an argument. Since `<<` method is destructive, it mutates the caller by appending the argument to the caller, i.e, the string object "hi there"  is mutated to `"hi there, Bob"`. This what is returned. 
 
-This demonstrates the concept of object passing and mutating methods. 
+This demonstrates the concept of variables as pointers and mutating methods. 
 
 ### Example 3
 
@@ -280,9 +278,9 @@ c = a.uniq
 
 
 
-In `line 1` the local variable `a` is initialized to the array object `[1, 2, 3, 3]`. In `line 2` the local variable `b` is initalized and assigned to the same object that `a` points to. In `line 3` the local variable `c` is initialized and assigned to the return value of calling the `uniq` method on `a`, which returns `[1, 2, 3]`. The `upcase` method is non-destructive and returns a new array object. It is this new array object that the local variable `c` points to. 
+In `line 1` the local variable `a` is initialized to the array object `[1, 2, 3, 3]`. In `line 2` the local variable `b` is initalized and assigned to the same object that `a` points to. In `line 3` the local variable `c` is initialized and assigned to the return value of calling the `uniq` method on the object  `a` points to; this method call  returns `[1, 2, 3]`. The `uniq` method is non-destructive and returns a new array object. It is this new array object that the local variable `c` points to. 
 
-If the last line was `c = a.uniq`, the object that `a` points to would be mutated to `[1, 2, 3]` and the local variable `c` points to this array. At thiis point, all three local variables `a`, `b`, and `c` point to the same mutated array `[1, 2, 3]`.
+If the last line was `c = a.uniq!`, the object that `a` points to would be mutated to `[1, 2, 3]` and the local variable `c` points to this array. At this point, all three local variables `a`, `b`, and `c` point to the same mutated array `[1, 2, 3]`.
 
 This demonstrates the concept of variables as pointers. 
 
