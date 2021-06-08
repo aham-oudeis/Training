@@ -578,13 +578,11 @@ When the code is executed, the value of both `s` and `t` are `"HELLO!"`, because
 1. the local variable `s` is initialized to the string object `"hello"` in `line 6` and is mutated when it is passed as an argument through `fix` in `line 7`.
 2. when we call `fix` and pass `s` as an argument, initially both the local variable `s` and the method parameter `value` point to the same string object.
 3. After calling the mutating method `upcase!` on `value`, we change the string object to `"HELLO"`
-4. `value` is reassgined to this same object in `line 2`. 
+4. `value` is reassigned to this same object in `line 2`. 
 5. After calling the mutating method `concat` on `value` with `"!"` as an argument, we change the string object to `"HELLO!"`
 6. Since this string object is returned by `fix(s)` and assigned to the local variable `t`, both `s` and `t` point to the same string object and have the same value. 
 
 This demonstrates the concept of variables as pointers and the concept of mutating methods. 
-
-
 
 ### Example 4
 
@@ -600,9 +598,11 @@ t = fix(s)
 
 
 
-in `line 6` the local variable `s` is initialized to the string object `"abc"` and passed in as an argument to the `fix` method in `line 7`. Within this method call, the method parameter `value` comes to point to the same object as `s`. Inside the method body we reassign the element at index `1` of the string that `value` points to. Hence the string object become `axc`. Since this is returned and assigned to the local variable `t`, both `s` and `t` point to this object. Hence, they both have the same value '"axc"'.
+in `line 6` the local variable `s` is initialized to the string object `"abc"` and passed in as an argument to the `fix` method in `line 7`. 
 
-This demonstrates the concept of mutating method, especially the element assignment method `Strin[index]=`.
+Within this method call, the method parameter `value` comes to point to the same object as `s`. Inside the method body we reassign the element at index `1` of the string that `value` points to. Hence the string object become `axc`. Since this is returned by the last evaluated expression `value` of the method body and this is assigned to the local variable `t`, both `s` and `t` point to this object. Hence, they both have the same value '"axc"'.
+
+This demonstrates the concept of mutating method, especially the element assignment method `String[index]=`.
 
 ### Example 5
 
@@ -633,11 +633,11 @@ num = 2 * num
 
 
 
-In `line 3` value of `num` is reassigned to the string object `6`, because in `line 1` the local variable is initialzed to the integer object `3` .
+In `line 3` the value of `num` is reassigned to the string object `6` after the local variable is initialzed to the integer object `3` in `line 1`  .
 
 In `line 3` we invoke the `*` operator on `2` and `3` (that `num` points to); this returns `6` and to this integer object is `num` reassigned. 
 
-This demonstrates the concept of variables as pointers
+This demonstrates the concept of variables as pointers.
 
 ### Example 7
 
@@ -669,11 +669,11 @@ puts names
 
 
 
-`line 7` outputs `'bob'` and  `'kim'` and returns `nil` because in `line 5` the local variable `names` is initialized to the array object `['bob', 'kim']` and passed through the method `add_name` along with the argument `"jim"`. At this point both `arr` and `names` point to the same array object. And 'name' point to 'jim'.
+`line 7` outputs `'bob'` and  `'kim'` and returns `nil` because in `line 5` the local variable `names` is initialized to the array object `['bob', 'kim']` and passed through the non-mutating method `add_name` along with the argument `"jim"`. At this point both `arr` and `names` point to the same array object. And the method parameter `name` points to 'jim'.
 
 In `line 2` we call the non-mutating `+` method on the array object that `arr` points to and pass in `name`. We then reassign `arr` to a different array object. Since the array object that `names` points to is not mutated within the method, it retains it original value in `line 7`. When we call the `puts` method and pass in `names` as an argument, it then outputs `'bob'` and  `'kim'` and returns `nil`.
 
-This demonstrates the concept of variables as pointers. 
+This demonstrates the concept of variables as pointers. This also demonstrates the concept of variable scope, in particular, the idea that local variables initialized outside the method are not accessible within the method unless the variables are passed in as arguments to the method.
 
 <!--- Each / Map / Select --->
 
@@ -695,7 +695,7 @@ The code outputs `1,`  `3` and  `5` and returns an empty array, because
 2. in `line 3` `select` method is called on this array object with the `do..end` block passed as an argument
 3. `select` method selects elements from the array based on the truthiness of the return values of the block on each iteration. 
 4. since the block returns `nil` on each iteration, nothing is selected; hence it returns an empty array.
-5. inside the block we call the `puts` method and pass in the element if it is odd. Hence, it outputs only the odd numbers.
+5. inside the block  if the current element is odd we call the `puts` method and pass in the element. Hence, it outputs only the odd numbers.
 6. When the elements are not odd, it returns `nil` as well. Hence, the block returns `nil` in each iteration. 
 
 This demonstrates the concept of truthiness and how the `select` method works. 
@@ -773,7 +773,7 @@ p new_array
 
 1. in `line 1` the local variable `words` is initiialized to the array `["jump", "trip", "laugh", "run", "talk"]`.
 2. in `line 3` the local variable `new_array` is initialized to the return value of calling `map` method on the array `words` point to and passing the `do..end` block.
-3. Each iteration, the block returns a boolean by testing iff the element starts with the letter `'t'`. 
+3. Each iteration, the block returns a boolean by testing if the element starts with the letter `'t'`. 
 4. since the `map` method returns a new array populated with the return values of the block, it returns `[false, true, false, false, true]`. 
 5. This returned value is what `new_array` points to.
 6. When we pass `new_array` to the `p` method in `line 7`, it outputs `[false, true, false, false, true]` and returns the same object. 
@@ -858,7 +858,7 @@ the code first outputs `written assement` and then outputs 'interview'on the con
 
 This demonstrates the concept of truthiness and falseyness.
 
-### New Problem
+### New Problems for practice
 
 ```ruby
 a = 'a'
