@@ -847,3 +847,39 @@ the code first outputs `written assement` and then outputs 'interview'on the con
 5. since `var` is initialied to `nil`, which is a falsey object, the code after the `else` gets executed. Hence, the second output is `interview`. It returns `nil`. 
 
 This demonstrates the concept of truthiness and falseyness.
+
+### New Problem
+
+```ruby
+a = 'a'
+b = [a, a, a]
+a << '!'
+```
+
+
+
+```ruby
+str = 'abc'
+(1..str.size).each_with_object([]) do |i, arr|
+  arr +=  str.chars.to_a
+end
+```
+
+```ruby
+def fix(value)
+  value.concat('!')
+  value = value.upcase!
+  value << 'xyz'
+end
+s = 'hello'
+t = fix(s)
+```
+
+
+
+```ruby
+arr = [[1, 2, 3], [4, 5, 6]]
+
+arr.map {|arr| arr.first.last}
+```
+
