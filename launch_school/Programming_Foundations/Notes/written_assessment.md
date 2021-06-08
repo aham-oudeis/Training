@@ -305,7 +305,7 @@ Because
 
 1. On `line 5` we initialize the local variable `a` to the array object `['a', 'b', 'c']` and on `line 6` we call the `test` method and pass in `a` as an argument. 
 2. On `line 1-3` we define the `test` method with the parameter `b`. When we call the `test` method with `b` as an argument, both the parameter `b` and the local variable `a` points to the same array  `['a', 'b', 'c']` . 
-3. Inside the method, in `line 2` we call the `map` method on `b` and pass the block `{|letter| "I like the letter: #{letter}"}`. `map` method iterates through the array and sends each element to the block and runs it. Since `map` method returns an array containing the values returned by the block and the this `map` method call is the last expression in the `test` method body, `test(a)` returns `["I like the letter: a", "I like the letter: b", "I like the letter: c"]`. 
+3. Inside the method, in `line 2` we call the `map` method on `b` and pass the block `{|letter| "I like the letter: #{letter}"}`. `map` method iterates through the array and sends each element to the block and runs it. Since `map` method returns an array containing the values returned by the block and the `map` method call is the last evaluated expression in the `test` method body, `test(a)` returns `["I like the letter: a", "I like the letter: b", "I like the letter: c"]`. 
 
 This demonstrates the concept of transformation, object passing, and non-mutating method. 
 
@@ -320,7 +320,7 @@ a = b
 b += 1.1
 ```
 
-The code returns the float object `8.4` and does not output anything, because the loca variable `b` is reassigned to the return value of calling `+` method on the local variable `b` and passing `1.1` as an argument. Since the local variable is initialized to the float object `7.3` in `line 2`, the local variable `b` is reassigned in `line 6` to `7.3 + 1.1`, i.e., `8.4`.  After this reassignment, the local variable `b` points to a different float object. 
+The code returns the float object `8.4` and does not output anything, because the local variable `b` is reassigned to the return value of calling `+` method on the local variable `b` and passing `1.1` as an argument.  the local variable `b` is initialized to the float object `7.3` in `line 2`, and reassigned in `line 6` to `7.3 + 1.1`, i.e., `8.4`.  After this reassignment, the local variable `b` points to a different float object. 
 
 This demonstrates the concept of variable as pointers.
 
@@ -338,7 +338,9 @@ test(test_str)
 puts test_str
 ```
 
-The code outputs `Written Assessment` and returns `nil`, because on the last line we we call the `puts` method and pass in   `test-str` as an argument. Since `puts` always returns `nil`, the return value is `nil`. As for the value of the `test_str`, we can see that the local variable `test_str` is initialized to the string object `"Written Assessment"` and is passed as an argument  to the  `test` method. When we we invoke the method `test` and pass `test_str` as an argument, the method internally assigns the parameter `str` to the object that `test_str`  points to and makes it available to the method body. Although initially `str` and `test_str` point to the same string object, the local variable `str` is reassigned to the return value of concatenating `str` with `"!"`. This string concatenation returns a different string and hence `str` is reassigned to a different object than what 'test_str` points to. After this reassignment, the object that `test_str` points to is no longer available to the method body. Hence, the `test_str` retains its original value, i.e, `"Written Assessment"`. 
+The code outputs `Written Assessment` and returns `nil`, because on the last line we we call the `puts` method and pass in   `test-str` as an argument. Since `puts` always returns `nil`, the return value is `nil`. 
+
+in `line 6` the local variable `test_str` is initialized to the string object `"Written Assessment"` and is passed as an argument  to the  `test` method  in `line 7`. When we we invoke the method `test` and pass `test_str` as an argument, the method internally assigns the parameter `str` to the object that `test_str`  points to and makes it available to the method body. Although initially `str` and `test_str` point to the same string object, the local variable `str` is reassigned to the return value of concatenating `str` with `"!"`. This string concatenation returns a different string and hence `str` is reassigned to a different object than what 'test_str` points to. After this reassignment, the object that `test_str` points to is no longer available to the method body. Hence, the `test_str` retains its original value, i.e, `"Written Assessment"`. 
 
 This demonstrates the concept of variables as pointers.
 
@@ -359,7 +361,7 @@ puts b
 
 the program outputs `3` (from `line 9`) and `5` (from `line 10`) and returns `nil`. It returns `nil` because the last expression is a `puts` method invocation, which always returns `nil` if executed without an error. 
 
-In `line 5` the local variable `a` is initialized to the integer object `3`. In `line 6` the local variable `b` is initialized to the return value of invoking the method `plus` with two arguments, `a` and `2`. Within the method body `x + y` evaluates to `5` and is reassigned to the local variable `x`. But this affects neither the local variable passed in as an argument nor the object it points to Since `plus(a, 2)` returns `5`, the local variable `b` is initialized to `5`. 
+In `line 5` the local variable `a` is initialized to the integer object `3`. In `line 6` the local variable `b` is initialized to the return value of invoking the method `plus` with two arguments, `a` and `2`. Within the method body `x + y` evaluates to `5` and is reassigned to the local variable `x`. But this affects neither the local variable passed in as an argument nor the object it points to. Since `plus(a, 2)` returns `5`, the local variable `b` is initialized to `5`. 
 
 we call the `puts` method and pass in `a` in `line 9`. This outputs `3` and returns `nil`. 
 we call the `puts` method and pass in  `b` in `line 10`. This outputs `5` and returns `nil`. 
@@ -406,7 +408,7 @@ change_name(name)
 puts name 
 ```
 
-on `line 8` we call the `puts` method and pass in `name` as an argument. Since the local variable `name` is initialized to the string object `jim` in `line 6` and is not mutated by the method call `change_name(name)` in `line 7`, the output is `jim` and return value is `nil`. 
+on `line 8` we call the `puts` method and pass in `name` as an argument. Since the local variable `name` is initialized to the string object `jim` in `line 6` and is not mutated by the method call `change_name(name)` in `line 7`, the output is `jim` and the return value is `nil`. 
 
 In `line 8`, when we invoke the method `change_name` and pass `name` as an argument, the method internally assigns the parameter `name` to the object that the local variable `name` points to and makes it available to the method body. At this point, both the local variable `name` and parameter `name` point to the same object. But when we reassign the variable `name` to the string object `bob` within the method body, the local variable `name` from outside the method is no longer available within the method. 
 
@@ -429,8 +431,8 @@ puts name
 1. in `line 5` the local variable `name` is initialized to  the string object `jim` and passed as an argument to the mutating method `cap`.
 2. When we invoke the method `cap` and pass `name` as an argument, the method internally assigns the parameter `str` to the object that `name` points to and makes it available to the method body. At this point, both `str` and `name` point to the same object. 
 3. In the method body, we invoke the method  `capitalize!` on `str`. This mutates the string that `str` points to.
-4. At this point, the object `name` points to become `"Jim"`.
-5. Hence, in `line 7` we call the `puts` method and pass in   `name` as an argument. This outputs `Jim` and returns `nil`. 
+4. At this point, the object `name` points to becomes `"Jim"`.
+5. Hence, in `line 7` when we call the `puts` method and pass in   `name` as an argument, it outputs `Jim` and returns `nil`. 
 
 This demonstrates the concept of variables as pointers and of object passing. 
 
@@ -452,7 +454,7 @@ arr
 
 1. in `line 1` the local variable `a` is initialized to  the array object `[1, 3]`
 2.  in `line 1` the local variable `b` is initialized to  the array object `[2]`
-3. in `line 3` when the local variable `arr` is initialized to  the array object `[a, b]`, both `arr[0]` and `a` point to the same the array object `[1, 3]` and both `arr[1]` and 'b` point to the same the array object `[2]`
+3. in `line 3` when the local variable `arr` is initialized to  the array object `[a, b]`, both `arr[0]` and `a` point to the same the array object `[1, 3]` and both `arr[1]` and `b` point to the same the array object `[2]`
 4. in `line 6` when we modify the array object `[1, 3]` by reassigning the second element to `5`,  the array object that both `a` and `arr[0]` point to becomes: `[1, 5]`.
 5. Hence, `arr` in `line 7` points to the mutated array object: `[[1, 5], [2]]
 
@@ -473,12 +475,12 @@ puts arr2
 
 `line 7` outputs the element of arr1: `a`, `b`, `c` and returns `nil`. `line 8` outputs  `A`, `B`, `C` and returns `nil`, because
 
-1. in `line 1` the local variable `arr1` is initialized to the array object `['a', 'b', 'c']
+1. in `line 1` the local variable `arr1` is initialized to the array object `['a', 'b', 'c']`
 2. in `line 2` the local variable `arr2` is initialized to the copy of array object  `['a', 'b', 'c']
-3. in `line 3` we call the `map!` method on `arr2` and transform the object by collecting the return values of the `do..end` block passed to it.
+3. in `line 3` we call the destructive `map!` method on the object `arr2` points to and mutate the object by collecting the return values of the `do..end` block passed to it.
 4. on each iteration, the block returns the object returned by calling `upcase` method on each element
 5. Hence, `arr2` is transformed to: [ `A`, `B`, `C` ]
-6. While the `map!` method mutates `arr2` in-place, it does not mutate the object that it shares with `arr1`. 
+6. While the `map!` method mutates `arr2` in-place, it does not mutate the object that it shares with `arr1`. (things would be different if we had called `upcase!` method inside the block.)
 
 This demonstrates the concept of variables as pointers and how the map method works. 
 
@@ -499,7 +501,11 @@ t = fix(s)
 
 
 
-At the end of the code, `s` has value `"HELLO!"` and `t` has value `"HELLO!"`, because at `line 7` the local variable `s` is initalized to the string object `hello` but the string object is mutated from within the method. In `line 8` we call the `fix` method and pass in `s` as an argument. At this point, both the local variable `s` and the method parameter `value` point to the same string object. Inside the method body, in `line 3` we call the `upcase!` method on `value` and this method call mutates the string object `value` points to by changing all the letters to their corresponding uppercase. Then another mutating method `concat` is called on the object and `"!"` is added to the string. Hence, the final result is `"HELLO!". This is what is returned by `fix(x)` and this string object is assigned to the local variable `t` in `line 8`.
+At the end of the code, `s` has value `"HELLO!"` and `t` has value `"HELLO!"`, because at `line 7` the local variable `s` is initalized to the string object `hello` but the string object is mutated from within the method. 
+
+In `line 8` we call the `fix` method and pass in `s` as an argument. At this point, both the local variable `s` and the method parameter `value` point to the same string object. 
+
+Inside the method body, in `line 3` we call the `upcase!` method on `value` and this method call mutates the string object `value` points to by changing all the letters to their corresponding uppercase form. Then another mutating method `concat` is called on the object and `"!"` is added to the string. Hence, the final result is `"HELLO!"`. This is what is returned by `fix(x)` and this string object is assigned to the local variable `t` in `line 8`.
 
 This demonstrates the concept of mutating methods. 
 
@@ -517,7 +523,13 @@ t = fix(s)
 
 
 
-The code returns `"HELLO!"` and outputs nothing. At the end of the code, the local variable `s` is still pointing to the string object `hello`; however, the local variable `t` points to a different string object `"HELLO!"`. After the local variable is initialized to the string object `"hello"` in `line 6`, it is neither reassigned nor the string object is modified. Hence, `s` retains its values. In `line 7` when we call the `fix` method on `s`, both `s` and the method parameter `value` point to the same string object. But the parameter `value` is reassigned to the return value of calling `upcase` method on the string object `"hello"`. Hence the parameter `value` is reassigned to a different string object `"HELLO"`. Then a mutating method `concat` is called on `value` with `"!"` passed as an argument. Since this is the last line of the method body, `fix(s)` returns `"HELLO!"` and this is assigned to the local variable `t`. 
+The code returns `"HELLO!"` and outputs nothing.
+
+At the end of the code, the local variable `s` is still pointing to the string object `hello`; however, the local variable `t` points to a different string object `"HELLO!"`. 
+
+After the local variable is initialized to the string object `"hello"` in `line 6`, it is neither reassigned nor the string object is modified. Hence, `s` retains its value. 
+
+In `line 7` when we call the `fix` method on `s`, both `s` and the method parameter `value` point to the same string object. But the parameter `value` is reassigned to the return value of calling `upcase` method on the string object `"hello"`. Hence the parameter `value` is reassigned to a different string object `"HELLO"`. Then a mutating method `concat` is called on `value` with `"!"` passed as an argument. Since this is the last line of the method body, `fix(s)` returns `"HELLO!"` and this is assigned to the local variable `t`. 
 
 This demonstrates the concept of variables as pointers and the concept of mutating methods. 
 
@@ -542,8 +554,8 @@ Once the code is run, the value of `s` and `t` is `"helloxyz"` and `"HELLOXYZ!" 
 2. When the `fix` method is invoked with `s`, both the local variable `s` and the method parameter `value` point to the same string object. 
 3. in `line 2`, invoking `<<` method on value and passing `"xyz"` as an argument, mutates the object `value` points to. The object become `"helloxyz"`; at this point both `value` and the local variable `s` is pointing to this object.
 4. in `line 3`, calling `upcase` method on `value` returns a new string: `HELLOXYZ`. and `value` is reassigned to this new string. At this point, `value` and the local variable `s` are pointing to different objects.
-5. in `line 4` calling the mutating method `concat` on 'value' with the argument `"!"` further mutates the string object to `"HELLOXYZ!"`
-6. `line 5` calls this object and the method call `fix(s)` in `line 8` returns this. since this return value is assigned to the local variable `t`, that is the object it points to. 
+5. in `line 4` calling the mutating method `concat` on `value` with the argument `"!"` further mutates the string object to `"HELLOXYZ!"`
+6. `line 4` returns this object and the method call `fix(s)` in `line 8` returns this. since this return value is assigned to the local variable `t`, that is the object it points to. 
 
 This demonstrates the concept of variables as pointers and the concept of mutating methods. 
 
