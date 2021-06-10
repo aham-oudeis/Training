@@ -776,7 +776,7 @@ p new_array
 3. Each iteration, the block returns a boolean by testing if the element starts with the letter `'t'`. 
 4. since the `map` method returns a new array populated with the return values of the block, it returns `[false, true, false, false, true]`. 
 5. This returned value is what `new_array` points to.
-6. When we pass `new_array` to the `p` method in `line 7`, it outputs `[false, true, false, false, true]` and returns the same object. 
+6. When we pass `new_array` to the `p` method in `line 7`, it outputs `[false, true, false, false, true]` and returns a reference to the same object. 
 
 This demonstrates how the map method works; in particular, it demonstrates the idea that `map` method transforms the given collection into an array populated with the return values of the block passed to it. 
 
@@ -862,18 +862,45 @@ This demonstrates the concept of truthiness and falseyness.
 
 ```ruby
 a = 'a'
-b = [a, a, a]
-a << '!'
+b = []
+3.times do 
+  a << '!'
+  b << a
+end
+
+b[0].chop!
 ```
 
 
+
+after the code is executed, the value of `b` is `["a!!", "a!!", "a!!"]`, because
+
+* we initialize the local variable `a` to the string object 'a' in line 1
+* we initialize the local variable `b` to an empty array
+* invoking the `times` method on integer `3` we run the `do..end` block three times and in each iteration we mutate the string object `a` points to by appending `!` to the string object `"a"` and each time insert the string object `a` points to into `b`. 
+* On the first iteration, `a` has the value 'a!'; on second iteration, `a` has the value `a!!`.
+* Hence, the value of `b` at the end of iteration becomes `["a!!!", "a!!!", "a!!!"]`
+* In line 8 we modify the string object that each of the element points to by chopping the last character. Hence the local variable `a` and all the elements of `b` now points to `a!!`
+
+This demonstrates the concept of local variables as pointers to memory space. 
 
 ```ruby
 str = 'abc'
 (1..str.size).each_with_object([]) do |i, arr|
   arr +=  str.chars.to_a
 end
+
+
+
+
+
 ```
+
+
+
+the method invocation `each_with_object` returns an empty array because we call the method  `each_with_object` on a range object and pass in an empty array and a `do..end` block. In each iteration, we reassign the block parameter `arr` to a new array object. Since the object that is being passed to `each_with_object` is no longer referenced by `arr` nothing gets added to the originally initialized empty array. And it is this empty array that gets returned. 
+
+This demonstrates the concept of variables as pointers and how variable reassignment sometimes makes it impossible to mutate an object passed to a method.
 
 ```ruby
 def fix(value)
@@ -887,9 +914,37 @@ t = fix(s)
 
 
 
+The value of `t` after the code is executed is `"HELLO!xyz"`, because
+
+* the local variable `s` is initialized to the string object `hello` and passed as an argument to the method `fix`
+* at this point, both `s` and method parameter `value` point to the same string object
+* inside the method `fix` we call the mutating `concat` method on the object `value` points to and pass `"!"` as an argument; this mutates the string object to `"hello!"
+* next we we call the mutating `upcase!` method on the object `value` points to; this method call returns the same string after mutation and this object is reassigned to the variable `value`. This means `value` and `s` are still pointing to the same string object `"HELLO!"`
+* Lastly, we call the mutating `<<` method on the object `value` points to and pass `"xyz"` as an argument; this mutates the string object to `"HELLO!xyz"` and this being the last evaluated expression is what is returned and stored in `t`.
+
+This demonstrates the concept of mutating methods and variables as pointers.
+
 ```ruby
 arr = [[1, 2, 3], [4, 5, 6]]
 
 arr.map {|arr| arr.first.last}
 ```
 
+```ruby
+def add_bang(str)
+  str.upcase!
+end
+
+sample_string = "This is the way!"
+add_bang(sample_string)
+p sample_string
+```
+
+line 7 outputs `"THIS IS THE WAY!"` and returns a reference to the same string object, because 
+
+* the local variable sampe_string is initialized to the string object `"This is the way!"` in line 5 and passed through the method `add_bang` as an argument
+* at this point both `sample_string` and method parameter `str` point to the same string object
+* in line 2 when we call the destructive `upcase!` method on the object `str` points to, it mutates the string object to `"THIS IS THE WAY!"`.
+* Hence in line 7 we we invoke the `p` method and pass in `sample_string` as an argument, it outputs the same string and returns a reference to the string object.
+
+This demonstrates the concept of mutating methods. 
