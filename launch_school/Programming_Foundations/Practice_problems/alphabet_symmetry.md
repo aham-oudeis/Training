@@ -35,10 +35,12 @@ Clarfications
 ALPHABET_INDEX = ('a'..'z').zip(1..26).to_h
 def solve(arr)
   arr.map do |word|
-    word.chars.count.with_index dp |char, idx| 	
+    word.chars.map.with_index do |char, idx| 	
       ALPHABET_INDEX[char] == idx + 1
-    emd
+    end.count(true)
   end
 end
+  
+  
 ```
 
