@@ -2,7 +2,7 @@ scramble
 
 ```ruby
 def scramble(str1, str2)
-  str2.chars.all? { |i| str1.include?(i)}
+  str2.chars.uniq.all? { |i| str1.count(i) >= str2.count(i)}
 end
 
 p scramble('javaass', 'jjss') == false

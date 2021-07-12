@@ -26,7 +26,7 @@ Algorithm:
 
 =end
 
-
+## well, well; it could be solved by just checking for the shorest substring.
 def substrings(str)
   chars = str.chars
   (2..(str.size)).each_with_object([]) do |num, arr|
