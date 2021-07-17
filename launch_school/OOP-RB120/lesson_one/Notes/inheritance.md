@@ -1,8 +1,8 @@
 __Inheritance__
 
-Inheritance is whena class __inherits__ behavior from another class. The class that is inheriting behavior is called the __subclass__ and the class it inherits from iis called the __superclass__.
+Inheritance is when a class __inherits__ behavior from another class. The class that is inheriting behavior is called the __subclass__ and the class it inherits from is called the __superclass__.
 
-We can use inheritance to extract common behaviors from classes that share that behavior and move it to a superclass. Like having a lot of common behaviors between arrays and hashes to the enumerable superclass.
+We can use inheritance to extract common behaviors from classes that share that behavior and move it to a superclass. It's like having a lot of common behaviors between arrays and hashes to the enumerable superclass.
 
 __class inheritance__
 
