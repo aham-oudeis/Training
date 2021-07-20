@@ -71,5 +71,5 @@ class Banner
   end
 end
 
-banner = Banner.new('To boldly go where no one has gone before.', 2)
+banner = Banner.new('To boldly go where no one has gone before.', 40)
 puts banner
