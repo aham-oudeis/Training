@@ -114,6 +114,7 @@ Welcome to Rock, Paper, Scissors, Lizard, Spock game!
     Spock as      s
 
 We shall play #{SET_LIMIT} number of sets in each round.
+Whoever wins more sets in the given round is the winner.
 
 MSG
 
@@ -313,8 +314,8 @@ module Customizable
       designator = ''
       loop do
         print "==> Please enter your name. "
-        designator = gets.chomp
-        break unless designator.empty?
+        designator = gets.chomp.strip
+        break if designator.match?(/[a-z]/i)
       end
       self.name = designator.capitalize
     end
