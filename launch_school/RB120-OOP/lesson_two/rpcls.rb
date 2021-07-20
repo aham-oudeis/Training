@@ -1,4 +1,3 @@
-require 'pry'
 class Banner
   SIZE = 60
   attr_reader :message, :width
