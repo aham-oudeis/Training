@@ -176,10 +176,6 @@ module Displayable
 end
 
 class Move
-  OPTIONS = { "r" => "rock", "p" => "paper",
-              "c" => "scissors", "l" => "lizard",
-              "s" => "spock" }
-
   BEATS = { 'r' => ['c', 'l'],
             'p' => ['r', 's'],
             'c' => ['p', 'l'],
@@ -270,6 +266,9 @@ class Score
 end
 
 class Player
+  OBJECTS = { 'r' => Rock, 'p' => Paper, 'c' => Scissors,
+    'l' => Lizard, 's' => Spock, 'q' => Quit }
+
   include Displayable
   attr_accessor :name, :move, :move_history, :score, :score_history
 
@@ -278,6 +277,10 @@ class Player
     @score = Score.new
     @score_history = {}
     determine_name
+  end
+
+  def moves
+    OBJECTS.values.reject { |object| object == Quit }
   end
 
   def update_move_history
@@ -341,7 +344,6 @@ class ComputerPersonalities < Computer
   private
 
   def chooses_from(dislikes, loves)
-    moves = [Rock, Paper, Scissors, Lizard, Spock]
     selection = moves.reject { |option| option.eql?(dislikes) }
     FREQUENCY_OF_CHOICE.times { selection << loves }
     selection
@@ -385,9 +387,6 @@ class Omega < ComputerPersonalities
 end
 
 class Human < Player
-  OBJECTS = { 'r' => Rock, 'p' => Paper, 'c' => Scissors,
-              'l' => Lizard, 's' => Spock, 'q' => Quit }
-
   def determine_name
     designator = ''
     loop do
