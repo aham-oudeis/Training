@@ -60,11 +60,11 @@ module Displayable
   include Constants
 
   def ask_what_next_until_valid
-    display_actions
+    display_to_do_options
     keep_asking
   end
 
-  def display_actions
+  def display_to_do_options
     NUM_TO_ACTION.each do |num, action|
       puts "Enter #{num} to #{action}."
     end
