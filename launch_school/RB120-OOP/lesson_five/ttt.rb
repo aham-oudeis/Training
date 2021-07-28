@@ -356,7 +356,7 @@ class Board
   end
 
   def middle_square_available?
-    middle_square = (size / 2) + 1
+    middle_square = ((size ** 2) / 2.0).ceil
     slots[middle_square].unmarked? if size.odd?
   end
 
@@ -377,7 +377,7 @@ class Board
   end
 
   def find_middle_square
-    (size / 2) + 1
+    ((size ** 2) / 2.0).ceil
   end
 
   def find_random_square
