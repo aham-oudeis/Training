@@ -545,7 +545,8 @@ class TTTGame
     display_game_intro
     @human = Human.new
     @computer = Computer.new
-    @board = Board.new(determine_board_size)
+    @board_size = determine_board_size
+    @board = Board.new(board_size)
     @history = {}
     @round = 1
     @score = Score.new(round)
