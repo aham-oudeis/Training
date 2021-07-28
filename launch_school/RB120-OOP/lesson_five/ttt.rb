@@ -58,10 +58,6 @@ module CoreTools
     end
   end
 
-  def prompt(str)
-    puts "=> #{str}"
-  end
-
   def clear
     system('clear')
   end
@@ -69,6 +65,10 @@ module CoreTools
   def join_or(arr)
     return arr.join if arr.size < 2
     [arr[0...(arr.size - 1)].join(', '), arr[-1]].join(', or ')
+  end
+
+  def prompt(str)
+    puts "=> #{str}"
   end
 end
 
@@ -161,6 +161,11 @@ module Displayable
          "  || Losses: #{score.losses} || Ties: #{score.ties}"
   end
 
+  def display_parting_message
+    clear
+    puts Banner.new(PARTING_MSG, 65)
+  end
+
   def keep_asking_until_valid(options)
     loop do
       answer = gets.chomp.strip
@@ -174,11 +179,6 @@ module Displayable
     print "Press ENTER to continue..."
     response = gets.chomp
     sleep unless response
-  end
-
-  def display_parting_message
-    clear
-    puts Banner.new(PARTING_MSG, 65)
   end
 end
 
@@ -261,8 +261,8 @@ class Square
     @value = value
   end
 
-  def unmarked?
-    empty? || numbered?
+  def empty?
+    value.match?(/#{GameConstants::EMPTY_MARKER}/)
   end
 
   def marked?
@@ -277,8 +277,8 @@ class Square
     value.match?(/\d/)
   end
 
-  def empty?
-    value.match?(/#{GameConstants::EMPTY_MARKER}/)
+  def unmarked?
+    empty? || numbered?
   end
 
   def to_s
@@ -338,11 +338,6 @@ class Board
 
   private
 
-  def winning_combos
-    slots_matrix + slots_matrix.transpose +
-      diagonal(slots_matrix) + diagonal(slots_matrix.reverse)
-  end
-
   def about_to_lose?(player)
     winning_combos.any? do |arr|
       possible_to_lose?(player, arr)
@@ -355,46 +350,8 @@ class Board
     end
   end
 
-  def middle_square_available?
-    middle_square = ((size ** 2) / 2.0).ceil
-    slots[middle_square].unmarked? if size.odd?
-  end
-
-  def find_losing_square(player)
-    losing_line(player).find { |key| slots[key].unmarked? }
-  end
-
-  def losing_line(player)
-    winning_combos.find { |arr| possible_to_lose?(player, arr) }
-  end
-
-  def find_winning_square(player)
-    winning_line(player).find { |key| slots[key].unmarked? }
-  end
-
-  def winning_line(player)
-    winning_combos.find { |arr| possible_to_win?(player, arr) }
-  end
-
-  def find_middle_square
-    ((size ** 2) / 2.0).ceil
-  end
-
-  def find_random_square
-    unmarked_slots.sample
-  end
-
-  def possible_to_win?(player, arr)
-    one_unmarked_square?(arr) &&
-      all_other_squares_owned?(player, arr)
-  end
-
   def all_other_squares_owned?(player, arr)
     arr.count { |key| slots[key].marked_by?(player) } == size - 1
-  end
-
-  def one_unmarked_square?(arr)
-    arr.one? { |key| slots[key].unmarked? }
   end
 
   def all_other_squares_taken?(player, arr)
@@ -406,15 +363,6 @@ class Board
     total_taken_squares == size - 1
   end
 
-  def possible_to_lose?(player, arr)
-    one_unmarked_square?(arr) &&
-      all_other_squares_taken?(player, arr)
-  end
-
-  def slots_matrix
-    slots.keys.each_slice(size).to_a
-  end
-
   def diagonal(slots_matrix)
     diagonal = []
     slots_matrix.each_with_index do |array, idx|
@@ -423,18 +371,86 @@ class Board
     [diagonal]
   end
 
-  def init_slots(num)
-    (1..num).each_with_object({}) do |key, all_slots|
-      all_slots[key] = Square.new(format("%2d", key))
-    end
+  def double_empty_lines
+    2.times { empty_line }
   end
 
   def empty_line
     ([" " * SQUARE_SIZE] * size).join("|")
   end
 
-  def double_empty_lines
-    2.times { empty_line }
+  def find_losing_square(player)
+    losing_line(player).find { |key| slots[key].unmarked? }
+  end
+
+  def find_winning_square(player)
+    winning_line(player).find { |key| slots[key].unmarked? }
+  end
+
+  def find_middle_square
+    ((size ** 2) / 2.0).ceil
+  end
+
+  def find_random_square
+    unmarked_slots.sample
+  end
+
+  def gap_between_slots
+    ([" " * ((SQUARE_SIZE / 2) - 1)] * 2).join("|")
+  end
+
+  def init_slots(num)
+    (1..num).each_with_object({}) do |key, all_slots|
+      all_slots[key] = Square.new(format("%2d", key))
+    end
+  end
+
+  def insert_board_numbers
+    slots.each do |key, square|
+      slots[key].value = format("%2d", key) if square.empty?
+    end
+  end
+
+  def middle_square_available?
+    middle_square = ((size ** 2) / 2.0).ceil
+    slots[middle_square].unmarked? if size.odd?
+  end
+
+  def losing_line(player)
+    winning_combos.find { |arr| possible_to_lose?(player, arr) }
+  end
+
+  def one_unmarked_square?(arr)
+    arr.one? { |key| slots[key].unmarked? }
+  end
+
+  def print_row(index)
+    puts [empty_line, slot_line(index), empty_line]
+    puts separator unless index == size - 1
+  end
+
+  def possible_to_win?(player, arr)
+    one_unmarked_square?(arr) &&
+      all_other_squares_owned?(player, arr)
+  end
+
+  def possible_to_lose?(player, arr)
+    one_unmarked_square?(arr) &&
+      all_other_squares_taken?(player, arr)
+  end
+
+  def rows
+    slots.values.each_slice(size).to_a
+  end
+
+  def remove_board_numbers
+    slots.each do |key, square|
+      slots[key].value = EMPTY_MARKER if square.numbered?
+    end
+  end
+
+  def slots_matrix
+    slots.keys.each_slice(size).to_a
   end
 
   def separator
@@ -445,29 +461,13 @@ class Board
     "   #{rows[index].join(gap_between_slots)}   "
   end
 
-  def rows
-    slots.values.each_slice(size).to_a
+  def winning_combos
+    slots_matrix + slots_matrix.transpose +
+      diagonal(slots_matrix) + diagonal(slots_matrix.reverse)
   end
 
-  def gap_between_slots
-    ([" " * ((SQUARE_SIZE / 2) - 1)] * 2).join("|")
-  end
-
-  def print_row(index)
-    puts [empty_line, slot_line(index), empty_line]
-    puts separator unless index == size - 1
-  end
-
-  def insert_board_numbers
-    slots.each do |key, square|
-      slots[key].value = format("%2d", key) if square.empty?
-    end
-  end
-
-  def remove_board_numbers
-    slots.each do |key, square|
-      slots[key].value = EMPTY_MARKER if square.numbered?
-    end
+  def winning_line(player)
+    winning_combos.find { |arr| possible_to_win?(player, arr) }
   end
 end
 
