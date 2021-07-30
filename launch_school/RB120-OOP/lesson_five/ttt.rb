@@ -28,7 +28,7 @@ end
 
 module CoreTools
   class Banner
-    SIZE = 60
+    SIZE = 65
     attr_reader :message, :width
 
     def initialize(message, width=SIZE)
@@ -95,7 +95,7 @@ module Displayable
 
   def display_game_intro
     clear
-    puts Banner.new(INTRO, 65)
+    puts Banner.new(INTRO)
     prompt Q_TO_QUIT
     puts T_TO_TOGGLE
     puts
