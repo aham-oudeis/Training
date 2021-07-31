@@ -200,12 +200,12 @@ class Dealer < Participant
     self.name = ["Omega", "Pinnochio", "Mario", "Pal"].sample
   end
 
-  def hit?
-    @hit = less_than_seventeen?
-  end
-
   def less_than_seventeen?
     hand_total < MIN_VALUE
+  end
+
+  def hit?
+    @hit = less_than_seventeen?
   end
 end
 
@@ -256,6 +256,10 @@ class TwentyOneGame
     @current_participant = nil
   end
 
+  ####################################################################
+  # Display Methods
+  ####################################################################
+
   def game_loop
     loop do
       one_round
@@ -299,6 +303,10 @@ class TwentyOneGame
     end
   end
 
+  ####################################################################
+  # Display Methods
+  ####################################################################
+
   def display_game_intro
     puts Banner.new(INTRO, 60)
   end
@@ -316,15 +324,6 @@ class TwentyOneGame
   def ask_until_valid(options)
     display_to_do(options)
     keep_asking_until_valid(options)
-  end
-
-  def set_over?
-    current_participant.quit? || current_participant.busted? ||
-      (current_participant == dealer && dealer.stay?)
-  end
-
-  def player_turn_over?
-    current_participant == player && dealer_turn?
   end
 
   def display_to_do(options)
@@ -352,18 +351,6 @@ class TwentyOneGame
 
   def display_busted
     prompt "#{current_participant} busted!"
-  end
-
-  def keep_asking_until_valid(options)
-    loop do
-      answer = gets.chomp.strip
-      return answer if options.keys.include? answer.downcase
-      puts "Sorry, must be #{join_or(options.keys)}."
-    end
-  end
-
-  def hit_or_stay
-    player.ask_hit_or_stay if current_participant == player
   end
 
   def deal_two_cards
@@ -418,14 +405,20 @@ class TwentyOneGame
     puts Banner.new(PARTING_MSG, 65)
   end
 
-  def show_one_dealer_card
-    puts "#{format_name(dealer)}: #{dealer.hand.first} [** **] | **"
-    puts "#{format_name(player)}: #{player.show_hand}"\
-         " | #{player.hand_total}"
-  end
-
   def format_name(participant)
     participant.to_s.ljust(10)
+  end
+
+  def hit_or_stay
+    player.ask_hit_or_stay if current_participant == player
+  end
+
+  def keep_asking_until_valid(options)
+    loop do
+      answer = gets.chomp.strip
+      return answer if options.keys.include? answer.downcase
+      puts "Sorry, must be #{join_or(options.keys)}."
+    end
   end
 
   def show_both_cards
@@ -435,6 +428,22 @@ class TwentyOneGame
     end
   end
 
+  def show_one_dealer_card
+    puts "#{format_name(dealer)}: #{dealer.hand.first} [** **] | **"
+    puts "#{format_name(player)}: #{player.show_hand}"\
+         " | #{player.hand_total}"
+  end
+
+  def sleep_until_enter
+    puts
+    print "Press ENTER to continue..."
+    response = gets.chomp
+    sleep unless response
+  end
+
+  ####################################################################
+  # Updating Methods
+  ####################################################################
   def switch_to_dealer
     @current_participant = dealer
   end
@@ -445,13 +454,6 @@ class TwentyOneGame
 
   def store_round_score
     history[round] = score
-  end
-
-  def sleep_until_enter
-    puts
-    print "Press ENTER to continue..."
-    response = gets.chomp
-    sleep unless response
   end
 
   def update_winner
@@ -482,19 +484,6 @@ class TwentyOneGame
       end
   end
 
-  def prepare_next_round
-    store_round_score
-    next_round
-    reset_score
-  end
-
-  def kickstart_new_set
-    reset_deck
-    reset_hands
-    reset_winner
-    reset_player_state
-  end
-
   def reset_player_state
     [dealer, player].each do |member|
       member.hit = true
@@ -516,6 +505,32 @@ class TwentyOneGame
 
   def reset_winner
     @winner = nil
+  end
+
+  ####################################################################
+  # Tests and Others
+  ####################################################################
+
+  def set_over?
+    current_participant.quit? || current_participant.busted? ||
+      (current_participant == dealer && dealer.stay?)
+  end
+
+  def player_turn_over?
+    current_participant == player && dealer_turn?
+  end
+
+  def kickstart_new_set
+    reset_deck
+    reset_hands
+    reset_winner
+    reset_player_state
+  end
+
+  def prepare_next_round
+    store_round_score
+    next_round
+    reset_score
   end
 
   def to_s
