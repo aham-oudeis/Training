@@ -10,7 +10,7 @@ __Encapsulation__
 
 hiding pieces of functionality and making it unavailable to other parts of the code base. It is a form of data protection so that the data cannot be manipulated without obvious intent. (Is the problem unintentional alteration of the data or that of unrecognized side-effects?)
 
-Ruby does this by creating objects and exposing interfaces (methods) with those objects. In what way are the objects related to the methods? Is it simply that the methods are specified in the parent class? What about the class methods? (What are other ways of doing this? Could functional programming be a way of dealing with this problem? Maybe the problem of side-effects?)
+Ruby does this by creating objects and exposing interfaces (methods) with those objects. In what way are the objects related to the methods? Is it simply that the methods are specified in the parent class? (Inheritance chain; method loop up path). What about the class methods? (What are other ways of doing this? Could functional programming be a way of dealing with this problem? Maybe the problem of side-effects?)
 
 __Polymorphism__
 
@@ -20,7 +20,7 @@ I understand it to mean we can call the same methods on different kinds of data.
 
 The basic idea here is that the same method can be made available to different objects. However, the mere fact that the same method is available to different objects does not make it a case of polymorphism. There has to an intentional design of the code such that we capitalize on the ability. (This part about the significance of intentional design is a bit hard to decipher.) 
 
-(Is it actually true that inheritance and mixins are ways of implementing polymorphism?) How is this availability built in? In Ruby, the answer would be inheritance and mix-in modules.
+Is it true that inheritance and mixins are ways of implementing polymorphism? Yes! How is polymorphism made available in Ruby? The answer would be inheritance and mix-in modules.
 
 > The concept of **inheritance** is used in Ruby where a class inherits the behaviors of another class, referred to as the **superclass**. This gives Ruby programmers the power to define basic classes with large reusability and smaller **subclasses** for more fine-grained, detailed behaviors.
 >
@@ -59,11 +59,11 @@ bob = HumanBeing.new
 bob.speak("Hello!")
 ```
 
-What `include` does is makes all the methods from `Speak` module, i.e., `speak` available to both  the `GoodDog` and `HumanBeing` class. This availability works in a very specific way that is revealed in the lookup path. Hence, we can call the `speak` method on both `sparky` and `bob` in line 16 and 19 respectively.
+What `include` does is makes all the methods from `Speak` module, i.e., `speak` available to both  the `GoodDog` and `HumanBeing` class. The module methods are made avaialble to the class by adding the module in the method lookup path (or, inheritance chain). Hence, we can call the `speak` method on both `sparky` and `bob` in line 16 and 19 respectively. (If there had been a speak method in the class itself, that would be the first method that Ruby would grab, because the parent class comes prior to the module in the method look up path.)
 
 __Method Lookup__
 
-Ruby has a distinct method lookup path that it follows each time a method is called. (I suppose not all programs have this method look up path. Is that right?)
+Ruby has a distinct method lookup path that it follows each time a method is called. Distinct method loop up path, but distinct from what? Distinct from constant look up path.
 
 ```ruby
 module Speak
@@ -90,7 +90,7 @@ It seems the `ancestors` method call reveals not only the superclasses (includin
 
 Since both inheritance from class and mixing modules can be implemented at once, there is a possibility of confusion regarding whether the class or module comes before in the look up path. For instance, say class `ABC` inherits from another class `XYZ` and also mixes in the module `MNO`, then it is unclear if `XYZ` comes before `MNO`  in the method lok up. There must be a way of resolving this.
 
-It seems a consequence of this method look up path is that the method defined in the closest ancestors overrides the method defined in the distant ancestor class. (A similar thing is happening in the case of variable shadowing.)
+A consequence of this method look up path is that the method defined in the closest ancestors is the one that Ruby invokes. (A similar thing is happening in the case of variable shadowing.)
 
 ```ruby
 # Exercises
@@ -118,7 +118,7 @@ phil_101 = SampleCourse.new
 prof_dunk = SamplePeople.new
 
 =begin
-Once we have the 'summary' method available through the use of module, we can invoke the 'summary' method on both 'phil_101' and 'prof_dunk'. They will respectively reveal what we have defined as the 'to_s' method for that particular class. in the case of a course, it may be the course description; in the case of a person, it may be some details of who they are and what they do. The core idea is that the same method is available to different objects, i.e., objects instantiated from different classes. This is polymorphism.
+Once we have the 'summary' method available through the use of module, we can invoke the 'summary' method on both 'phil_101' and 'prof_dunk'. They will respectively reveal what we have defined as the 'to_s' method for that particular class, because the puts method automatically calls to_s on the object passed to it. in the case of a course, it may be the course description; in the case of a person, it may be some details of who they are and what they do. The core idea is that the same method is available to different objects, i.e., objects instantiated from different classes. This is polymorphism.
 =end
 ```
 
