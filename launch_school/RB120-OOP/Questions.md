@@ -1,6 +1,8 @@
 Questions
 
-1. Is there such a thing as method look up path for class methods? (It works for constants.)
+1. Is there such a thing as a method look up path for class methods? (There is one for Constants.)
+
+   I would think that the method look up path for class methods is the same as the one for instance methods.
 
 2. Why is setter methods is to be preferred over instance variables when it comes to changing the value?
 
@@ -19,6 +21,8 @@ Questions
    In regards to having a `self.drive` method inside a `Drivable` module:
 
    > Methods in mixin modules should be defined without using `self.` in the definition. If you add `self.` to the definition, the including class will only be able to access the method by calling `Drivable.drive`; furthermore, the method will not be available at all as an instance method to objects.
+
+   The way the instance methods are included in a class is different from how the class methods are included. Although there are some compliicated ways of including the class methods from a module, right now it's not necessary to dive into them. 
 
 4. When to use a module instead of a superclass?
 
