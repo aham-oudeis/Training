@@ -1,0 +1,249 @@
+## 					Study Guide For the RB120 Written Assessment
+
+### Classes and objects
+
+Classes are blueprints for the states and behaviors of objects instantiated from them. 
+
+Or, classes are outlines for what the objects are made up of and what they are able to do. 
+
+Classes are like molds and objects are things created out of those molds. 
+
+Classes supply forms (like Platonic forms) of state and available behaviors for the objects created from them. 
+
+Classes set the boundaries for behaviors and states avalable to the objects instantiated from them.
+
+Objects are instantiations of classes. They have states and behaviors. 
+
+Objects are created from classes when we invoke the `new` class method. Since the `new` class method triggers and passes in all the arguments given to it to the instance method `initialize`, we have to pass in adequate number of arguments to the `new` method invocation. 
+
+There is a bit of an issue in understanding whether the `new` method is the constructor or the `initialize` method is the constructor. The LS articles explicitly mention the `initialize` method as a constructor, but given that there are ways of instantiating an object without invoking the `initialize` method, it does not seem like `initialize` is necessary for object construction. Nevertheless, for now `initialize` will be taken as the constructor.
+
+In our class definitions, we define the instance methods, where we  put all the details about how the instance variables are to be initialized. (if the variables `@var` are initialized outside of the instance methods, they are of different breed: __class instance variables__). Since these variables are initialized only when we invoke these instance methods, the instance variables are not actually initialized untill we create an object and invoke these instance methods. It is important to note that the `initialize` method is not exactly an instance method. Rather, it is a special method that is run evertime we create an object by calling `new` on the class. 
+
+One thing to note here is that object creation is a different process than the invocation of the initialize method, because we can create objects without invoking the initialize method (e.g., `allocate`). Although we cannot actually call the `initialize` method on an instance of an object (unless we make the initialize method public), we already need to have an object instance for us to call the `initialize` method for that object. Since we can make the `initialize` method public and call it on the object, it looks like an instance method. Given the special role it plays in ruby, it might be better to just call it the `initialize` method. 
+
+It's only by calling the `initialize` method that we initialize all the instance variables for that object (if the instance variables are intialized that way; one may simply avoid the `initialize` method and just work with `setter` methods). That's why it makes sense to not talk about the instance variables at the class level. Even Matt Johnson's talk about 'attribute signiifier' is rather misleading. Since all the instance variables are located inside the instance methods and these instance methods do not come into play in the absence of objects, it is misleading to talk about instance variables as if they are part of the class. 
+
+In this sense, the instance variables come into play only when objects are created. What we see in the class defitions are simply an outline  of the behaviors available to the objects. Once initialized, these instance variables tied to the object. In other words, objects encapsulate the state in the form of instance variables and their values. That is, an object carries its state with it. When we invoke any method on the object ( a method that needs access to the information stored in the instance variable) the state of the object is available to the method. In this sense, instance variables are scoped at the object level. 
+
+> Instance variables are variables that exist only within an object  instance. They are available to reference only once the object has been  initialized. They're differentiated by the `@` symbol prepended to their name, like this: `@name`. In this exercise, we use an instance variable to assign a unique name to the `kitty` object.
+
+Now Pete's and Karl's response should be a bit easier to understand.
+
+Pete Hanson's response to Nick Calibey:
+
+> I think of things this way:
+>
+> - An instance variable is named by the class, but each object created  from the class creates its own copy of the instance variable, and its  value contributes to the overall state of the object. With this  definition, note in particular that the instance variable is actually  not part of the class; therefore, it can't be inherited. The subclass  does know about the name, but it's merely using that name as a handle  for the value it contains.
+> - An attribute is an instance variable **name and value**. More specifically, an attribute must be accessible outside the methods  defined by the class; this means you need either a getter or setter  method, or both. If both are missing, you only have an instance variable and a value (you can think of this as a "private attribute" if you  want, but it doesn't really help). An attribute's getter and setter **methods** will be inherited by a superclass, but, the instance variable name and  value behind the attribute do not participate in inheritance.
+> - Every object has state. State is the collection of all instance  variables and their values defined for an object. Since state is part of the object, not the class, state is not inherited.
+>
+> The following list should keep you out of trouble, at least for now:
+>
+> -   A subclass inherits the methods of the superclass.
+> -   Instance variables and their values are not inheritable.
+> -   Attribute getters and setters are methods, so they are inheritable
+> -   Attribute names and their values are just instance variables and values, so they are not inheritable
+> -   State is a tied directly to individual objects, so is not inheritable.
+
+Karl Lingiah's response to Kimberly Ramirez:
+
+> I'd suggest thinking along the following lines:
+>
+> - Attributes are an abstraction, and represent the properties/ characteristics of an object
+> - Instance variables, e.g. `@age` are how we represent that abstraction in Ruby
+> - Assignment to instance variables, e.g.`@age = age` are the way that we associate values with those attributes
+> - The state of an object is the combination of all its attributes and their values
+
+### Use `attr_*` to create setter and getter methods
+
+```ruby
+class Course
+  attr_accessor :students
+  attr_reader :name, teacher
+ 
+  def initialize(name, teacher, students)
+    @name = name
+    @teacher = teacher
+    @students = students
+  end
+end
+
+=begin
+we define the Course class with five instance methods
+-initialize instance method initializes the instance variables
+-a getter and a setter method for the attribute students by invoking the method
+	attr_accessor and passing in :students as an argument
+-two getter methods for the attribute name and teacher by invoking tthe attr_reader
+	and passing in :name, :teacher as arguments
+
+attr_* methods are prefered for their simplicity, but when there are other demands
+in place, we would have to use manual getter and setter methods. For instance, when we need to have a built in customization for accessing and setting instance variables.
+=end
+```
+
+
+
+### How to call setters and getters
+
+we call setters and getters on the objects just like any other method calls, writing the getter and setter method name after the dot operator. 
+
+Ruby offfers a nice syntax for the setter methods. While we define the setter methods as follows:
+
+```ruby
+def name=(name)
+  @name = name
+end
+```
+
+We can invoke the setter method in a much cleaner way:
+
+```ruby
+object.name = 'new name'
+```
+
+This is Ruby's syntactical sugar.
+
+
+
+### Instance methods vs. class methods
+
+> Class methods are defined differently than instance methods. When defining a class method, the method name is prepended with `self`, like this: `self.generic_greeting`. In the solution, `self` refers to the `Cat` class. This means we could also define `#generic_greeting` as `Cat.generic_greeting`. However, `self` is preferred when defining class methods.
+
+Instance methods are methods we can invoke on the objects and class methods are methods we can invoke on the class. (If we look under the hood, it turns out that class methods are just instance methods defined for that class object, where the class is treated as an object. These 'class methods' are stored in the singleton_class, which stay sliightly hidden.) 
+
+Inside of the class we define class methods by appending `self.` before the method name. What this does is create a singleton class for the class object and puts the method there. That is why we can simply open the singleton class and put the 'class' methods there just as we put instance methods. 
+
+```ruby
+class Something
+  def self.name
+    "This is something."
+  end
+end
+
+# This is equivalent to:
+
+class Something; end
+
+def Something.name
+  "This is something."
+end
+
+# In a weird way, this is equialent to:
+
+class Something; end
+
+Ghost = Something.singleton_class
+
+# now we open up the Ghost class and add instance method there
+# since Something is an instance of the Ghost class, we can then
+# invoke the name method defined in the Ghost class on Something.
+
+class Ghost
+  def name
+    "This is something."
+  end
+end
+```
+
+
+
+Hence, when we define a method with `self` Ruby creates a singleton class and puts that method there. 
+
+The weird thing is that when we inherit from a superclass, the subclass inherits the class methods as well. The inheritance of the instance methods and class methods are more or less similar, except fact that instance methods remain as instance methods and class methods remain as class methods. That is, instance method can only be called by objects and class methods can be called by the classes.
+
+Whereas we define the instance methods without using `self` keyword. (This is where the concept of default_definee comes about, but I don't understand it well enough to say anything meaningful.)
+
+###  Method Access Control
+
+Method access control are ways of implementing encapsulation through the usage of _access modifiers_. Method access control enables hiding certain methods and making other methods part of the public interface. Ruby has three _access modifiers_: `public`, `private`, `protected`. 
+
+> Protected methods are very similar to private methods. The main  difference between them is protected methods allow access between class  instances, while private methods don't. If a method is protected, it  can't be invoked from outside the class. This allows for controlled  access, but wider access between class instances.
+
+### Referencing and setting instance variables vs. using getters and setters
+
+We have two different ways of accessing and changing the value stored in the instance variables. To access the value, we can directly invoke the instance variable or we can invoke the getter method. To change the value, we can directly change the value stored in the instance variable or we can invoke the setter method. Despite there being these two ways, it is preferable to rely on getter and setter methods for at least two reasons:
+
+1. by using the getter method, we can have built in customization of the the value either for the sake of presentation or for the sake of data protection
+2. by using the setter method, we can customize the value that is stored in the instance variable. 
+   1. For instance, although we allow to provide string as an argument for the setter method, we may want to actually store a different object with that value, instead of storing a string object. 
+
+###  Class inheritance, [encapsulation](https://launchschool.com/books/oo_ruby/read/the_object_model#whyobjectorientedprogramming), and [polymorphism](https://launchschool.com/books/oo_ruby/read/the_object_model#whyobjectorientedprogramming)
+
+Encapsulation refers to the practice of hiding certain pieces of functionality from rest of the codebase. This can be implemented in different ways. Ruby implements encapsulation by using objects. Method access control is also one of the ways of implementing encapsulation. 
+
+Polymorphism refers to the ability of different types of objects to respond to the same method call. The basic idea is that if different objects refer to the same method call, it does not matter how the types of the objects differ. What matters is that they respond to the same method. This feature enables programmer to write DRY code. 
+
+Polymorphism enables programmers to work in a rather flexible way with the objects.
+
+### Modules](https://launchschool.com/lessons/dfff5f6b/assignments/2cf31cc8)
+
+Modules are containers for shared behaviors and constants. Or, Modules are collections of  behaviors usable in other classes via mixin. They can be used for namespacing and extracting common behaviors. They can be mixed in with classes using the following syntax: `include ModuleName`'', where `ModuleName` stands for the name of the module that is to be included.
+
+###  Method lookup path
+
+Method loopup path is the sequential path that Ruby traverses in looking for a method. This path can be found out by calling the `ancestors` method on the class. 
+
+###  self
+
+-   [Calling methods with self](https://launchschool.com/books/oo_ruby/read/classes_and_objects_part1#callingmethodswithself)
+
+We use `self` to call the setter methods from inside the class, because in absence of the `self` Ruby does not know that we meant to call the setter method and not just initialize a local variable. 
+
+> We're required to use `self` so that Ruby knows the difference between initializing a local variable and invoking a setter method.
+
+-   [More about self](https://launchschool.com/books/oo_ruby/read/classes_and_objects_part2#moreaboutself)
+
+We also use `self` to define the class methods or rather the methods in the singleton_class. 
+
+`self` is a way of being explicit about the calling object. 
+
+`self` references where Ruby is in the program execution.
+
+###  Reading OO code
+
+### Fake operators and equality
+
+Except for `.` `::`, `ternary operator`, and the logical operators, most of what seem like operators are in fact methods defined for that particular object. For instance, when we write `'abc' == 'abcd'` in ruby, we are not using an operator but a method call defined in the String class. What this does is compare if the two objects have the same value. However, when we invoke the same equivalence method for our custom objects without defining == for the custom class, the method Ruby finds is from BasicObject, which compares the two objects by checking if they are the same object, not if the two objects have the same value.
+
+### Truthiness
+
+In Ruby anything except `false` or `nil` evaluates as `true`. That means, a custom object with no attributes would be considered `truthy`. 
+
+```ruby
+class Something; end
+empty_object = Something.new
+
+empty_objet ? "Empty Object is Truthy" : "Empty Object is Falsey."
+
+#=> "Empty Object is Truthy."
+
+# one new thing from OOP is that uninitialized instance variables returns nil;
+# so, if we happen to evaluate an uninitialized instanve variable, then
+# it would evaluate as false.
+```
+
+###  Working with collaborator objects
+
+Collaborator objects are objects that are part of the state of another object.
+
+```ruby
+class Course
+  def initialize(name, teacher, students)
+    @name = name
+    @teacher = teacher.capitalize
+    @students = students
+  end
+end
+
+=begin
+In this example, we define the Course class such that a string object stored in the stance variable @teacher is part of the Course object's attribute. In this sense, the string object is a collaborator object of Course object. 
+
+Say, we store an array object in the instance variable @students. In that case, the array object would be the collaborator object of the course object.
+=end
+
+```
+
+
+
+> When you invoke `#super` within a method, Ruby looks in the inheritance hierarchy for a method with the same name. 
