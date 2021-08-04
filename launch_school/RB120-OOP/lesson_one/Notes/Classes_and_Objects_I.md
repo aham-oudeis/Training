@@ -2,7 +2,7 @@ __States and Behaviors__
 
 When defining a class we generally focus on two things: _states_ and _behaviors_. States track attributes for individual objects and behaviors are what objects are capable of doing.
 
-In other words, the objects will have predefined set of attributes (the ones that are specified in the class). The state of the object is simply a set of the attributes. Behaviors are  methods these attributes respond to in different ways. 
+In other words, the objects will have predefined set of attributes (the ones that are specified in the class). The state of the object is simply the totality of the attributes and the values contained in them. Behaviors are  methods these attributes respond to in different ways. 
 
 Instance variables are the ones that keep track of these distinct attributes.
 
