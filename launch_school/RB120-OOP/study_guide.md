@@ -24,9 +24,9 @@ One thing to note here is that object creation is a different process than the i
 
 It's only by calling the `initialize` method that we initialize all the instance variables for that object (if the instance variables are intialized that way; one may simply avoid the `initialize` method and just work with `setter` methods). That's why it makes sense to not talk about the instance variables at the class level. Even Matt Johnson's talk about 'attribute signiifier' is rather misleading. Since all the instance variables are located inside the instance methods and these instance methods do not come into play in the absence of objects, it is misleading to talk about instance variables as if they are part of the class. 
 
-In this sense, the instance variables come into play only when objects are created. What we see in the class defitions are simply an outline  of the behaviors available to the objects. Once initialized, these instance variables tied to the object. In other words, objects encapsulate the state in the form of instance variables and their values. That is, an object carries its state with it. When we invoke any method on the object ( a method that needs access to the information stored in the instance variable) the state of the object is available to the method. In this sense, instance variables are scoped at the object level. 
+In this sense, the instance variables come into play only when objects are created. What we see in the class defitions are simply an outline  of the behaviors available to the objects. Once initialized, these instance variables are tied to the object. In other words, objects encapsulate the state in the form of instance variables and their values. That is, an object carries its state with it. When we invoke any method on the object the state of the object is available to the method and thus any method call can work with the object's state.  In this sense, instance variables are scoped at the object level. 
 
-> Instance variables are variables that exist only within an object  instance. They are available to reference only once the object has been  initialized. They're differentiated by the `@` symbol prepended to their name, like this: `@name`. In this exercise, we use an instance variable to assign a unique name to the `kitty` object.
+> Instance variables are variables that exist only within an object  instance. They are available to reference only once the object has been  initialized. They're differentiated by the `@` symbol prepended to their name, like this: `@name`. 
 
 Now Pete's and Karl's response should be a bit easier to understand.
 
@@ -34,7 +34,7 @@ Pete Hanson's response to Nick Calibey:
 
 > I think of things this way:
 >
-> - An instance variable is named by the class, but each object created  from the class creates its own copy of the instance variable, and its  value contributes to the overall state of the object. With this  definition, note in particular that the instance variable is actually  not part of the class; therefore, it can't be inherited. The subclass  does know about the name, but it's merely using that name as a handle  for the value it contains.
+> - An instance variable is named by the class, but each object created  from the class creates its own copy of the instance variable, and its  value contributes to the overall state of the object. With this  definition, note in particular that the instance variable is actually not part of the class; therefore, it can't be inherited. The subclass  does know about the name, but it's merely using that name as a handle  for the value it contains.
 > - An attribute is an instance variable **name and value**. More specifically, an attribute must be accessible outside the methods  defined by the class; this means you need either a getter or setter  method, or both. If both are missing, you only have an instance variable and a value (you can think of this as a "private attribute" if you  want, but it doesn't really help). An attribute's getter and setter **methods** will be inherited by a superclass, but, the instance variable name and  value behind the attribute do not participate in inheritance.
 > - Every object has state. State is the collection of all instance  variables and their values defined for an object. Since state is part of the object, not the class, state is not inherited.
 >
@@ -78,7 +78,7 @@ we define the Course class with five instance methods
 	and passing in :name, :teacher as arguments
 
 attr_* methods are prefered for their simplicity, but when there are other demands
-in place, we would have to use manual getter and setter methods. For instance, when we need to have a built in customization for accessing and setting instance variables.
+in place, we would have to use manual getter and setter methods. For instance, when we need to have a built-in customization for accessing and setting instance variables.
 =end
 ```
 
@@ -104,17 +104,19 @@ object.name = 'new name'
 
 This is Ruby's syntactical sugar.
 
-
-
 ### Instance methods vs. class methods
 
 > Class methods are defined differently than instance methods. When defining a class method, the method name is prepended with `self`, like this: `self.generic_greeting`. In the solution, `self` refers to the `Cat` class. This means we could also define `#generic_greeting` as `Cat.generic_greeting`. However, `self` is preferred when defining class methods.
 
-Instance methods are methods we can invoke on the objects and class methods are methods we can invoke on the class. (If we look under the hood, it turns out that class methods are just instance methods defined for that class object, where the class is treated as an object. These 'class methods' are stored in the singleton_class, which stay sliightly hidden.) 
+Instance methods are methods we can invoke on the objects and class methods are methods we can invoke on the class. 
 
-Inside of the class we define class methods by appending `self.` before the method name. What this does is create a singleton class for the class object and puts the method there. That is why we can simply open the singleton class and put the 'class' methods there just as we put instance methods. 
+If we look under the hood, it turns out that class methods are just instance methods defined for that class object, where the class is treated as an object. These 'class methods' are stored in the singleton_class, which stay sliightly hidden.
+
+Inside of the class we define class methods by adding `self.` before the method name. What this does is create a singleton class for the class object and puts the method there. That is why we can simply open the singleton class and put the 'class' methods there just as we put instance methods. 
 
 ```ruby
+# in all three following cases, Something.name should return "This is something."
+
 class Something
   def self.name
     "This is something."
@@ -150,9 +152,9 @@ end
 
 Hence, when we define a method with `self` Ruby creates a singleton class and puts that method there. 
 
-The weird thing is that when we inherit from a superclass, the subclass inherits the class methods as well. The inheritance of the instance methods and class methods are more or less similar, except fact that instance methods remain as instance methods and class methods remain as class methods. That is, instance method can only be called by objects and class methods can be called by the classes.
+The weird thing is that when we inherit from a superclass, the subclass inherits the class methods as well. The inheritance of the instance methods and class methods are more or less similar, except for the fact that instance methods remain as instance methods and class methods remain as class methods. That is, instance method can only be called by objects and class methods can be called by the classes.
 
-Whereas we define the instance methods without using `self` keyword. (This is where the concept of default_definee comes about, but I don't understand it well enough to say anything meaningful.)
+We define the instance methods without using `self` keyword. (This is where the concept of default_definee comes about, but I don't understand it well enough to say anything meaningful.)
 
 ###  Method Access Control
 
@@ -164,47 +166,59 @@ Method access control are ways of implementing encapsulation through the usage o
 
 We have two different ways of accessing and changing the value stored in the instance variables. To access the value, we can directly invoke the instance variable or we can invoke the getter method. To change the value, we can directly change the value stored in the instance variable or we can invoke the setter method. Despite there being these two ways, it is preferable to rely on getter and setter methods for at least two reasons:
 
-1. by using the getter method, we can have built in customization of the the value either for the sake of presentation or for the sake of data protection
+1. by using the getter method, we can have built in customization of the the value either for the sake of presentation (like adding a prefix) or for the sake of data protection (hiding some parts, like bank account).
 2. by using the setter method, we can customize the value that is stored in the instance variable. 
-   1. For instance, although we allow to provide string as an argument for the setter method, we may want to actually store a different object with that value, instead of storing a string object. 
+   - For instance, although we allow the setter method to take a string as an argument, we may want to actually store a different object (say, Book object) with that value, instead of storing a string object. 
 
 ###  Class inheritance, [encapsulation](https://launchschool.com/books/oo_ruby/read/the_object_model#whyobjectorientedprogramming), and [polymorphism](https://launchschool.com/books/oo_ruby/read/the_object_model#whyobjectorientedprogramming)
 
-Encapsulation refers to the practice of hiding certain pieces of functionality from rest of the codebase. This can be implemented in different ways. Ruby implements encapsulation by using objects. Method access control is also one of the ways of implementing encapsulation. 
+Encapsulation refers to the practice of hiding certain pieces of functionality from rest of the codebase. This can be implemented in different ways. Ruby implements encapsulation by using objects. Method access control is also one of the ways of implementing encapsulation at the object level.
 
 Polymorphism refers to the ability of different types of objects to respond to the same method call. The basic idea is that if different objects refer to the same method call, it does not matter how the types of the objects differ. What matters is that they respond to the same method. This feature enables programmer to write DRY code. 
 
 Polymorphism enables programmers to work in a rather flexible way with the objects.
 
-### Modules](https://launchschool.com/lessons/dfff5f6b/assignments/2cf31cc8)
+### [Modules](https://launchschool.com/lessons/dfff5f6b/assignments/2cf31cc8)
 
-Modules are containers for shared behaviors and constants. Or, Modules are collections of  behaviors usable in other classes via mixin. They can be used for namespacing and extracting common behaviors. They can be mixed in with classes using the following syntax: `include ModuleName`'', where `ModuleName` stands for the name of the module that is to be included.
+Modules are containers for shared behaviors and constants. 
+
+Or, Modules are collections of  behaviors usable in other classes via mixin. 
+
+They can be used for namespacing and extracting common behaviors. 
+
+They are mixed in with classes using the following syntax: `include ModuleName`'', where `ModuleName` stands for the name of the module that is to be included.
 
 ###  Method lookup path
 
-Method loopup path is the sequential path that Ruby traverses in looking for a method. This path can be found out by calling the `ancestors` method on the class. 
+Method loopup path is the sequential path that Ruby traverses in looking for a method. This path can be found out by calling the `ancestors` method on the class. Ruby invokes the first method it finds in this path; if it does not find any method of that name, it throws a `NoMethod` error. 
 
 ###  self
 
 -   [Calling methods with self](https://launchschool.com/books/oo_ruby/read/classes_and_objects_part1#callingmethodswithself)
 
-We use `self` to call the setter methods from inside the class, because in absence of the `self` Ruby does not know that we meant to call the setter method and not just initialize a local variable. 
+We use `self` to call the setter methods from inside the class, because in absence of the `self` Ruby does not know whether we meant to call the setter method or just initialize a local variable. 
 
 > We're required to use `self` so that Ruby knows the difference between initializing a local variable and invoking a setter method.
 
 -   [More about self](https://launchschool.com/books/oo_ruby/read/classes_and_objects_part2#moreaboutself)
 
-We also use `self` to define the class methods or rather the methods in the singleton_class. 
+We also use `self` to define the class methods (or, rather the methods in the singleton_class.)
 
-`self` is a way of being explicit about the calling object. 
+`self` is a way of being explicit about the calling object.
 
-`self` references where Ruby is in the program execution.
+`self` references where Ruby is in the program execution or what the calling object is.
 
 ###  Reading OO code
 
 ### Fake operators and equality
 
-Except for `.` `::`, `ternary operator`, and the logical operators, most of what seem like operators are in fact methods defined for that particular object. For instance, when we write `'abc' == 'abcd'` in ruby, we are not using an operator but a method call defined in the String class. What this does is compare if the two objects have the same value. However, when we invoke the same equivalence method for our custom objects without defining == for the custom class, the method Ruby finds is from BasicObject, which compares the two objects by checking if they are the same object, not if the two objects have the same value.
+Except for `.` `::`, `ternary operator`, and the logical operators, most of what seem like operators are in fact methods defined for that particular object. 
+
+For instance, when we write `'abc' == 'abcd'` in ruby, we are not using an operator but a method call defined in the String class. 
+
+What this does is compare if the two objects have the same value. 
+
+However, when we invoke the same equivalence method for our custom objects without defining == for the custom class, the method Ruby finds is from Object (or, is it BasicObject?), which compares the two objects by checking if they are the same object, not if the two objects have the same value.
 
 ### Truthiness
 
@@ -219,8 +233,23 @@ empty_objet ? "Empty Object is Truthy" : "Empty Object is Falsey."
 #=> "Empty Object is Truthy."
 
 # one new thing from OOP is that uninitialized instance variables returns nil;
-# so, if we happen to evaluate an uninitialized instanve variable, then
+# so, if we happen to evaluate an uninitialized instance variable, then
 # it would evaluate as false.
+
+class Something
+  attr_reader :name
+end
+
+empty_object = Something.new
+
+empty_objet.name ? "Empty Object is Truthy" : "Empty Object is Falsey."
+
+#=> "Empty Object is Falsey."
+
+# This is because, the calling the name method on the empty_object returns
+# a reference to the instance variable @name, which is not yet initialized
+# hence, it returns nil and thus empty_object.name evaluates to false.
+
 ```
 
 ###  Working with collaborator objects
@@ -237,13 +266,116 @@ class Course
 end
 
 =begin
-In this example, we define the Course class such that a string object stored in the stance variable @teacher is part of the Course object's attribute. In this sense, the string object is a collaborator object of Course object. 
+In this example, we define the Course class such that a string object stored in the instance variable @teacher is part of the Course object's attribute. In this sense, the string object is a collaborator object of Course object. 
 
 Say, we store an array object in the instance variable @students. In that case, the array object would be the collaborator object of the course object.
 =end
 
 ```
 
-
+### Extra Stuff
 
 > When you invoke `#super` within a method, Ruby looks in the inheritance hierarchy for a method with the same name. 
+
+### Constant Look up Path
+
+Constants have lexical scope. What that means is that whenever Ruby encounters a call for a Constant, it starts looking 
+
+Let's put a Constant in the class, in the superclass, in the module and test which one has precedence:
+
+```ruby
+CONS = "This is from the outer scope."
+
+class SuperTest
+  CONS = "This is a constant in inheritance hierarchy."
+end
+
+module A
+  module Ba
+    CONS = "This is a module Constant."
+
+    module Cc
+      class Test < SuperTest
+        CONS = "This is a class constant."
+        def check
+          puts CONS
+        end
+      end
+    end
+  end
+end
+
+A::Ba::Cc::Test.new.check
+# => "This is a class constant."
+# This shows that the constant in the class has the highest precedence. Or, that for 
+# the constant look up path, the class comes first. 
+
+# when we comment out the class constant as follows and run the code:
+
+CONS = "This is from the outer scope."
+
+class SuperTest
+  CONS = "This is a constant in inheritance hierarchy."
+end
+
+module A
+  module Ba
+    CONS = "This is a module Constant."
+
+    module Cc
+      class Test < SuperTest
+        # CONS = "This is a class constant."
+        def check
+          puts CONS
+        end
+      end
+    end
+  end
+end
+
+A::Ba::Cc::Test.new.check
+# => "This is a module Constant"
+
+# This should be a bit surprising, given that  we would expect the Constant in the superclass to have precedence. This is what it means to have lexical scope. When it comes to finding  a constant, Ruby looks wherever the call for the constant comes up and then goes outward in the nested modules. 
+
+# Now we know that in terms of looking for a constant, Ruby looks in the nested structure first.
+
+# what if the constant is defined outside of the module? We have two choices: either the constant is defined in the superclass or it is defined in the 'main' object.
+
+# Let's comment out the constants defined in the modules and leave only the ones defined in the 'main' scope and then in the superclass.
+
+CONS = "This is from the outer scope."
+
+class SuperTest
+  CONS = "This is a constant in inheritance hierarchy."
+end
+
+module A
+  module Ba
+    # CONS = "This is a module Constant."
+
+    module Cc
+      class Test < SuperTest
+        # CONS = "This is a class constant."
+        def check
+          puts CONS
+        end
+      end
+    end
+  end
+end
+
+A::Ba::Cc::Test.new.check
+
+# => "This is a constant in inheritance hierarchy."
+
+# This should be a bit more surprising. 
+# Instead of looking for the Constant in the 'main' object, Ruby actually looks for the constant in the superclass. 
+
+# This is because the constant defined in the 'main' object is actually defined for an object in the Object class. (This part I am not sure, but something like this is true, because when we run `self.class` we get Object.) And Object is the superclass of SuperTest. That means, Object comes after SuperTest in the inheritance heirarchy.
+
+```
+
+
+
+Overall, the constant look up path is weird because, unlike the method look up path, it does not depend on the calling object. Rather it depends on where Ruby first finds the call for the Constant. 
