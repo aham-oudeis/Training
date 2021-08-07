@@ -1,4 +1,6 @@
 class Length
+  include Comparable
+
   attr_reader :value, :unit
 
   def initialize(value, unit)
@@ -18,40 +20,48 @@ class Length
     convert_to(:nmi, { km: 1.8519993, mi: 1.15078, nmi: 1 })
   end
 
-  def ==(other)
-    case unit
-    when :km  then value == other.as_kilometers.value
-    when :mi  then value == other.as_miles.value
-    when :nmi then value == other.as_nautical_miles.value
-    end
-  end
+  # def ==(other)
+  #   case unit
+  #   when :km  then value == other.as_kilometers.value
+  #   when :mi  then value == other.as_miles.value
+  #   when :nmi then value == other.as_nautical_miles.value
+  #   end
+  # end
 
-  def <(other)
-    case unit
-    when :km  then value < other.as_kilometers.value
-    when :mi  then value < other.as_miles.value
-    when :nmi then value < other.as_nautical_miles.value
-    end
-  end
+  # def <(other)
+  #   case unit
+  #   when :km  then value < other.as_kilometers.value
+  #   when :mi  then value < other.as_miles.value
+  #   when :nmi then value < other.as_nautical_miles.value
+  #   end
+  # end
 
-  def <=(other)
-    self < other || self == other
-  end
+  # def <=(other)
+  #   self < other || self == other
+  # end
 
-  def >(other)
-    !(self <= other)
-  end
+  # def >(other)
+  #   !(self <= other)
+  # end
 
-  def >=(other)
-    self > other || self == other
-  end
+  # def >=(other)
+  #   self > other || self == other
+  # end
 
   def to_s
     "#{value} #{unit}"
   end
 
   def <=>(other)
-    as_kilometers.value <=> other.as_kilometers.value
+    # forcing all values to kilometers
+    # as_kilometers.value <=> other.as_kilometers.value
+
+    # or, we can test based on the given unit
+    case unit
+    when :km then value <=> other.as_kilometers.value
+    when :mi then value <=> other.as_miles.value
+    else          value <=> other.as_nautical_miles.value
+    end
   end
 
   private
@@ -69,3 +79,5 @@ puts [Length.new(1, :mi), Length.new(1, :nmi), Length.new(1, :km)].sort
 # 1 km
 # 1 mi
 # 1 nmi
+
+puts Length.new(1, :mi) > Length.new(1, :nmi)

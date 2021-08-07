@@ -24,7 +24,7 @@ class GeoLocation
   end
 
   def ==(other)
-    latitude == other.latitude && longitude == other.longitude
+    [latitude, longitude] == [other.latitude, other.longitude]
   end
 end
 
@@ -44,7 +44,8 @@ puts ada.location == grace.location # expected: true
                                     # actual: false
 
 ## The reason why line 43 output false initially is because in absence
-## of the instance method for GeoLocation objectt to compare the values,
-## == method is derived from the Object class and it compares if the two ## objects are the same. Since ada.location is a different object than
+## of the instance method for GeoLocation object to compare the values,
+## == method is derived from the Object class and it compares if the two
+## objects are the same. Since ada.location is a different object than
 ## grace.location, we get false. To address the issue, we need to define
 ## how we want the == method to compare two Geolocation objects.
