@@ -89,7 +89,7 @@ If we look under the hood, it turns out that class methods are just instance met
 Inside of the class we define class methods by adding `self.` before the method name. What this does is create a singleton class for the class object and puts the method there. That is why we can simply open the singleton class and put the 'class' methods there just as we put instance methods. 
 
 ```ruby
-# in all three following cases, Something.name should return "This is something."
+# Here is an explore for how we define the class method and how we call it
 
 class Something
   def self.name
@@ -97,47 +97,8 @@ class Something
   end
 end
 
-# This is equivalent to:
-
-class Something; end
-
-def Something.name
-  "This is something."
-end
-
-# In a weird way, this is equialent to:
-
-class Something; end
-
-Ghost = Something.singleton_class
-
-class Ghost
-  def name
-    "This is something."
-  end
-end
-
-# here, we open up the Ghost class and add instance method there
-# since Something is an instance of the Ghost class, we can then
-# invoke the name method defined in the Ghost class on Something.
-
-# The following is just another way of opening the singleton class 
-# and putting the class methods there.
-
-class Something
-  class << self
-    def name
-      "This is something."
-    end
-  end
-end
+p Something.name
 ```
-
-
-
-Hence, when we define a method with `self` Ruby creates a singleton class and puts that method there. 
-
-The weird thing is that when we inherit from a superclass, the subclass inherits the class methods as well. The inheritance of the instance methods and class methods are more or less similar, except for the fact that instance methods remain as instance methods and class methods remain as class methods. That is, instance method can only be called by objects and class methods can be called by the classes.
 
 ###  Method Access Control
 
@@ -148,18 +109,6 @@ Method access control are ways of implementing encapsulation through the usage o
 > Protected methods are very similar to private methods. The main  difference between them is protected methods allow access between class  instances, while private methods don't. If a method is protected, it  can't be invoked from outside the class. This allows for controlled  access, but wider access between class instances.
 >
 > A protected method is like a private method in that it can only be invoked from within the implementation of a class or its subclasses. It differs from a private method in that it may be explicitly invoked on any instance of the class, and it is not restricted to implicit invocation on self. A protected method can be used, for example, to define an accessor that allows instances of a class to share internal state with each other, but does not allow users of the class to access that state. (p. 232)
-
-But...
-
-> It is important to understand, however, that Ruby’s metaprogramming capabilities make it trivial to invoke private and protected methods and even to access encapsulated instance variables. To invoke the private utility method defined in the previous code, you can use the send method, or you can use instance_eval to evaluate a block in the context of the object: 
->
-> ```ruby
-> w = Widget.new # Create a Widget
-> w.send :utility_method # Invoke private method! 
-> w.instance_eval { utility_method } # Another way to invoke it 
-> w.instance_eval { @x } # Read instance variable of w
-> ```
->
 
 Example:
 
@@ -220,6 +169,28 @@ We have two different ways of accessing and changing the value stored in the ins
 1. by using the getter method, we can have built in customization of the the value either for the sake of presentation (like adding a prefix) or for the sake of data protection (hiding some parts, like bank account).
 2. by using the setter method, we can customize the value that is stored in the instance variable. 
    - For instance, although we allow the setter method to take a string as an argument, we may want to actually store a different object (say, Book object) with that value, instead of storing a string object. 
+
+```ruby
+class BankAccount
+  def initialize(client, account_number)
+    @client = client
+    @account_number = account_number
+  end
+  
+  def account_number
+    to_show = 4
+    chars = @account_number.digits.reverse
+    hide_index = chars.size - to_show
+    chars.map.with_index { |n, i| i < hide_index ? '*' : n }.join
+  end
+end
+
+bill = BankAccount.new("Bill Somsky", 9124817292)
+
+p bill.account_number
+```
+
+
 
 ###  Class inheritance, [encapsulation](https://launchschool.com/books/oo_ruby/read/the_object_model#whyobjectorientedprogramming), and [polymorphism](https://launchschool.com/books/oo_ruby/read/the_object_model#whyobjectorientedprogramming)
 
@@ -311,6 +282,10 @@ Polymorphism refers to the ability of different types of objects to respond to t
 
 Polymorphism enables programmers to work in a rather flexible way with the objects.
 
+## Use of Super
+
+When you invoke `#super` within a method, Ruby looks in the inheritance hierarchy, starting from the superclass, for a method with the same name. 
+
 ### [Modules](https://launchschool.com/lessons/dfff5f6b/assignments/2cf31cc8)
 
 Modules are containers for shared behaviors and constants. 
@@ -357,6 +332,8 @@ end
 ###  Method lookup path
 
 Method loopup path is the sequential path that Ruby traverses in looking for a method. This path can be found out by calling the `ancestors` method on the class. Ruby invokes the first method it finds in this path; if it does not find any method of that name, it throws a `NoMethod` error. 
+
+This is quite different from how Ruby looks for a constant.
 
 ###  self
 
@@ -437,123 +414,3 @@ Say, we store an array object in the instance variable @students. In that case, 
 =end
 ```
 
-### Miscellaneous Stuff
-
-> When you invoke `#super` within a method, Ruby looks in the inheritance hierarchy for a method with the same name. 
-
-I feel like this LS definition is a bit inadequate, because the inheritance hierarchy includes the class itself. If the super were to start calling method from the class itself, it would run into problems. It seems better to be explict that `super` invokes the enclosing method in the superclass.
-
-> `super` works like a special method invocation: it invokes a method with the same name as the current one, in the superclass of the current class.
-
-### Constant Look up Path
-
-Constants have lexical scope. What that means is that whenever Ruby encounters a call for a Constant, it starts looking 
-
-Let's put a Constant in the class, in the superclass, in the module and test which one has precedence:
-
-```ruby
-CONS = "This is from the outer scope."
-
-class SuperTest
-  CONS = "This is a constant in inheritance hierarchy."
-end
-
-module A
-  module Ba
-    CONS = "This is a module Constant."
-
-    module Cc
-      class Test < SuperTest
-        CONS = "This is a class constant."
-        def check
-          puts CONS
-        end
-      end
-    end
-  end
-end
-
-A::Ba::Cc::Test.new.check
-# => "This is a class constant."
-# This shows that the constant in the class has the highest precedence. Or, that for 
-# the constant look up path, the class comes first. 
-
-# when we comment out the class constant as follows and run the code:
-
-CONS = "This is from the outer scope."
-
-class SuperTest
-  CONS = "This is a constant in inheritance hierarchy."
-end
-
-module A
-  module Ba
-    CONS = "This is a module Constant."
-
-    module Cc
-      class Test < SuperTest
-        # CONS = "This is a class constant."
-        def check
-          puts CONS
-        end
-      end
-    end
-  end
-end
-
-A::Ba::Cc::Test.new.check
-# => "This is a module Constant"
-
-# This should be a bit surprising, given that  we would expect the Constant in the superclass to have precedence. This is what it means to have lexical scope. When it comes to finding  a constant, Ruby looks wherever the call for the constant comes up and then goes outward in the nested modules. 
-
-# Now we know that in terms of looking for a constant, Ruby looks in the nested structure first.
-
-# what if the constant is defined outside of the module? We have two choices: either the constant is defined in the superclass or it is defined in the 'main' object.
-
-# Let's comment out the constants defined in the modules and leave only the ones defined in the 'main' scope and then in the superclass.
-
-CONS = "This is from the outer scope."
-
-class SuperTest
-  CONS = "This is a constant in inheritance hierarchy."
-end
-
-module A
-  module Ba
-    # CONS = "This is a module Constant."
-
-    module Cc
-      class Test < SuperTest
-        # CONS = "This is a class constant."
-        def check
-          puts CONS
-        end
-      end
-    end
-  end
-end
-
-A::Ba::Cc::Test.new.check
-
-# => "This is a constant in inheritance hierarchy."
-
-# This should be a bit more surprising. 
-# Instead of looking for the Constant in the 'main' object, Ruby actually looks for the constant in the superclass. 
-
-# This is because the constant defined in the 'main' object is actually defined for an object in the Object class. (This part I am not sure, but something like this is true, because when we run `self.class` we get Object.) And Object is the superclass of SuperTest. That means, Object comes after SuperTest in the inheritance heirarchy.
-
-```
-
-
-
-Overall, the constant look up path is weird because, unlike the method look up path, it does not depend on the calling object. Rather it depends on where Ruby first finds the Constant reference expression. 
-
-> When a constant is referenced without any qualifying namespace, the Ruby interpreter must find the appropriate definition of the  constant. To do so, it uses a name resolution algorithm, just as it does      to find method definitions. However, constants are resolved much  differently than methods.
->
-> Ruby first attempts to resolve a constant reference in the lexical scope of the reference. This means that it first checks the class or  module that encloses the constant reference to see if that class or      module defines the constant. If not, it checks the next enclosing class  or module. This continues until there are no more enclosing classes or  modules. Note that top-level or “global” constants are not considered  part of the lexical scope and are not considered during this part of  constant lookup. The class method `Module.nesting` returns the list of  classes and modules that are searched in this step, in the order they  are searched.
->
-> If no constant definition is found in the lexically enclosing scope, Ruby next tries to resolve the constant in the inheritance  hierarchy by checking the ancestors of the class or module that referred      to the constant. The `ancestors` method  of the containing class or module returns the list of classes and modules searched in this step.
->
-> If no constant definition is found in the inheritance hierarchy, then top-level constant definitions are checked. (from The Ruby Programming Language)
-
->The important difference between constants and methods is that constants are looked up in the lexical scope of the place they are used before they are looked up in the inheritance hierarchy
