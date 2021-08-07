@@ -1,4 +1,4 @@
-###  Working with collaborator objects
+###  Collaborator objects
 
 Collaborator objects are objects that are part of the state of another object.
 

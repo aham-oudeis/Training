@@ -1,3 +1,5 @@
+### Calling Setters and Getters
+
 we call setters and getters on the objects just like any other method calls, writing the getter and setter method name after the dot operator.
 
 Ruby offfers a nice syntax for the setter methods. While we define the setter methods as follows:

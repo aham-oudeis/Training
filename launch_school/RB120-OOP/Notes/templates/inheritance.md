@@ -1,4 +1,4 @@
-__Inheritance__
+### Inheritance
 
 Inheritance is when a class __inherits__ behavior from another class. The class that is inheriting behavior is called the __subclass__ and the class it inherits from is called the __superclass__.
 

@@ -1,3 +1,5 @@
+### Modules
+
 Modules are containers for behaviors and constants usable in other classes via mixin.
 
 Since classes can inherit methods from modules but are different from class inheritance, they are called interface inheritance.

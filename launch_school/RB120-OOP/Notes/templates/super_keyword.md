@@ -1,3 +1,5 @@
+### Super keyword
+
 > When you invoke `#super` within a method, Ruby looks in the inheritance hierarchy for a method with the same name.
 
 It seems like inheritance heirarchy is understood to exclude the class itself. If the super were to start calling method from the class itself, it would run into problems. It seems better to be explict that `super` invokes the enclosing method in the superclass.
