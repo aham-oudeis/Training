@@ -33,7 +33,10 @@ class KrispyKreme
   end
 
   def to_s
-    [@filling_type, @glazing].reject(&:nil?).join(' with ')
+    #[@filling_type, @glazing].reject(&:nil?).join(' with ')
+    glaze_type = (@glazing ? " with #{@glazing}" : "")
+
+    "#{@filling_type}#{glaze_type}"
   end
 end
 

@@ -50,9 +50,10 @@ end
 
 # Question 2
 # we add self. before hi in line 8
-# in other words, we maake the hi method into a class method by prefixing self to its name
+# in other words, we make the hi method into a class method by prefixing self to its name
 # and then create a new Greeting object and then call the greet method on that greeting
 # object with "hello" passed in as an argument
+# Or, we could make `hi`, `greet`, and  `bye` class methods.
 
 # Question 6
 

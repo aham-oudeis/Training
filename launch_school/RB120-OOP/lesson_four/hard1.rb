@@ -32,8 +32,6 @@ end
 class WheeledVehicle
   include Fuelable
 
-  attr_accessor :speed, :heading
-
   def initialize(tire_array, km_traveled_per_liter, liters_of_fuel_capacity)
     @tires = tire_array
     self.fuel_efficiency = km_traveled_per_liter
@@ -64,8 +62,9 @@ class Motorcycle < WheeledVehicle
 end
 
 class Catamaran
+  include Fuelable
+
   attr_reader :propeller_count, :hull_count
-  attr_accessor :speed, :heading
 
   def initialize(num_propellers, num_hulls, km_traveled_per_liter, liters_of_fuel_capacity)
     # ... code omitted ...
