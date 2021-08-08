@@ -14,7 +14,7 @@ It seems like inheritance heirarchy is understood to exclude the class itself. I
 
 if we run the following code, we will get an error, because
 1. we are passing in three arguments to the `new` method in line 24
-2. this calls the `initialize` method from Dog class with all three arguments passed in to the `initialze` method.
+2. the `new` method creates the object and calls the `initialize` method from Dog class with all three arguments passed in to the `initialze` method.
 3. the super keyword inside the `initialize` method calls the `initialize` method from the superclass `Pet` and passes in all three arguments.
 4. since the `initialize` method in the `Pet` class is defined to take only two arguments, it throws an error complaining about the wrong number of arguments.
 

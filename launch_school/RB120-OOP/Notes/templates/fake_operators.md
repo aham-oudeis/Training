@@ -6,7 +6,7 @@ For instance, when we write `'abc' == 'abcd'` in ruby, we are not using an opera
 
 What this does is compare if the two objects have the same value.
 
-However, when we invoke the same equivalence method for our custom objects without defining == for the custom class, the method Ruby finds is from BasicObject, which returns true only if they are the same object, not if the two objects have the same value.
+However, when we invoke the same equivalence method for our custom objects without defining `==` method for the custom class, the method Ruby finds is from BasicObject, which returns true only if the objects being compared are the same object, i.e., if they both have the same object id.
 
 We would implement a fake operator in a custom class to give the desired behavior for the custom objects, in contrast to the default behavior available to the object or because no such behavior is available to the object.
 

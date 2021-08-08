@@ -4,7 +4,7 @@ Classes are outlines for what the objects are made up of (states) and what they 
 
 Objects are instantiations of classes. They have states and behaviors.
 
-Objects are created from classes when we invoke the `new` class method. Since the `new` class method triggers and passes in all the arguments given to it to the instance method `initialize`, we have to pass in adequate number of arguments to the `new` method invocation.
+Objects are created from classes when we invoke the `new` class method. Since the `new` class method triggers and passes in all the arguments given to it to the `initialize` method , we have to pass in adequate number of arguments to the `new` method invocation.
 
 Example:
 

@@ -94,7 +94,7 @@ class TeachingAssistant
   end
 end
 
-class Faculty < Person
+class Faculty
   def prepare_for(course)
     # email(course.students)
     # create_lesson_plan(course.book)
