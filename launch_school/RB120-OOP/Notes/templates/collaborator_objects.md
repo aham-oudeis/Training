@@ -2,6 +2,8 @@
 
 Collaborator objects are objects that are part of the state of another object.
 
+Collaborator objects enable programmers to work with custom-objects and to model real-world relationships between objects.
+
 ```ruby
 class Course
   def initialize(name, teacher, students)

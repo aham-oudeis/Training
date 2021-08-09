@@ -30,12 +30,11 @@ end
 
 A::Ba::Cc::Test.new.check
 # => "This is a class constant."
+```
 
-# This shows that the constant in the class has the highest precedence. Or, that for
-# the constant look up path, the class comes first.
+This shows that the constant in the class has the highest precedence. Or, that for the constant look up path, the class comes first. when we comment out the class constant as follows and run the code:
 
-# when we comment out the class constant as follows and run the code:
-
+```ruby
 CONS = "This is from the outer scope."
 
 class SuperTest
@@ -59,14 +58,17 @@ end
 
 A::Ba::Cc::Test.new.check
 # => "This is a module Constant"
+```
 
-# This should be a bit surprising, given that  we would expect the Constant in the superclass to have precedence. This is what it means to have lexical scope. When it comes to finding  a constant, Ruby looks wherever the call for the constant comes up and then goes outward in the nested modules.
+This should be a bit surprising, given that  we would expect the Constant in the superclass to have precedence. This is what it means to have lexical scope. When it comes to finding  a constant, Ruby looks wherever the call for the constant comes up and then goes outward in the nested modules.
 
-# Now we know that in terms of looking for a constant, Ruby looks in the nested structure first.
+Now we know that in terms of looking for a constant, Ruby looks in the nested structure first.
 
-# what if the constant is defined outside of the module? We have two choices: either the constant is defined in the superclass or it is defined in the 'main' object.
+what if the constant is defined outside of the module? We have two choices: either the constant is defined in the superclass or it is defined in the 'main' object.
 
-# Let's comment out the constants defined in the modules and leave only the ones defined in the 'main' scope and then in the superclass.
+Let's comment out the constants defined in the modules and leave only the ones defined in the 'main' scope and then in the superclass.
+
+```ruby
 
 CONS = "This is from the outer scope."
 
@@ -92,13 +94,12 @@ end
 A::Ba::Cc::Test.new.check
 
 # => "This is a constant in inheritance hierarchy."
-
-# This should be a bit more surprising.
-# Instead of looking for the Constant in the 'main' object, Ruby actually looks for the constant in the superclass.
-
-# This is because the constant defined in the 'main' object is actually defined for an object in the Object class. (This part I am not sure, but something like this is true, because when we run `self.class` we get Object.) And Object is the superclass of SuperTest. That means, Object comes after SuperTest in the inheritance heirarchy.
-
 ```
+
+This should be a bit more surprising.
+Instead of looking for the Constant in the 'main' object, Ruby actually looks for the constant in the superclass.
+
+This is because the constant defined in the 'main' object is actually defined for an object in the Object class. (This part I am not sure, but something like this is true, because when we run `self.class` we get Object.) And Object is the superclass of SuperTest. That means, Object comes after SuperTest in the inheritance heirarchy.
 
 > When a constant is referenced without any qualifying namespace, the Ruby interpreter must find the appropriate definition of the  constant. To do so, it uses a name resolution algorithm, just as it does to find method definitions. However, constants are resolved much  differently than methods.
 >

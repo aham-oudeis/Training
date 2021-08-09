@@ -1,6 +1,6 @@
 ### Fake operators
 
-Except for `.` `::`, `ternary operator`, and the logical operators, most of what seem like operators are in fact methods defined for that particular object.
+Except for `.` `::`, `ternary operator`, and the logical operators, (and some others) most of what seem like operators are in fact methods defined for that particular object.
 
 For instance, when we write `'abc' == 'abcd'` in ruby, we are not using an operator but a method call defined in the String class.
 
@@ -20,12 +20,13 @@ class Mountain
 end
 
 sanitas = Mountain.new('Sanitas', 1129)
-evans = Mountai.new('Evans', 1440)
+evans = Mountain.new('Evans', 1440)
+```
 
-# Here, since we have not defined how to compare object with the
-# other, it would throw a NoMethod error.
-# in order to allow for such comparision, we can add the following instance method:
+Here, since we have not defined how to compare object with the
+other, it would throw a NoMethod error. in order to allow for such comparision, we can add the following instance method:
 
+```ruby
 class Mountain
 	def >(other)
     height > other.height
@@ -33,6 +34,5 @@ class Mountain
 end
 
 puts "Sanitas is smaller than Evans" if evans > sanitas
-
-# Now we would get the desired result.
 ```
+Now we would get the desired result.

@@ -2,9 +2,9 @@
 
 Inheritance is when a class __inherits__ behavior from another class. The class that is inheriting behavior is called the __subclass__ and the class it inherits from is called the __superclass__.
 
-We can use inheritance to extract common behaviors from classes that share that behavior and move it to a superclass.
+We can use inheritance to extract common behaviors from classes that share that behavior and move it to a superclass. That means, inheritance is a way to implement the DRY principle. (Another being module.)
 
-It's like having a lot of common behaviors between arrays and hashes to the enumerable module (that's interface inheritance).
+It's like having a lot of common behaviors between arrays and hashes in the enumerable module (that's interface inheritance), or in the Object class (class inheritance).
 
 __class inheritance__
 

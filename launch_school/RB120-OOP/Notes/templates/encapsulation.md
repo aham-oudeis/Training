@@ -1,8 +1,8 @@
 Encapsulation refers to the practice of hiding certain pieces of functionality from rest of the codebase.
 
-Ruby implements encapsulation by using objects.
+Ruby implements encapsulation by using objects. Broadly speaking, classes encapsulate behaviors and objects encapsulate state.
 
-Method access control is also one of the ways of implementing encapsulation at the object level.
+Method access control is also one of the ways of implementing encapsulation at the class level.
 
 Let us suppose a Computer is a player in some strategic board game. When we are writing a program for the game, we can simply create a Computer object and let it handle all the tasks that the Computer ought to do. Here is an outline for how the Computer might make a choice:
 
@@ -64,5 +64,5 @@ computer = Computer.new
 computer.chooses(board)
 ```
 
-In this code, all the details about how a computer finds a move is hidden from the rest of the code base. We can simply invoke the method `chooses` on the computer object and pass in the `board`. The method invocation returns the move to be made and it suffices for the rest of the program to work. Rest of the code base does not need access to other details about the computer. All the implementation details are hidden from the public interface. This practice of hiding unnecessary details is called encapsulation.
+In this code, all the details about how a computer finds a move is hidden from the rest of the code base. We can simply invoke the method `chooses` on the `computer` object and pass in the `board`. The method invocation returns the move to be made and it suffices for the rest of the program to work. Rest of the code base does not need access to other details about the computer. All the implementation details are hidden from the public interface. This practice of hiding unnecessary details is called encapsulation.
 

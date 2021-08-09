@@ -1,6 +1,6 @@
 ###  Method lookup path
 
-Method look up path is the sequential path that Ruby traverses in looking for a method. This path can be found out by calling the `ancestors` method on the class. Ruby invokes the first method it finds in this path; if it does not find any method of that name, it throws a `NoMethod` error.
+Method look up path is the order of classes and/or modules that Ruby traverses in looking for a method. This path can be found out by calling the `ancestors` method on the class. Ruby invokes the first method it finds in this path; if it does not find any method of that name, it throws a `NoMethod` error.
 
 This is quite different from how Ruby looks for a constant.
 

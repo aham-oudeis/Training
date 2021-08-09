@@ -4,8 +4,11 @@ Classes are outlines for what the objects are made up of (states) and what they 
 
 Objects are instantiations of classes. They have states and behaviors.
 
+Classes provide behaviors for objects.
+
 Objects are created from classes when we invoke the `new` class method. Since the `new` class method internally triggers the `initialize` method and relays all its arguments to it, we have to pass in adequate number of arguments to the `new` method invocation, depending on how many arguments the `initialize` method expects.
 
+Classes and objects is how Ruby implements encapsulation.
 Example:
 
 ```ruby
@@ -14,18 +17,14 @@ class Person
     @first_name = first_name
     @last_name = last_name
   end
-end
 
-class Book
-  def initialize(name, author)
-    @name = name
-    @author = author
+  def write
+    puts  "I am writing"
   end
 end
 
 dostoyevsky = Person.new("Fyodor", "Dostoyevsky")
-the_idiot = Book.new('The Idiot', dostoyevsky)
-
-# Here the Person object (dostoyevsky) is the collaborator object for the Book object ("the_idiot")
-
+dostoyevsky.write
 ```
+
+In this example, `dostoyevsky` is a `Person` object. The `Person` class makes thee behavior `write` available to `dostoyevsky` such that we can invoke the `write` method on it.

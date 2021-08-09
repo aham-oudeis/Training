@@ -24,8 +24,7 @@ puts "Uninitialized Instance variable is " +
     (empty_object.name ? "Truthy" : "Falsey.")
 
 #=> "Uninitialized Instance variable is Falsey."
-
-# This is because, a reference to an uninitialized instance
-# variable @name returns nil and thus empty_object.name
-# evaluates to false.
 ```
+This is because, a reference to an uninitialized instance
+variable `@name` returns nil and thus `empty_object.name`
+evaluates as false.
