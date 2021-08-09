@@ -4,17 +4,17 @@
 
 It seems like inheritance heirarchy is understood to exclude the class itself. If the super were to start calling method from the class itself, it would run into problems. It seems better to be explict that `super` invokes the enclosing method in the superclass.
 
-`super` works as if it is a method invocation. It invokes a method with the same name as the enclosing method, in the superclass of the current class.
+`super` works as if it is a method invocation. It invokes a method with the same name as the enclosing method, from the inheritance hierarchy.
 
-`super` without parenthesis invokes a method with the same name as the enclosing method, in the superclass of the current class, and passes in all the arguments passed to the enclosing method.
+`super` without parenthesis invokes a method with the same name as the enclosing method, from the inheritance hierarchy, and passes in all the arguments passed to the enclosing method.
 
-`super` without parenthesis but no arguments invokes a method with the same name as the enclosing method, in the superclass of the current class, and passes no arguments.
+`super` without parenthesis but no arguments invokes a method with the same name as the enclosing method, from the inheritance hierarchy, and passes no arguments.
 
-`super` with specified arguments invokes a method with the same name as the enclosing method, in the superclass of the current class, and passes in only the specificied arguments.
+`super` with specified arguments invokes a method with the same name as the enclosing method, from the inheritance hierarchy, and passes in only the specificied arguments.
 
 if we run the following code, we will get an error, because
-1. we are passing in three arguments to the `new` method in line 24
-2. the `new` method creates the object and calls the `initialize` method from Dog class with all three arguments passed in to the `initialze` method.
+1. we are passing in three arguments to the `new` method
+2. the `new` method creates a Dog object and calls the `initialize` method on that object with all three arguments passed in to the `initialze` method.
 3. the super keyword inside the `initialize` method calls the `initialize` method from the superclass `Pet` and passes in all three arguments.
 4. since the `initialize` method in the `Pet` class is defined to take only two arguments, it throws an error complaining about the wrong number of arguments.
 

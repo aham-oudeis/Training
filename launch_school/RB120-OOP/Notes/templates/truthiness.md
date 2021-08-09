@@ -20,11 +20,12 @@ end
 
 empty_object = Something.new
 
-empty_objet.name ? "Empty Object is Truthy" : "Empty Object is Falsey."
+puts "Uninitialized Instance variable is " +
+    (empty_object.name ? "Truthy" : "Falsey.")
 
-#=> "Empty Object is Falsey."
+#=> "Uninitialized Instance variable is Falsey."
 
-# This is because, the calling the name method on the empty_object returns
-# a reference to the instance variable @name, which is not yet initialized
-# hence, it returns nil and thus empty_object.name evaluates to false.
+# This is because, a reference to an uninitialized instance
+# variable @name returns nil and thus empty_object.name
+# evaluates to false.
 ```

@@ -22,10 +22,8 @@ end
 sanitas = Mountain.new('Sanitas', 1129)
 evans = Mountai.new('Evans', 1440)
 
-puts "Sanitas is smaller than Evans" if evans > sanitas
-
-# Here, since we have not defined how to compare object with the other
-# it would throw a NoMethod error.
+# Here, since we have not defined how to compare object with the
+# other, it would throw a NoMethod error.
 # in order to allow for such comparision, we can add the following instance method:
 
 class Mountain
@@ -33,6 +31,8 @@ class Mountain
     height > other.height
   end
 end
+
+puts "Sanitas is smaller than Evans" if evans > sanitas
 
 # Now we would get the desired result.
 ```

@@ -18,7 +18,7 @@ class Faculty
 end
 
 =begin
-In this example, we define the Course class such that a string object stored in the instance variable @name is part of the Course object's attribute. In this sense, the string object is a collaborator object of Course object.
+In this example, we define the Course class in a way that a course object has three instance variables. Say, the Course object's instance variable @name stores a string. In this sense, the string object is a collaborator object of Course object.
 
 Say, we store an array object in the instance variable @students. In that case, the array object would be the collaborator object of the course object.
 

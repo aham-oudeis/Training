@@ -1,6 +1,6 @@
 ### Accidental Method Overriding
 
-Accidental method overriding occurs when we define an instance method for our custom object such that it overrides that method defined in the inheritance heirarchy such that it affects all the code that rely on the method from the superclass.
+Accidental method overriding occurs when we define an instance method for our custom object overriding the method defined in the inheritance heirarchy. The problem with the accidental  method overriding is that it affects all the code that rely on the method from the superclass.
 
 This happens accidentaally when we are not quite aware of the methods defined in the superclass.
 

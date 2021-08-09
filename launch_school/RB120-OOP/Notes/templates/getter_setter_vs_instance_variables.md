@@ -26,7 +26,7 @@ bill = BankAccount.new("Bill Somsky", 9124817292)
 p bill.account_number
 ```
 
-Also to prevent the instance variable value from being altered through a destructive method call.
+Data protection: also to prevent the instance variable value from being altered through a destructive method call.
 
 ```ruby
 class Student

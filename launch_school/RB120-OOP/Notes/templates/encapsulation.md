@@ -4,7 +4,7 @@ Ruby implements encapsulation by using objects.
 
 Method access control is also one of the ways of implementing encapsulation at the object level.
 
-Let us suppose a Computer is a player in some strategic board game. When we are writing a program for the game, we can simply create a Computer object and let is handle all the tasks  that the Computer ought to do. Here is an outline for how the Computer might make  a  choice:
+Let us suppose a Computer is a player in some strategic board game. When we are writing a program for the game, we can simply create a Computer object and let it handle all the tasks that the Computer ought to do. Here is an outline for how the Computer might make a choice:
 
 ```ruby
 class Computer

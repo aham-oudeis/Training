@@ -18,7 +18,7 @@ object.name = 'new name'
 
 This is Ruby's syntactical sugar.
 
-When we are calling the setter method from inside the class, we need to make sure that we are calling it on the object by prepending self to the setter name as follows:
+When we are calling the setter method from inside the class, we need to make sure that we are calling it on the object by prepending `self` to the setter name as follows:
 
 ```ruby
 class Something

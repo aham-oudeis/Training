@@ -31,7 +31,6 @@ We also use `self` to define the class methods (or, rather the methods in the si
 
 `self` references where Ruby is in the program execution or what the calling object is.
 
-
 ```ruby
 class Something
   def self.what_am_i?

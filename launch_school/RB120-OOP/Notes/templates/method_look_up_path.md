@@ -20,10 +20,9 @@ end
 table = SomeSpecificThing.new
 
 table.what_am_i?
-
-# if we run the code as it, then it will output "I am some specific thing".
-# however, if we comment out the method what_am_i?  defined in SomeSpecificThing,
-# then Ruby executes the same method defined in Something, because Something is a superclass of SomeSpecificThing.
+=begin
+if we run the code as it, then it will output "I am some specific thing". however, if we comment out the method what_am_i?  defined in SomeSpecificThing, then Ruby executes the same method defined in Something, because Something comes next to SomeSpecificThing in the method look up path.
+=end
 
 class Something
   def what_am_i?

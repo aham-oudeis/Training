@@ -51,7 +51,7 @@ mohan = PetSitter.new
 mohan.take_care_of(my_pets)
 ```
 
-When different  unrelated types of objects respond to the same method call because they are designed to do so, then it is said to implement polymorphism through duck typing. Basically, we care about what the objects are designed to do rather than the class they belong to.
+When unrelated types of objects respond to the same method call because they are designed to do so in a systematic way, then it is said to implement polymorphism through duck typing. Basically, we care about what the objects are designed to do rather than the class they belong to.
 
 Here is an example of duck-typing.
 

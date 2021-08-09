@@ -1,8 +1,8 @@
 ### Constant Look up Path
 
-Constants have lexical scope. What that means is that Constants are available to a method call if they are defined in the enclosing module or the inheritance heirarchy of the class where the constant is referenced.
+Constants have lexical scope. What this means is that Constants are available to a method call if they are defined in the enclosing module or the inheritance heirarchy of the class where the constant is referenced.
 
-Overall, the constant look up path is weird because, unlike the method look up path, it does not depend on the calling object. Rather it depends on where Ruby first finds the Constant reference expression.
+Overall, the constant look up path is weird because, unlike the method look up path, it does not depend on the calling object. Rather it depends on where in the code Ruby first finds the Constant reference expression.
 
 Let's put a Constant in the class, in the superclass, in the module and test which one has precedence:
 
@@ -104,7 +104,7 @@ A::Ba::Cc::Test.new.check
 >
 > Ruby first attempts to resolve a constant reference in the lexical scope of the reference. This means that it first checks the class or  module that encloses the constant reference to see if that class or module defines the constant. If not, it checks the next enclosing class or module. This continues until there are no more enclosing classes or  modules. Note that top-level or “global” constants are not considered  part of the lexical scope and are not considered during this part of  constant lookup. The class method `Module.nesting` returns the list of  classes and modules that are searched in this step, in the order they  are searched.
 >
-> If no constant definition is found in the lexically enclosing scope, Ruby next tries to resolve the constant in the inheritance  hierarchy by checking the ancestors of the class or module that referred      to the constant. The `ancestors` method  of the containing class or module returns the list of classes and modules searched in this step.
+> If no constant definition is found in the lexically enclosing scope, Ruby next tries to resolve the constant in the inheritance  hierarchy by checking the ancestors of the class or module that referred to the constant. The `ancestors` method  of the containing class or module returns the list of classes and modules searched in this step.
 >
 > If no constant definition is found in the inheritance hierarchy, then top-level constant definitions are checked. (from The Ruby Programming Language)
 

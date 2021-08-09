@@ -35,7 +35,6 @@ end
 class Penguin < Bird
 end
 
-# Here, a Bat object can invoke the fly method that returns the string object:
-# "I am a Bat. I can fly."
+# Here, a Bat object can invoke the fly method that returns the string object: "I am a Bat. I can fly.", because it is made available through the use of mixin.
 ```
 
