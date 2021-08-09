@@ -42,8 +42,11 @@ molly = Student.new("Molly")
 molly.name.upcase!.reverse!
 
 molly.name # => YLLOM (Not what we would want.)
+```
 
-# Rather we would want something as follows:
+Rather we would want something as follows:
+
+```ruby
 
 class Student
   def initialize(name)

@@ -30,13 +30,15 @@ bill = Account.new("Billy", 2957)
 marvin = Account.new("Marvin", 38271)
 
 p bill > marvin
+```
 
-# line [] throws an error because we cannot call the private
-# methods with an explicit caller the way we do in line []
-# but if we change line [] from private to protected, the code
-# works, because protected methods allow access between class
-# instances from within the class.
+The code above throws an error because we cannot call the private
+methods with an explicit caller the way we do in line [] (inside the `>` method)
+but if we change line [] from `private` to `protected`, the code
+works, because protected methods allow access between class
+instances from within the class.
 
+```ruby
 class BankAccount
   def initialize(name, balance)
     @name = name
@@ -57,5 +59,4 @@ marvin = Account.new("Marvin", 38271)
 
 p bill > marvin #=> false
 
-# This code works because protected methods can be called from within the class on a different object of the same class or its subclass.
 ```

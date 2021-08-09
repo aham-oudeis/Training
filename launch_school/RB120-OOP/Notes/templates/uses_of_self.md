@@ -8,9 +8,6 @@ We use `self` to call the setter methods from inside the class, because in absen
 class Something
   attr_accessor :name
 
-  def initialize(name)
-  end
-
   def change_name(new_name)
     self.name = new_name
   end

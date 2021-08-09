@@ -8,7 +8,7 @@ It seems like inheritance heirarchy is understood to exclude the class itself. I
 
 `super` without parenthesis invokes a method with the same name as the enclosing method, from the inheritance hierarchy, and passes in all the arguments passed to the enclosing method.
 
-`super` without parenthesis but no arguments invokes a method with the same name as the enclosing method, from the inheritance hierarchy, and passes no arguments.
+`super` with parenthesis but no arguments invokes a method with the same name as the enclosing method, from the inheritance hierarchy, and passes no arguments.
 
 `super` with specified arguments invokes a method with the same name as the enclosing method, from the inheritance hierarchy, and passes in only the specificied arguments.
 
@@ -54,4 +54,20 @@ class Dog < Pet
 end
 
 tango = Dog.new('Tango', "Brown", "Chihauha")
+```
+
+```ruby
+class Pet
+  def moves
+    "#{self.class} is moving "
+  end
+end
+
+class Dog < Pet
+  def moves(speed)
+    super() + "#{speed}."
+  end
+end
+
+Dog.new.moves("awkwardly")
 ```

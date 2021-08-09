@@ -20,10 +20,13 @@ end
 table = SomeSpecificThing.new
 
 table.what_am_i?
-=begin
-if we run the code as it, then it will output "I am some specific thing". however, if we comment out the method what_am_i?  defined in SomeSpecificThing, then Ruby executes the same method defined in Something, because Something comes next to SomeSpecificThing in the method look up path.
-=end
+```
 
+if we run the code as it, then it will output `I am some specific thing`.
+
+However, if we comment out the method `what_am_i?`  defined in `SomeSpecificThing`, then Ruby executes the same method defined in Something, because `Something` comes after `SomeSpecificThing` in the method look up path.
+
+```ruby
 class Something
   def what_am_i?
     puts "I am Something"
@@ -40,5 +43,3 @@ table = SomeSpecificThing.new
 
 table.what_am_i?
 ```
-
-###

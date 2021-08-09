@@ -48,9 +48,6 @@ module Flyable
   end
 end
 
-class Plant
-end
-
 class Animal
 end
 
@@ -58,6 +55,9 @@ class Mammal < Animal
 end
 
 class Bird < Animal
+end
+
+class Pigeon < Bird
   include Flyable
 end
 
