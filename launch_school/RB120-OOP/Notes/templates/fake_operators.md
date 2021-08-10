@@ -2,7 +2,7 @@
 
 Except for `.` `::`, `ternary operator`, and the logical operators, (and some others) most of what seem like operators are in fact methods defined for that particular object.
 
-For instance, when we write `'abc' == 'abcd'` in ruby, we are not using an operator but a method call defined in the String class.
+For instance, when we write `'abc' == 'abcd'` in ruby, we are not using an operator but a method call defined in the `String` class.
 
 What this does is compare if the two objects have the same value.
 

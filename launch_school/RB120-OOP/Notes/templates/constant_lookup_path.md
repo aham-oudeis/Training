@@ -4,6 +4,25 @@ Constants have lexical scope. What this means is that Constants are available to
 
 Overall, the constant look up path is weird because, unlike the method look up path, it does not depend on the calling object. Rather it depends on where in the code Ruby first finds the Constant reference expression.
 
+The following code raises an error complaining that it cannot find the constant. However, if we uncomment the line where we declare the constant inside the class `Something`, the code works. This is because the reference to `CONS` is in the instance method defined in `Something` class.
+
+```ruby
+class Something
+  # CONS = "A Constant declared in Something"
+  def what_am_i?
+    puts "I am #{CONS}"
+  end
+end
+
+class SomeSpecificThing < Something
+  CONS = "A Constant declared in Some Specific Thing."
+end
+
+table = SomeSpecificThing.new
+
+table.what_am_i?
+```
+
 Let's put a Constant in the class, in the superclass, in the module and test which one has precedence:
 
 ```ruby
