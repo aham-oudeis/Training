@@ -1,6 +1,6 @@
 ### Polymorphism
 
-Polymorphism refers to the ability of different types of objects to respond to the same method call. The basic idea is that if different objects refer to the same method call, it does not matter how the types of the objects differ. What matters is that they respond to the same method. This feature enables programmer to write DRY code.
+Polymorphism refers to the ability of different types of objects to respond to the same message (method call). The basic idea is that if different objects refer to the same message (method call), it does not matter how the types of the objects differ. What matters is that they respond to the same method. This feature enables programmer to write DRY code.
 
 Polymorphism enables programmers to work in a rather flexible way with the objects.
 

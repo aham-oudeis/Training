@@ -2,7 +2,7 @@
 
 We have two different ways of accessing and changing the value stored in the instance variables. To access the value, we can directly reference the instance variable or we can invoke the getter method. To change the value, we can directly change the value stored in the instance variable or we can invoke the setter method. Despite there being these two ways, it is preferable to rely on getter and setter methods for at least two reasons:
 
-1. by using the getter method, we can have built in customization of the the value either for the sake of presentation (like adding a prefix) or for the sake of data protection (hiding some parts, like bank account).
+1. by using the getter method, we can have built in customization of the the value either for the sake of presentation (like adding a prefix) or for the sake of data protection (hiding some parts, like bank account). When it comes to changing the code, it would be a hassle if the customization is all over the place. It's better to have the customization in one place.
 2. by using the setter method, we can customize the value that is stored in the instance variable.
    - For instance, although we allow the setter method to take a string as an argument, we may want to actually store a different object (say, Book object) with that value, instead of storing a string object.
 

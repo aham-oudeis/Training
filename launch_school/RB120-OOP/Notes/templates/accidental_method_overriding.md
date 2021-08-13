@@ -29,5 +29,4 @@ b = PlayNumbers.new(11)
 p a.send :str
 ```
 
-In this example, if we uncomment the lines where we define the `send` method,
-it will override the `send` method defined in Object.
+In this example, if we uncomment the lines where we define the `send` method, it will override the `send` method defined in Object.
