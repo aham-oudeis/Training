@@ -4,7 +4,13 @@ Accidental method overriding occurs when we define an instance method for our cu
 
 This happens accidentaally when we are not quite aware of the methods defined in the superclass.
 
-The overriding happens because Ruby looks for the method of the same name and executes the first one it finds in the method look up path. One example is as follows:
+The overriding happens because Ruby looks for the method of the same name and executes the first one it finds in the method look up path.
+
+**Significance**
+1. Accidentally overriding a method that other parts of the code relies on can break the application
+2. Makes it difficult for people to maintain the code if the method being overriden is required down the line.
+
+One example is as follows:
 
 ```ruby
 class PlayNumbers

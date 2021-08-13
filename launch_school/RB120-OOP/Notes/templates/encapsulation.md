@@ -2,7 +2,48 @@ Encapsulation refers to the practice of hiding certain pieces of functionality f
 
 Ruby implements encapsulation by using objects. Broadly speaking, classes encapsulate behaviors and objects encapsulate state.
 
-Method access control is also one of the ways of implementing encapsulation at the class level.
+Method access control is also one of the ways of implementing encapsulation at the class level. (Hiding implementation details).
+
+ **Benefits**
+  1. Data protection
+  2. Preventing unintentional changes in the code
+  3. Makes the code easier to maintain by reducing dependencies
+
+Example of 'object encapsulate state'
+
+```ruby
+class Person
+  attr_reader :age, :ranking
+
+  def initialize(name, age, ranking)
+    @name = name
+    @age = age
+    @ranking = ranking
+  end
+
+  def promote
+    @ranking = level_up(ranking)
+  end
+
+  def name
+    @name.clone
+  end
+
+  private
+
+  def level_up(ranking)
+    #implementaton
+  end
+end
+
+kyle = Person.new("Kyle Mullen", 35, :staff)
+```
+
+In this example, the `kyle` object encapsulates state by storing date in the instance variables: `@name`, `@age`, `@ranking`. While we can access the data stored in the `kyle` object using the getter methods, we are not able to change the data stored there. If we were to directly access the data stored in the `@name` instance variable, we would be able to change it by calling various destructive methods available for string objects. Hence, encapsulation is a form of data protection.
+
+And class `Person` encapsulate behaviors available for objects instantiated from `Person` by hiding certain pieces of functionality and exposing certain methods as part of the public interface.
+
+A more elaborate example of 'class encapsulate behaviors'.
 
 Let us suppose a Computer is a player in some strategic board game. When we are writing a program for the game, we can simply create a Computer object and let it handle all the tasks that the Computer ought to do. Here is an outline for how the Computer might make a choice:
 
@@ -65,4 +106,3 @@ computer.chooses(board)
 ```
 
 In this code, all the details about how a computer finds a move is hidden from the rest of the code base. We can simply invoke the method `chooses` on the `computer` object and pass in the `board`. The method invocation returns the move to be made and it suffices for the rest of the program to work. Rest of the code base does not need access to other details about the computer. All the implementation details are hidden from the public interface. This practice of hiding unnecessary details is called encapsulation.
-
