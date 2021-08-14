@@ -38,4 +38,4 @@ Some language allows for multiple inheritance. Ruby has mixins, i.e., interface 
 
 Mixins allows one to extract common behaviors to a module and mixin with the class as per the need.
 
-See [Modules][./modules.md].
+See [Modules][modules.md].
