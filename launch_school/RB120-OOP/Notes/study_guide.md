@@ -559,3 +559,18 @@ Overall, the constant look up path is weird because, unlike the method look up p
 > If no constant definition is found in the inheritance hierarchy, then top-level constant definitions are checked. (from The Ruby Programming Language)
 
 >The important difference between constants and methods is that constants are looked up in the lexical scope of the place they are used before they are looked up in the inheritance hierarchy
+
+```ruby
+class Something  
+  def what_am_i
+    "I am #{self.class}. My existence is #{self.class:EXISTENCE}."
+  end
+end
+
+module Weird
+  EXISTENCE = "Unverifiable"
+  class SomeWeirdThing < Something
+  end
+end
+```
+
