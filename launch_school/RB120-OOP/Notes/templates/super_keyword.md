@@ -24,6 +24,10 @@ class Pet
     @name = name
     @color = color
   end
+
+  def speak
+    "#{@name.capitalize} says "
+  end
 end
 
 class Dog < Pet

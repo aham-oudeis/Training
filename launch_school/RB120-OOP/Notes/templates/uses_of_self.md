@@ -1,6 +1,11 @@
 ###  self
 
+1. `self` in calling a setter method from inside the class
+2. defining class or module methods
+
 -   [Calling methods with self](https://launchschool.com/books/oo_ruby/read/classes_and_objects_part1#callingmethodswithself)
+
+> We're required to use `self` so that Ruby knows the difference between initializing a local variable and invoking a setter method.
 
 We use `self` to call the setter methods from inside the class, because in absence of the `self` Ruby does not know whether we meant to call the setter method or just initialize a local variable.
 
@@ -17,8 +22,6 @@ cup = Something.new("teacup")
 cup.change_name("coffeecup")
 cup.name # => "coffeecup"
 ```
-
-> We're required to use `self` so that Ruby knows the difference between initializing a local variable and invoking a setter method.
 
 -   [More about self](https://launchschool.com/books/oo_ruby/read/classes_and_objects_part2#moreaboutself)
 
