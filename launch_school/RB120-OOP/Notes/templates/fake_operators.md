@@ -21,8 +21,10 @@ end
 
 sanitas = Mountain.new('Sanitas', 1129)
 evans = Mountain.new('Evans', 1440)
-```
 
+puts sanitas > evans
+
+```
 Here, since we have not defined how to compare object with the
 other, it would throw a NoMethod error. in order to allow for such comparision, we can add the following instance method:
 

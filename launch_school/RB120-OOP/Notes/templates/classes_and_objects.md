@@ -1,10 +1,10 @@
 ### Classes and Objects
 
-Classes are outlines for what the objects are made up of (states) and what they are able to do (behaviors).
+Classes are outlines for what the objects are made up of (state) and what they are able to do (behaviors).
 
-Objects are instantiations of classes. They have states and behaviors.
+Objects are instantiations of classes. They have state and behaviors.
 
-Classes provide behaviors for objects and the objects carry their states with them.
+Classes provide behaviors for objects and the objects carry their state with them.
 
 Objects are created from classes when we invoke the `new` class method. Since the `new` class method internally triggers the `initialize` method and relays all its arguments to it, we have to pass in adequate number of arguments to the `new` method invocation, depending on how many arguments the `initialize` method expects.
 

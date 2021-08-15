@@ -2,6 +2,8 @@
 
 Class variables are scoped at the class level and the same variable is shared among the class, the subclasses, and the objects instantiated from them.
 
+Unlike instance variables, uninitialized class variables throws an error.
+
 ```ruby
 
 class Something
