@@ -1,4 +1,8 @@
-Encapsulation refers to the practice of hiding certain pieces of functionality from rest of the codebase.
+I particularly like Karl Lingiah's explanation [here](https://launchschool.com/posts/2fa7508d).
+
+Catherine Emond's sensitivity to the disagreements about how people understand the concept makes her [explanation](https://launchschool.com/posts/a8e43f97) particularly illuminating.
+
+Encapsulation refers to the practice of bundling data and functionality in a single construct, such as object, so as to control access to the data and functionality. This is where the concept of public interface is relevant. Public interface is how we work with the encapsulated data. The `public` methods that we can call on an object comprise the public interface.
 
 Ruby implements encapsulation by using objects. Broadly speaking, classes encapsulate behaviors and objects encapsulate state.
 
@@ -39,7 +43,9 @@ end
 kyle = Person.new("Kyle Mullen", 35, :staff)
 ```
 
-In this example, the `kyle` object encapsulates state by storing date in the instance variables: `@name`, `@age`, `@ranking`. While we can access the data stored in the `kyle` object using the getter methods, we are not able to change the data stored there. If we were to directly access the data stored in the `@name` instance variable, we would be able to change it by calling various destructive methods available for string objects. Hence, encapsulation is a form of data protection.
+In this example, the `kyle` object encapsulates state by storing data in the instance variables: `@name`, `@age`, `@ranking`. It's this bundling of data and behavior in a single object that is called encaapsulation.
+
+Controlling acess to certain methods available to the object is one aspect of encapsulation. While we can access the data stored in the `kyle` object using the getter methods, we are not able to change the data stored there. If we were to directly access the data stored in the `@name` instance variable, we would be able to change it by calling various destructive methods available for string objects. Hence, encapsulation enables data protection.
 
 And class `Person` encapsulate behaviors available for objects instantiated from `Person` by hiding certain pieces of functionality and exposing certain methods as part of the public interface.
 
@@ -105,4 +111,4 @@ computer = Computer.new
 computer.chooses(board)
 ```
 
-In this code, all the details about how a computer finds a move is hidden from the rest of the code base. We can simply invoke the method `chooses` on the `computer` object and pass in the `board`. The method invocation returns the move to be made and it suffices for the rest of the program to work. Rest of the code base does not need access to other details about the computer. All the implementation details are hidden from the public interface. This practice of hiding unnecessary details is called encapsulation.
+In this code, all the details about how a computer finds a move is hidden from the rest of the code base. We can simply invoke the method `chooses` on the `computer` object and pass in the `board`. The method invocation returns the move to be made and it suffices for the rest of the program to work. Rest of the code base does not need access to other details about the computer. All the implementation details are hidden from the public interface. This practice of hiding unnecessary details is a key aspect of encapsulation.

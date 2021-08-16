@@ -14,12 +14,13 @@ end
 class Course
   def initialize(name, teacher)
     @name = name
-    @teacher = Faculty.new(teacher)
+    @teacher = teacher
     @students = []
   end
 end
 
-phil = Course.new("Philosophy", "Mulla Krishna")
+krishna = Faculty.new("Mulla Krishna")
+phil = Course.new("Philosophy", krishna)
 ```
 
 In this example, we define a `Faculty` class and a `Course` class in a way that a `Faculty` object has one instance variable, and a `Course` object has three instance variables.
