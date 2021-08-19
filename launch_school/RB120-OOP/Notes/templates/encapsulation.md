@@ -16,38 +16,55 @@ Method access control is also one of the ways of implementing encapsulation at t
 Example of 'object encapsulate state'
 
 ```ruby
-class Person
-  attr_reader :age, :ranking
+class Student
+  attr_reader :balance
 
-  def initialize(name, age, ranking)
+  def initialize(name)
     @name = name
-    @age = age
-    @ranking = ranking
   end
 
-  def promote
-    @ranking = level_up(ranking)
+  def name
+    @name.clone
+  end
+end
+
+kyle = Student.new("Kyle Mullen")
+```
+
+In this example, the `kyle` object encapsulates state by storing data in the instance variables: `@name`, `balance`. It's this bundling of data and behavior in a single object that is called encaapsulation.
+
+Controlling acess to certain methods available to the object is one aspect of encapsulation. While we can access the data stored in the `kyle` object using the getter methods, we are not able to change the data stored there. If we were to directly access the data stored in the `@name` instance variable, we would be able to change it by calling various destructive methods available for string objects. Hence, encapsulation enables data protection.
+
+And class `Student` encapsulate behaviors available for objects instantiated from `Student` by hiding certain pieces of functionality and exposing certain methods as part of the public interface.
+
+Let's build on the same example:
+
+```ruby
+class Student
+  attr_reader :balance
+
+  def initialize(name)
+    @name = name
   end
 
   def name
     @name.clone
   end
 
+  def pay_balance
+    payment_portal
+  end
+
   private
 
-  def level_up(ranking)
-    #implementaton
+  def payment_portal
   end
-end
 
-kyle = Person.new("Kyle Mullen", 35, :staff)
+  attr_writer :balance
+end
 ```
 
-In this example, the `kyle` object encapsulates state by storing data in the instance variables: `@name`, `@age`, `@ranking`. It's this bundling of data and behavior in a single object that is called encaapsulation.
-
-Controlling acess to certain methods available to the object is one aspect of encapsulation. While we can access the data stored in the `kyle` object using the getter methods, we are not able to change the data stored there. If we were to directly access the data stored in the `@name` instance variable, we would be able to change it by calling various destructive methods available for string objects. Hence, encapsulation enables data protection.
-
-And class `Person` encapsulate behaviors available for objects instantiated from `Person` by hiding certain pieces of functionality and exposing certain methods as part of the public interface.
+We may want to hide certain functionalities, such as being able to change the balance. We would want change the balance only if it is paid or waived. Hence, we hide the setter method for `balance`.
 
 A more elaborate example of 'class encapsulate behaviors'.
 
