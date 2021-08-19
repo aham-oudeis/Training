@@ -1,5 +1,5 @@
 # getter and setter methods
-getter methods are instance methods that allow us to access the instance variable in some form.
+getter methods are instance methods that allow us to access the instance variable (in some form).
 
 setter methods are instance methods that allow us to change the value stored in the instance variable.
 
@@ -34,6 +34,13 @@ class Student
     @balance = amount
   end
 end
+
+kyle = Student.new
+
+kyle.balance = 2939
+p kyle.balance
+kyle.pay_balance(3983)
+p kyle.balance
 ```
 
 If we remove `self` before `balance` in line 30, it would not update the value stored in the instance variable `@balance`.

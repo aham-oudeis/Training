@@ -2,39 +2,40 @@
 Collaborator objects are objects that are part of another object's state. Basically, whatever is stored in the instance variable of an object is a collaborator object.
 
 # relation to OOP
--it allows us to create these custom objects that have certain relationships with other objects
--enables us to model real-world relationships in a flexible way
+* it allows us to create these custom objects that have certain relationships with other objects
+* enables us to model real-world relationships in a flexible way
 
 # Example
 ```ruby
 class Student
-  attr_reader :name, :courses
+end
 
-  def initialize(name)
-    @name = name
-    @courses =  []
-  end
-
-  def enroll(course)
-    courses << course
-  end
+class Faculty
 end
 
 class Course
-  def initialize(name, faculty, department)
+  attr_reader :name, :faculty, :students
+
+  def initialize(name, faculty)
     @name = name
     @faculty = faculty
-    @department = department
+    @students = []
+  end
+
+  def enroll(student)
+    @students << student
   end
 end
 
-math101 = Course.new("Intro to Calculus", "Peter Slome", :mathematics)
+peter = Faculty.new
 
-molly = Student.new("Molly Glum")
+molly = Student.new
 
-molly.enroll(math101)
+math101 = Course.new("Intro to Calculus", peter)
 
-p molly.courses
+math101.enroll(molly)
+
+p math101.students
 ```
 
-Here, `math101` is a collaborator object of `molly` object.
+Here, `peter` a `Faculty` object and `molly` a `Student` object are collaborator objects of `math101` object.

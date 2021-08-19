@@ -1,11 +1,11 @@
 # what are modules?
 Modules are containers for behaviors.
 # Additional details
--unlike classes, we cannot create objects from modules
+* unlike classes, we cannot create objects from modules
 # types of modules
--mixins
--namespacing
--module methods
+* mixins
+* namespacing
+* module methods
 
 ```ruby
 module Gymable
@@ -42,7 +42,7 @@ Teachable::Student.new
 
 ```ruby
 module SchoolActivities
-  def upcoming_events
+  def self.upcoming_events
   end
 end
 

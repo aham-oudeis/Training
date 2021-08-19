@@ -26,8 +26,8 @@ class Course
   end
 
   def +(other)
-    all_studeents = students + other.students
-    new_course = Course.new(teacher)
+    all_students = students + other.students
+    new_course = Course.new(@teacher)
     new_course.students = all_students
     new_course
   end
@@ -38,4 +38,4 @@ phil102 = Course.new("Ibn")
 
 phil101 + phil102
 ```
-# usefullness
+

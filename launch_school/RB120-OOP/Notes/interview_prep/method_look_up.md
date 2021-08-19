@@ -21,4 +21,4 @@ dor.access_library
 p dor.class.ancestors
 ```
 # what is its significance?
--method overriding
+* method overriding

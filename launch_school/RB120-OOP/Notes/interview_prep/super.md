@@ -7,7 +7,11 @@ when `super` is called with specified arguments, it passes in only the specified
 
 when `super` is called without any arguments but with parenthesis, it calls the method without any arguments.
 
-# what are its use cases?
+# Benefits
+* extending the functionality of the subclasses
+* DRY code
+
+# Example of three use cases
 
 ```ruby
 class People

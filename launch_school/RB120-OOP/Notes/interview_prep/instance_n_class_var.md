@@ -11,6 +11,7 @@ end
 
 # what are class variables
 class variables are scoped at the class level and are available throughout the class, subclass, and the instance methods.
+
 ```ruby
 class People
   @@total = 50
@@ -20,23 +21,21 @@ class People
   end
 end
 
-p People.total
+p People.total # => 50
 
 class Student < People
   @@total = 30
 end
 
-p Student.total
-p People.total
+p Student.total # => 30
+p People.total # => 30
 
 class Faculty < People
   @@total = 10
 end
 
-p Faculty.total
-p Student.total
-p People.total
+p Faculty.total # => 10
+p Student.total # => 10
+p People.total # => 10
 ```
 This kind of counterintuitive behavior is what makes class variables  a bit dangerous to use.
-
-# how are they different?

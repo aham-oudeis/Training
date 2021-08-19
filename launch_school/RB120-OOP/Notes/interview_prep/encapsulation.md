@@ -1,11 +1,13 @@
 # what is encapsulation
-bundling data and functionality to allow selective access to them.
-ruby implements encapsulation by creating objects.
-in general, objects encapsulate state and classes encapsulate behaviors.
+* bundling data and functionality to allow selective access to them.
+* ruby implements encapsulation by creating objects.
+* in general, objects encapsulate state and classes encapsulate behaviors.
+* method access control allows another layer of encapsulation
+
 # aspects of it
--hiding data at the object level
--hidng functionalites at the class level
--public interface
+1. hiding data at the object level
+2. hidng functionalites at the class level
+3. public interface
 # examples
 
 ```ruby
@@ -37,4 +39,4 @@ p cory
 ```
 Here the `cory` object encapsulates the data stored in the `@name` instance variable. So far we have very little data stored in the `cory` object, but we could have more.
 
-At the class level, we have restricted access to the setter method for `balance` so that client code can only change the balance if they have paid it, through some payment portal system.
+At the class level, we have restricted access to the setter method for `balance` so that client code can only change the balance if they have paid the balance, through some payment portal system.

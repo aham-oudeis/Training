@@ -1,8 +1,9 @@
 # method access modifiers
--ways of building different levels of access to the instance methods
--public, private, protected
+* ways of building different levels of access to the instance methods
+* public, private, protected
+
 # related concepts
--method access modifiers are ways of implementing encapsulation at the class level
+* method access modifiers enables further encapsulation
 
 # example
 ```ruby
@@ -25,30 +26,30 @@ cory.gpa = 4.0
 p cory.gpa
 ```
 
-By default, instance methods are public (except for the `initialize` method). `public` instance methods comprise the public interface for the object. that is, we can invoke those methods explicitly on the object.
+By default, instance methods are public (except for the `initialize` method). `public` instance methods comprise the public interface of the class. that is, we can invoke those methods explicitly on the object.
 
 But we can restrict access to certain methods so that they cannot be  be called with an explicit caller.
 
 ```ruby
 class Student
+  attr_reader :name, :courses, :gpa
+
   def initialize(name)
     @name = name
     @courses = []
   end
 
- private
+  private
 
- attr_reader :name, :courses
-
- attr_accessor :gpa
+  attr_writer :gpa
 end
 
 cory = Student.new("Cory Turner")
-p cory.name
+p cory.gpa = 4.0
 ```
-The code throws an error because the getter method for `name` is private.
+The code throws an error because the getter method for `gpa=` is private.
 
-But they can be called from within the class.
+But they can be called from within the class. For convenience, let's make `name` method private.
 
 ```ruby
 class Student

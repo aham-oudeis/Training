@@ -14,9 +14,9 @@ end
 ```
 
 # what are two use cases of self?
--in calling the setter methods from inside the class
-  -in absence of the explict reference to the calling object, Ruby will only initialize a local variable instead of calliing the setter method
--in defining class or module methods
+1. in calling the setter methods from inside the class
+    * in absence of the explict reference to the calling  object, Ruby will only initialize a local variable instead of calliing the setter method
+2. in defining class or module methods
 
 ```ruby
 class Student
