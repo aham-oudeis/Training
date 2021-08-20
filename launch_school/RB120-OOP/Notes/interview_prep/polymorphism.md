@@ -3,7 +3,7 @@ the ability of differrent kinds of objects to respond to the same method invocat
 
 For instance: [1, "2", [3, 4], "hi "].map {|item| item *  2}
 
-In this example, all the array items respond to the `*` method. It doesn't matte what class they belong to as long as they all respond to the `*` method invocation with `2` passed in as an argument. They have radicallly different implementation. This is polymorophism.
+In this example, all the array items respond to the `*` method. It doesn't matter what class they belong to as long as they all respond to the `*` method invocation with `2` passed in as an argument. This is polymorophism.
 
 # types of polymorophsm
 1. through inheritance: related types; common interface

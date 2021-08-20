@@ -1,7 +1,10 @@
 # what are modules?
-Modules are containers for behaviors.
+Modules are containers for classes, constants, behaviors, and modules themselves.
+
 # Additional details
 * unlike classes, we cannot create objects from modules
+* unlike class inheritance, we can mixin multiple modules with a class.
+
 # types of modules
 * mixins
 * namespacing

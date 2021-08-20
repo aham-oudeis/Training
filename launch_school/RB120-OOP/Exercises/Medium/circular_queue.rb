@@ -1,4 +1,9 @@
 class CircularQueue
+  def initialize(num)
+    @queue = []
+    @size = num
+  end
+
   def enqueue(item)
     dequeue if queue.size >= size
     queue << item
@@ -11,11 +16,6 @@ class CircularQueue
   private
 
   attr_reader :queue, :size
-
-  def initialize(num)
-    @queue = []
-    @size = num
-  end
 end
 
 queue = CircularQueue.new(3)

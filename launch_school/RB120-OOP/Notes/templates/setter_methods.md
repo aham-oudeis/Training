@@ -29,9 +29,9 @@ class Person
   end
 end
 ```
-This is also a getter method, bot because the method is returning a reference to the instancee variable, but a copy of the reference (value). Returning the value stored in one of the instance variable is sufficient for it to be a getter method.
+This is also a getter method, not because the method is returning a reference to the instance variable, but a copy of the reference (value). Returning the value stored in one of the instance variable is sufficient for it to be a getter method.
 
-Are there getter methods that do not return the value stored in the instance variables? Here, things get a bit tricky. If we do not allow getter methods to do more than return the value stored in the instance variable, we cannot have customized getter methods, because the customized getter methods tend to return something other than the value stored in the instance variable. They return some modification. However, if we allow getter methods to do more than just return the  value stored in the instance variable, then getter methods become indistinguishable from other behaviors.
+Are there getter methods that do not return the value stored in the instance variables? Here, things get a bit tricky. If we do not allow getter methods to do more than return the value stored in the instance variable, we cannot have customized getter methods, because the customized getter methods tend to return something other than the value stored in the instance variable. They return some modification. However, if we allow getter methods to do more than just return the value stored in the instance variable, then getter methods become indistinguishable from other behaviors.
 
 For example,the `ssn` method in the following example seems like a customized getter method.
 
@@ -98,3 +98,5 @@ end
 Are the `name` and `info` methods in the above example getter methods or behaviors? It's not obvious if there is a clear way of deciding.
 
 What this means is that the strict distinction between *getters/setters* and *behaviors* does not hold up. This is a good reason to be skeptical about identifying **attributes** with getters and setters. Getters and setters are simply loose way of talking about specfic kind of behavior that the objects have.
+
+__Attributes__ are values stored in the instance variables. It is sensible to talk about an object having certain attributes despite there not being any getters or setters. Getters are ways of exposing attributes.

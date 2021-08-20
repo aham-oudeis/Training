@@ -20,6 +20,10 @@ class People
     @name = name
     @id = generate_id
   end
+
+  def generate_id
+    # implementation details on generating a unique id
+  end
 end
 
 class Student < People
