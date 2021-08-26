@@ -154,6 +154,10 @@ class TodoList
     each { |todo| todo.undone!}
   end
 
+  def empty?
+    todos.empty?
+  end
+
   protected
 
   attr_reader :todos
