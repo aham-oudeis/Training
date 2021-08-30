@@ -1,0 +1,143 @@
+Aristotle is clearly invoking the homonymy of the origins (ἀρχαί).
+Not only that there are different ways of being origins, but also that
+there are different ways for substances to be origins. With respect to
+generation, human beings, other animals, and plants are all origins.
+If a substance X generates many instances of Y, then X is the origin
+of Y. There are two aspects to the claim that X (a substance) is an
+origin of Y: (a) X generates Y, and (b) X can generate many instances
+of Y. For contrast, consider a plant’s seed (not a substance). The
+seed generates only one plant, satisfying (a) but not (b). Elsewhere
+Aristotle admits both (a) and (b) as cases of origins, but in this
+context, Aristotle is focused on (b).
+
+Aristotle moves from the rather straightforward case of generation of
+instances to the claim that only a human being is the origin of some
+actions and no other animal is said to be the origin of actions.
+Aristotle’s suggestion seems to be that generation is the focal
+meaning of origins for the scope of his inquiry and that human beings
+are the origins of their actions because they generate their actions.
+In cases of generations, the origins are not only from which the
+outcomes come about, but they also furnish the form/final cause of the
+outcome. For instance, when a plant generates a sapling, the mother
+plant (1) is from which the sapling comes about and (2) supplies the
+formal/final cause to the sapling. Just as in the case of generation,
+the origins are not only from which the outcomes come about, but they
+also supply the formal/final cause of the products.  Although
+Aristotle has already anticipated his view of human agency, there is
+much more to be filled in. As the focus is on a human being qua the
+origin of many actions, Aristotle proceeds to clarify the distinctive
+way human beings are the origins of their actions.
+
+If human beings are unique in being the origins of actions, then the
+doings of non-human animals and children do not qualify as actions.
+Later Aristotle claims that children and non-human animals do not act
+(at least we do not say so), because they do not act on the basis of
+reasoning (οὐ γάρ φαμεν τὸ παιδίον πράττειν, οὐδὲ τὸ θηρίον, ἀλλὰ τὸν
+ἤδη διὰ λογισμὸν πράττοντα) (EE II.8 1224a28s-30). This suggests that
+doing things on the basis of reasoning is a necessary condition for
+action. Since other animals and children do not do things on the basis
+of reasoning, they do not act and thus they cannot be the origin of
+actions. This is consistent with holding that children and animals are
+origins of their doings (and even actions construed in a weak way).
+While acting on the basis of reasoning sets human beings apart from
+non-human animals and children, it is not obvious that acting on the
+basis of reasoning is what makes human beings the origin of actions.
+Since not every token of action must be on the basis of reasoning (e.g.
+, whimsical and impulsive actions), human beings seem to be the origin
+of their actions even when they are not acting on the basis of
+reasoning.  Aristotle’s aim in EE II.6 is to articulate the sense in
+which human beings (perhaps in virtue of having reasoning) are the
+origin of actions, even when their actions are not from their
+reasoning.
+
+Aristotle immediately distinguishes between different kinds of origins
+and picks out a specific type of origins for his ensuing discussions.
+Aristotle makes it clear that the type of origins he is concerned with
+are the ones from which (ὅθεν) changes/motions (κινήσεις) first come
+about. He calls these origins κύριαι.
+
+Among origins, those that are of that sort—those from which changes
+first arise (ὅθεν πρῶτον αἱ κινήσεις)—are called κύριαι, and most
+correctly (μάλιστα δὲ δικαίως) those from which results what cannot be
+otherwise (ἀφ’ ὧν μὴ ἐνδέχεται ἄλλως), the way in which the God
+perhaps governs (ἄρχει). (EE II.6 1222b20-24)
+
+τῶν δ’ ἀρχῶν ὅσαι τοιαῦται, ὅθεν πρῶτον αἱ κινήσεις, κύριαι λέγονται,
+μάλιστα δὲ δικαίως ἀφ’ ὧν μὴ ἐνδέχεται ἄλλως, ἣν ἴσως ὁ θεὸς ἄρχει.
+(EE II.6 1222b20-24)
+
+Aristotle applies the term κύριαι to the origins in two ways. First,
+κύριαι are the origins where the changes primarily come about (ὅθεν
+πρῶτον αἱ κινήσεις). Second, the term κύριαι is most apt or most
+correct in those cases of origins from which the outcomes cannot be
+otherwise, which Aristotle (with hesitation) takes to be God. While
+the first qualification isolates the efficient causes required for
+generation, the second qualification specifies the manner of such
+generation.  With the two qualifications, Aristotle narrows the domain
+of origins relevant to the inquiry. Let us look at the second
+qualification first.
+
+The case where the outcomes cannot be otherwise specifies the best
+case of being κύριαι origins. Aristotle holds that perhaps God governs
+in that way. In the second qualification, Aristotle’s focus is in the
+manner of governing and not on the notion of generation.  The manner
+of governing in the best case has to be such that the outcomes cannot
+be otherwise. Since Aristotle picks out God’s way of governing as the
+best case, the not-so-best cases would not result in an outcome that
+cannot be otherwise but would still govern the outcome. From this it
+is reasonably clear that the κύριαι origins are the ones that, in some
+sense, govern the changes they bring about. To govern a change, in a
+rather minimal way, is to provide a specific direction and character
+to the change. Sometimes, the origins may provide a specific direction
+and character to a change, but the direction and character of the
+outcome may be upset by other factors. That is, an origin can govern
+an outcome without governing absolutely, because their manner of
+governing is subject to various kinds of interventions. If the origins
+govern the outcome in an absolute way so that nothing can upset it (i.
+e., no intervention is possible), then those origins are most aptly
+called κύριαι. For instance, if God brings about the motion of
+celestial bodies, then the motion of those celestial bodies, i.e.
+circular motion, would not be anything other than what God governs
+them to be. Other origins may not govern in an absolute way, but they
+are still called κύριαι, because they govern the outcome to some
+extent. Only God (perhaps) can provide a direction and character to
+the change in such a way that the outcome cannot be otherwise.
+
+God’s way of governing offers the best-case scenario of what counts as
+κύριαι origins. However, Aristotle does not specify the threshold case
+on being κύριαι origins. Various origins of change can govern the
+outcome in varying degrees. For instance, a seed can provide the
+direction and character of change for the organism that comes from the
+seed. Similarly, even a final cause can govern the outcome. Thus, the
+second qualification on its own does not require that God’s way of
+governing is through efficient causation and not through final/formal
+causation. Clearly, there is no generation of the motion of celestial
+bodies, because their motion is eternal. Perhaps God provides a form
+to the motion of celestial bodies such that their motions cannot be
+otherwise. Celestial bodies move as they move because they mirror
+God’s everlastingness and perhaps for this reason they could not have
+moved otherwise. Therefore, the second qualification on its own is not
+an adequate characterization of κύριαι origins. It is through the
+first qualification that Aristotle limits the κύριαι origins to
+efficient causes.
+
+Aristotle claims that κύριαι origins are the ones from which changes
+first come about (ὅθεν πρῶτον αἱ κινήσεις). Aristotle reserves the
+term ὅθεν πρῶτον αἱ κινήσεις for specifying primary efficient causes
+(Vlastos 1963).  With the emphasis on the primary efficient causes,
+Aristotle picks out the sense in which κύριαι origins produce their
+actions qua efficient causes.  Thus, with the two qualifications
+Aristotle restricts the cases of controlling origins to efficient
+causes that govern their outcome. Since the term κύριαι picks out how
+origins govern their outcomes by being efficient causes, an
+appropriate translation for κύριαι is ‘controlling’ (henceforth, I use
+‘controlling’ as a translation of κύριαι).
+
+Since Aristotle offers only the best case of controlling origin but
+does not specify a threshold case, it may seem that the range of
+controlling origins is too wide.  For instance, a plant produces other
+plants. Similarly, a seed produces the corresponding organism. In
+absence of some threshold, it would seem that seeds and plants are
+also the controlling origins of the changes they bring about. I will
+now offer some reasons to think that the domain of controlling origins
+is not wide enough to includes all efficient causes.
