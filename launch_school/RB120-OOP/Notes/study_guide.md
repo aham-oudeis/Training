@@ -449,7 +449,7 @@ I feel like this LS definition is a bit inadequate, because the inheritance hier
 
 ### Constant Look up Path
 
-Constants have lexical scope. What that means is that whenever Ruby encounters a call for a Constant, it starts looking 
+Constants have lexical scope. What that means is that whenever Ruby encounters a call for a Constant, it starts looking in the enclosing module, and then in the inheritance chain, and lastly in the top shelf (main). But if the location of the reference is explicitly specified, then Ruby looks for the constant only there.
 
 Let's put a Constant in the class, in the superclass, in the module and test which one has precedence:
 
