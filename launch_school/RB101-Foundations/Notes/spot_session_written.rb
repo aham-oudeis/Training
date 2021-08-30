@@ -99,7 +99,18 @@ test(a)
 # Problem
 pet = "dog"
 
-loop do |pet|
+loop do |animal|
+  pet = "cat"
+  break
+end
+
+puts pet
+
+# What does the code output and what does it return? What concept does this demonstrate?
+
+pet = "dog"
+
+loop do |animal|
   pet = "cat"
   break
 end
