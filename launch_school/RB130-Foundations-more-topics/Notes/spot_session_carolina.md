@@ -22,7 +22,6 @@ Assertions
 Purpose of core tools
 Gemfiles
 
-
 # Create a `my_method` method definition that will output whats expected when the last two are executed.
 
 ```ruby

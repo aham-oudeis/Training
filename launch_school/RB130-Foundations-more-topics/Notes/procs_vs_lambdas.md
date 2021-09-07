@@ -2,7 +2,7 @@
 
 Differences between procs and lambdas: while procs are more like blocks, lambdas are more like methods
 1. procs, like blocks, have lenient arity, lambdas and methods have strict arity
-2. `return` inside of procs returns from the enclosing method; lambdas only return from the block
+2. `return` inside of procs returns from the contex they were created in; if the context of their creaton is inside of a method, then it returns from that context; lambdas only return from the block
 
 ### Differennce in Arity
 ```ruby
@@ -15,11 +15,11 @@ p juxtapose[2, 3, 4]
 # => "2 3"
 
 # But
-juxtapose = proc { |x, y| "#{x}  #{y}" }
+juxtapose = lambda { |x, y| "#{x}  #{y}" }
 p juxtapose[2]
 # => ArgumentError: Wrong number of arguments
 
-juxtapose = proc { |x, y| "#{x}  #{y}" }
+juxtapose = lambda { |x, y| "#{x}  #{y}" }
 p juxtapose[2, 3, 4]
 # => ArgumentError: Wrong number of arguments
 ```

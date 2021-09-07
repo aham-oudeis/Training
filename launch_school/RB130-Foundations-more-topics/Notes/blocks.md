@@ -12,7 +12,7 @@ Since the block passed to the `loop` method retains a memory of the enviroment (
 
 The mechanism by which the block has access to the variables initialized in the outer scope is __binding__.
 
-But when we initialize a local variable inside of the block, it is not available in the outer scope.e
+But when we initialize a local variable inside of the block, it is not available in the outer scope.
 
 ```ruby
 loop { name = "Lily"; break}
