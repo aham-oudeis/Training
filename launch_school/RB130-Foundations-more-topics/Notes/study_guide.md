@@ -9,7 +9,7 @@
 * [Methods with an explicit block parameter](explicit_blocks.md)
 * Arguments and return values with blocks
 * [When can you pass a block to a method](blocks.md)
-* [&:symbol](&:symbol.md)
+* [&:symbol](using_&_symbol.md)
 * [Arity of blocks and methods](procs_vs_lambdas.md)
 
 ### Testing With Minitest
