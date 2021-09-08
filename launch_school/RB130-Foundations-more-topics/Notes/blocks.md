@@ -1,6 +1,15 @@
 ## Blocks
 
+Blocks are anonymous functions that are passed as argument to method invocation. All methods in Ruby take an optional block, but whether the code in the block gets executed depends on the method implementation. Block is one of the ways Ruby implements closure.
+
+1. Blocks and Variable Scoping
+2. [Use cases of Blocks](usage_of_blocks.md)
+
+### Blocks and Variable Scoping
+
 We can illustrate the concept of closure in regards to blocks by showing how it gives rise to the specific local variable scoping rule: a local variable initialized in the outer scope can be reassigned from the inner scope, but the local variable initialized in the inner scope cannot be accessed from the outer scope.
+
+It's the binding that explains why we can reassign local variables from inside a block, but cannot access variables initialized inside the block from outside.
 
 ```ruby
 name = "Grace"

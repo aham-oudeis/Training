@@ -1,5 +1,7 @@
 ### Map
 
+Using Recursion
+
 ```ruby
 def map_helper(arr, collection, &b)
   if arr.empty?

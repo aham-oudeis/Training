@@ -5,7 +5,7 @@ Closure is a programming technique for storing/bundling a function together with
 It's the binding that explains why we can reassign local variables from inside a block, but cannot access variables initialized inside the block from outside.
 
 Ruby implements closures in three ways:
-1. creating objects from Proc class
-2. __lambdas__
-3. blocks
+1. [creating objects from Proc class](procs.md)
+2. [__lambdas__](procs_vs_lambdas.md)
+3. [blocks](blocks.md)
 
