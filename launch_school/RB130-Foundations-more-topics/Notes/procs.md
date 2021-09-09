@@ -1,6 +1,6 @@
 ## Procs
 
-Procs are objects of Proc class. They are of two kinds: procs and lambdas.
+Procs are objects of Proc class. They are of two kinds: procs and lambdas. Procs are how Ruby implements closure in the sense of objects that can be passed around. Just like blocks, procs retain a memory of the environment they were created in, such that they can access and even change the variables that  were in scope when they were created.
 
 ```ruby
 name = "Grace"
@@ -48,4 +48,21 @@ test(change_name_proc)
 #=> My name inside the method: Faker
 
 puts "Name after we execute the code inside the proc: #{name}"
+```
+
+### Returning Procs
+
+Procs are also useful becauase they can be returned by methods like any other object. Hence, we can create different kinds of procs to suit our purposes by having a function return a proc.
+
+```ruby
+
+def power_of(num)
+  proc { |n| n ** num }
+end
+
+square = power_of(2) # => returns a proc that works as a way of squaring a number
+cube = power_of(3) # => returns a proc that works as a way of cubing a numb
+
+p square[5] # => 25
+p cube[5] # => 125
 ```

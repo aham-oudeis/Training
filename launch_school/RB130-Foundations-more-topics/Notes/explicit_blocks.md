@@ -13,7 +13,7 @@ end
 greet {puts "Outputting from inside the block!" }
 ```
 
-Here, `&` unary operator converts the block passed in to the method into a proc object, assigns it to the variable `block` and makes it available to the method. That way, inside the method, we can invoke the `call` method on the proc object that `block` refers to.
+Here, `&` unary operator converts the block passed in to the method into a proc object, assigns it to the variable `block` and makes it available inside the method. That way, inside the method, we can invoke the `call` method on the proc object that `block` refers to.
 
 Not only that, since `block` refers to a proc object, we can simply pass it around:
 

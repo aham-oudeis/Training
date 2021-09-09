@@ -1,11 +1,11 @@
 ## Study Guide
 
 ### Blocks
-* [Closures](closure.md), [binding](binding.md) and scope
+* [Closures](closure.md), [binding](binding.md) and [scope](blocks.md)
 * [How blocks work, and when we want to use them.](usage_of_blocks.md)
 * [Blocks and variable scope](blocks.md)
 * [Write methods that use blocks and procs](select.md)
-* [Understand that methods and blocks can return chunks of code (closures)](binding.md)
+* [Understand that methods and blocks can return chunks of code (closures)](procs.md)
 * [Methods with an explicit block parameter](explicit_blocks.md)
 * Arguments and return values with blocks
 * [When can you pass a block to a method](blocks.md)

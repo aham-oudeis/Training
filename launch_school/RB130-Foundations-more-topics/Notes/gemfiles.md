@@ -11,9 +11,11 @@ Structure:
 |--- gemfile.lock
 
 |--- lib
+
       |-- source_file.rb
 
 |--- test
+
       |-- source_file_test.rb
 
 |--- project_name.gemspec

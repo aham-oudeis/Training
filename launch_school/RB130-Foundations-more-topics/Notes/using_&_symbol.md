@@ -1,6 +1,6 @@
 # Using &:symbol
 
-When we pass a symbol or a proc to a method with `&` operator prefixed, then Ruby attempts to convert what is passed in to a block. If a proc object is passed in, then `&` converts the proc into a block. If it is not a proc object, Ruby attempts to convert the argument to a proc object before converting it into a block.
+When we pass a symbol or a proc to a method with `&` operator prefixed, then Ruby attempts to convert what is passed in to a block. If a proc object is passed in, then `&` converts the proc into a block. If it is not a proc , Ruby attempts to convert the argument to a proc before converting it into a block.
 
 For example:
 

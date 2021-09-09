@@ -35,7 +35,7 @@ puts power(15, 3)
 ```
 
 ###  Sandwich-code scenarios
-Sometimes, we may want to perform some before and after action. We can do that to measure time it takes to run the code, or to open and close files.
+Sometimes, we may want to perform some 'before' and 'after' action for some code. We can do that to measure the time it takes to run the code, or to open and close files (resource management).
 
 ```ruby
 def time_it

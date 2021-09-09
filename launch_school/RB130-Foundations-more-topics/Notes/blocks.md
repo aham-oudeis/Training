@@ -1,9 +1,6 @@
 ## Blocks
 
-Blocks are anonymous functions that are passed as argument to method invocation. All methods in Ruby take an optional block, but whether the code in the block gets executed depends on the method implementation. Block is one of the ways Ruby implements closure.
-
-1. Blocks and Variable Scoping
-2. [Use cases of Blocks](usage_of_blocks.md)
+Blocks are anonymous functions that are passed as argument to method invocation. Block is one of the ways Ruby implements closure. All methods in Ruby take an optional block, but whether the code in the block gets executed depends on the method implementation.
 
 ### Blocks and Variable Scoping
 
@@ -31,7 +28,7 @@ p name # => Throws a NameError
 
 That means, in addition to creating their own scope, blocks retain a memory of the environment where they are created.
 
-These blocks are created in the main scope, but executed from inside the method invocation. But if the method invocation is not designed to execute the block, then the code inside the block is not executed, even though it is created and passed to the method.
+These blocks are created in the main scope, but executed from inside the method invocation with the `yield` keyword. But if the method invocation is not designed to execute the block, then the code inside the block is not executed, even though it is created and passed to the method.
 
 ```ruby
 name = "Grace"
@@ -41,3 +38,5 @@ p name # => "Grace"
 ```
 
 The `puts` method is not designed to execute the code; hence, the reassignment inside the block is not executed.
+
+### [Use Case of Blocks](usage_of_blocks.md)
