@@ -1,6 +1,5 @@
 def compute
-  return "Does not compute." unless block_given?
-  yield
+  block_given? ? yield : "Does not compute"
 end
 
 p compute { 5 + 3 } == 8

@@ -1,5 +1,12 @@
+# def all?(collection)
+#   collection.each { |item| return false unless yield(item)}
+#   true
+# end
+
 def all?(collection)
-  collection.each { |item| return false unless yield(item)}
+  for item in collection
+    return false unless yield(item)
+  end
   true
 end
 

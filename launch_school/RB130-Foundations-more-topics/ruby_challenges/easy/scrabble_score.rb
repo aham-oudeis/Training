@@ -5,7 +5,7 @@ class Scrabble
              %w(F H V W Y) => 4,
              %w(K) => 5,
              %w(J X) => 8,
-             %w(Q Z) => 10 }
+             %w(Q Z) => 10 }.freeze
 
   def initialize(word)
     @word = (word ? word : '')

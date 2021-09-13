@@ -25,7 +25,8 @@ def rot13_decrypt(name)
 
   name.chars.map do |char|
     decrypt_char_idx = alphabets.index(char.downcase)
-    decrypt_char  = (decrypt_char_idx ? alphabets[decrypt_char_idx - 13] : char)
+    decrypt_char  =
+    (decrypt_char_idx ? alphabets[decrypt_char_idx - 13] : char)
     char == char.upcase ? decrypt_char.upcase : decrypt_char
   end.join
 end

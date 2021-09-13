@@ -9,6 +9,14 @@ def drop_while(collection)
   start ? collection[start..-1] : []
 end
 
+def drop_while(collection)
+  collection.each_with_index do |item, index|
+    return collection[index..-1] unless yield(item)
+  end
+
+  []
+end
+
 p drop_while([1, 3, 5, 6]) { |value| value.odd? } == [6]
 p drop_while([1, 3, 5, 6]) { |value| value.even? } == [1, 3, 5, 6]
 p drop_while([1, 3, 5, 6]) { |value| true } == []

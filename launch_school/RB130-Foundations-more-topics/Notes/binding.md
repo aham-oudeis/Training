@@ -1,6 +1,8 @@
 ## Binding
 
-Binding is the mechanism by which closures retain a memory of the environment they were created in.
+A binding of a closure is the totality of the surrounding artifacts that were in scope when the closure is created.
+
+A binding of a closure comprises of the artifacts that were in scope when the closure is created.
 
 For instance:
 
