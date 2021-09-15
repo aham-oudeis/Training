@@ -16,7 +16,7 @@ p name
 ```
 Since the block passed to the `loop` method retains a memory of the enviroment (where the local variable `name` is initialized to `"Grace"`), reassigning the value of `name` to `"Lily"` inside the block affects the value of `name` in the outer scope; hence, the reassignment is reflected when we pass `name` to the `p` method invocation.
 
-The mechanism by which the block has access to the variables initialized in the outer scope is __binding__.
+The block has access to the variables initialized in the outer scope through __binding__.
 
 But when we initialize a local variable inside of the block, it is not available in the outer scope.
 
