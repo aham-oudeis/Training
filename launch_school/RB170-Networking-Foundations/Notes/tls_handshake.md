@@ -1,4 +1,7 @@
-## TLS Handshake
+[Transport Layer](transport_layer.md)  || [TCP vs UDP](tcp_vs_udp.md)
+
+
+# TLS Handshake
 
 Since HTTP is not encrypted but sent in plain text, it is insecure. In order to add security, HTTP can be used with Transport Layer Security (TLS) protocol. This protocol can be conceived as operating between the Application and the Transport layer.
 

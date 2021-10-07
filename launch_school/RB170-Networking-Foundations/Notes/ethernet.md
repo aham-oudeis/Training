@@ -1,6 +1,4 @@
-See [Internet Layer](internet.md)
-
-See [Internet Protocol](internet_protocol.md)
+[Internet Layer](internet.md)   ||   [Internet Protocol](internet_protocol.md) || [Transport Layer](transport_layer.md)
 
 # Ethernet
 

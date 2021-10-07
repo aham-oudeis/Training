@@ -1,3 +1,5 @@
+[HTTP Terms](http.md)  || [HTTP Headers](http_header.md) || [HTTP Request and Response](http_request_n_response.md) 
+
 # Status Code 
 
 The `status code` is a three-digit number that the server sends back after receiving a request signifying the status of the request. The `status text` displayed next to the `status code` provides the description of the code.

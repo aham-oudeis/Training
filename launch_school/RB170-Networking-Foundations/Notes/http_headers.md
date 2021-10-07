@@ -1,6 +1,4 @@
-See [HTTP Life Cycle](http_life_cycle.md)
-
-See [HTTP Request and Response](http_request_n_response.md)
+[HTTP Life Cycle](http_life_cycle.md)    ||    [HTTP Request and Response](http_request_n_response.md)
 
 # HTTP Header 
 

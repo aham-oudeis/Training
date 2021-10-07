@@ -1,3 +1,5 @@
+[Internet Layer](internet.md) ||  [Ethernet](ethernet.md)  || [Transport Layer](transport_layer.md)
+
 ## Internet/Network layer
 
 It provides communication between devices on different networks. It provides two main services:
