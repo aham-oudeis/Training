@@ -17,8 +17,8 @@
 8. This Ethernet frame goes through varous network bridging devices and finally reaches the server with the matching IP address.
 9. Once the server device receives the frame, the PDUs are appropriately de-encapsulated at different layers and the HTTP request is sent to the server application.
 10. Finally, the server processes the request and sends a response over the Internet back to your network interface which hands it to your browser.
-   * The HTTP response sent by the server has a mandatory Status line containing the status code, optional header, and an optional body. A HTTP response status line might look like this:
-   
+      * The HTTP response sent by the server has a mandatory Status line containing the status code, optional header, and an optional body. A HTTP response status line might look like this:
+
       `HTTP/1.1 200 OK`
-   * The response headers contain information that is helpful to the browser for rendering the page. For instance, `Content_Type: html/txt`
+      * The response headers contain information that is helpful to the browser for rendering the page. For instance, `Content_Type: html/txt`
 11. Finally, the browser displays the response in the form of a web page.
