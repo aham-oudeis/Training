@@ -1,7 +1,5 @@
 # Internet
 
-## Key Terms
-
 __Network__
 * When at least two or more devices are connected in such a way that they can exchange data, it forms a network
 
@@ -34,7 +32,7 @@ __Layers__
 __Encapsulation__
 * Encapsulation in the context of networking refers to the process of packaging the data from the layer above with protocol-specific metadata of the current layer. This package is reffered as a PDU.
 
-__Protocol Data Units__
+__Protocol Data Units__ (PDU)
 * Protocol Data units are bundles composed of a protocol-specific header (and sometimes a trailer/footer) and the data payload from the layer above.
 
 __Latency__
@@ -42,27 +40,11 @@ __Latency__
 * It is a measure of delay between sending and receiving data.
 * It includes propagation delay, transmission delay, processing delays, and queuing delay.
 
-1. Round Trip Latency: Latency involved in sending data added to the latency involved in receiving acknowledgement.
-2. Last Mile Latency: Latency concentrated near the edge of the network; this is generally the delay involved in getting data from your local ISP to the LAN.
+1. _Round Trip Latency_: Latency involved in sending data added to the latency involved in receiving acknowledgement.
+2. _Last Mile Latency_: Latency concentrated near the edge of the network; this is generally the delay involved in getting data from your local ISP to the LAN.
 
 __Bandwidth__
-* Bandwidth is the amount of data that can be transmitted in a given unit of time (usually per second).
+* Bandwidth is the amount of data that can be transmitted in a given unit of time (usually per second)
 
-__Internet Protocol__
-* The dominant protocol (for the Internet layer)  that is responsible for the communication between hosts in different networks.
-
-__IP Address__
-
-__Packet__
-* Protocol data unit for the Network/Internet layer
-
-__Ethernet__
-* Protocol governing the Link layer/ Data link layer (Layer 2 of OSI model)
-
-__Frame__
-* Protocol data unit of the Link layer and the lowest layer where encapsulation happens.
-
-__MAC Address__
-MAC Addresses is a permanent address assigned to the Network Interface Card (NIC) of every device connected to a networrk. It is formatted as a sequence of six two-digit hexadecimal numbers, e.g. 00:40:96:9d:68:0a, with different ranges of addresses being assigned to different network hardware manufacturers.
 
 
