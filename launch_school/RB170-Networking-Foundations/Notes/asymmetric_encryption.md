@@ -1,3 +1,5 @@
+[Transport Layer Security](transport_layer_security.md)  || [Authentication](authentication.md)
+
 # Asymmetric Encryption
 
 * When encryption and decryption are performed using different keys, then it is an asymmetric encryption.
@@ -16,19 +18,23 @@ This relies on what is known as __one-way-functions__, functions that are easy t
 Here is a small example:
 
 Say, Alice selects 13
-
+```ruby
 p (7**13) % 17  # => 6
-
+```
 Then, Alice sends 6 to Bob. Bob does the same after selecting 101
 
+```ruby
 p (7**101) % 17 # => 11
+```
 
 Bob sends 11 back to Alice. On Alice's end, she makes use of 11 in the same functon. She raises the received number to the power of her selected number. Bob does the same.
 
+```ruby
 p (11**13) % 17 # => 7 
 
 
 p (6**101) % 17 # => 7
+```
 
 Now both Alice and Bob arrive at the same number 7, which they can use as a symmetric key.
 

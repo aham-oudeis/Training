@@ -1,3 +1,5 @@
+See [Asymmetric_Encrypton](asymmetric_encryption.md)
+
 # Authentication
 
 The core issue is that even if the messages are encrypted, the messages we send and receive may not be from the actual source. Someone might be posing as the source to recieve all the message. In that case, we would be sending sensitive information to an imposter with the cipher suite that the imposter provided.

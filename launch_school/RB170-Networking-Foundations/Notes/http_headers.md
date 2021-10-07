@@ -1,3 +1,7 @@
+See [HTTP Life Cycle](http_life_cycle.md)
+
+See [HTTP Request and Response](http_request_n_response.md)
+
 # HTTP Header 
 
 HTTP headers allow the client and the server to send additional information during the request/response HTTP cycle. Headers are colon-separated name-value pairs that are sent in plain text.
