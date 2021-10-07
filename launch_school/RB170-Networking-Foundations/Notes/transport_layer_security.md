@@ -1,4 +1,4 @@
-[HTTP Security Risks](http_security_risks.md)
+[HTTP Security Risks](http_security_risk.md)
 
 # Transport Layer Security
 
