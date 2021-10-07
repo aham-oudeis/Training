@@ -7,9 +7,13 @@ It provides communication between devices on different networks. It provides two
 2. Data encapsulation in the form of packets
 
 ## Routing capability
-Since the IP addresses are hierarchical and logical, the process of locating a specific id address is more manageable. That means, using different parts of the IP address, routers can figure out which router to send the data. Sub-netting is the mechanism for dividng the IP address into heirarchical subnetworks.
+Since the IP addresses are hierarchical and logical, the process of locating a specific id address is more manageable. The overall network is divided into logical subnetworks creating a network heirarchy. The IP address of a device must fall within a range of addresses available to the local network that the device is connected to. This hierarchy enables the routers to figure out which next device to send the data to, without having a record of every device.
 
-In contrast, MAC addresses are flat and burned-in. While a device's MAC address is permanent, a device's IP address is relative to the network it is connected to. 
+Sub-netting is the mechanism for dividng the IP address into heirarchical subnetworks.
+
+Bascially, all routers on the network have a local routing table. Routers examine the destination IP address of the IP packet and matches it against the list of network addresses in its routing table. The matching network determines where in the network hierarchy the subnet exists. This kind of mechanism is used to determine the best route for the IP packet. 
+
+In contrast, MAC addresses are flat and burned-in. While a device's MAC address is permanent, a device's IP address is relative to the network it is connected to.
 
 __Internet Protocol__
 * The dominant protocol (for the Internet layer)  that is responsible for the communication between hosts in different networks.
