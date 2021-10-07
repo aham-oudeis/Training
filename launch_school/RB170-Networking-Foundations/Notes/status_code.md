@@ -1,4 +1,4 @@
-[HTTP Terms](http.md)  || [HTTP Headers](http_header.md) || [HTTP Request and Response](http_request_n_response.md) 
+[HTTP Terms](http.md)  || [HTTP Headers](http_headers.md) || [HTTP Request and Response](http_request_n_response.md) 
 
 # Status Code 
 

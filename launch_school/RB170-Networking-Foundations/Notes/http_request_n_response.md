@@ -1,4 +1,4 @@
-[HTTP Headers](http_header.md) || [HTTP Life Cyle](http_life_cycle.md) || [Status Code](status_code.md)
+[HTTP Headers](http_headers.md) || [HTTP Life Cyle](http_life_cycle.md) || [Status Code](status_code.md)
 
 # HTTP requests
 

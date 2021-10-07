@@ -1,5 +1,4 @@
-[HTTP Terms](http.md)  || [HTTP Headers](http_header.md) || [HTTP Life Cyle](http_life_cycle.md)
-
+[HTTP Terms](http.md)  || [HTTP Life Cyle](http_life_cycle.md) || [HTTP Security Risks](http_security_risk.md)
 
 ## Stateful Applications
 
