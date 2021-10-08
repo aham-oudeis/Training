@@ -8,7 +8,8 @@ __Ethernet__
 
 ## Framing
 * Providing a logical structure to the data to be transmissed through the physical layer
-* The structure is provided by adding a header and a footer to the packet. * Various fields of the header are of specified lengths and have a identifiable pattern.
+* The structure is provided by adding a header and a footer to the packet. 
+* Various fields of the header are of specified lengths and have a identifiable pattern.
 * This is the final encapsulation that happens before sending the data through the physical layer
 
 __Frame__

@@ -10,7 +10,7 @@ Accept_Language: List of acceptable languages\
 Connection: The type of connection the client would prefer\
 Cookie: Cookie data to identify sessions\
 
-we need an empty line (an extra carriage return and line feed) after the header to determine the end of basci components and start an optional body
+we need an empty line (an extra carriage return and line feed) after the header to signal the end of header and start an optional body
 
 ## HTTP Response Header
 Content_Encoding: The type of encoding used on the data\

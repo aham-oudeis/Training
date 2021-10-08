@@ -36,6 +36,6 @@ p (11**13) % 17 # => 7
 p (6**101) % 17 # => 7
 ```
 
-Now both Alice and Bob arrive at the same number 7, which they can use as a symmetric key.
+Now both Alice and Bob arrive at the same number 7, which they can use as a symmetric key. Alice can use this symmetric key to send her pincode to Bob and Bob can use 7 to decipher the encrypted pincode.
 
 Based on the publicly available information, it is kinda hard to arrive at 7. That is, based on the function (7**(numbeer)) % 17 and the numbers 6 and 11, it is rather hard to generate 7. When the primes are really huge, the decryption becomes astronomically difficult. 

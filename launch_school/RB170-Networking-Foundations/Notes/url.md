@@ -19,7 +19,7 @@ https://www.launchschool.com:80/courses?name=Networking%20Foundations
 
 ## URL encoding
 
-URL uses certain characters to distinguish between different parts. For instance, colon (:), slashes (///), question mark (?), ampersand (&). These charaacters are reserved. 
+URL uses certain characters to distinguish between different parts. For instance, colon (:), slash (/), question mark (?), ampersand (&). These charaacters are reserved. 
 
 There are other unsafe characters, such as space ( ) or percentage (%) or quotation marks (""). Since these unsafe characters can be interpreted in a wrong manner, they cannot be used in an URL. 
 

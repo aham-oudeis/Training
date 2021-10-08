@@ -6,7 +6,7 @@
 
 __Multiplexing__
 * The mechanism for transmitting multiple signals over a single channel is called multiplexing.
-* This is accomplished through the use of ip address with the port number
+* In the context of the trasport layer, this is accomplished through the use of ip address with the port number
 
 __Demultiplexing__
 *  The mechanism for extracting distinct signals received over a single channel is called demultiplexing

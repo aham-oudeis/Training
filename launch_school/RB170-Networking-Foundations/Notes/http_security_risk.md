@@ -2,7 +2,7 @@
 
 ## Security Threats
 
-There are two major forms of security threats that we need to know about:
+Since HTTP is a stateless protocol, application employ varieties of techniques to simulate stateful application. These techniques introduce new vulnerabilities. There are two major forms of security threats that we need to know about:
 
 1. __Session Hijacking__ (perhaps through packet sniffing)
  * This type of attack happens when an attacker gets acceess to the session id and thus is able to access the sensitive information without having to login in. 

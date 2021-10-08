@@ -3,7 +3,7 @@
 ## Internet/Network layer
 
 It provides communication between devices on different networks. It provides two main services:
-1. Routing capability
+1. Routing capability through IP addressing
 2. Data encapsulation in the form of packets
 
 ## Routing capability
@@ -13,10 +13,10 @@ Sub-netting is the mechanism for dividng the IP address into heirarchical subnet
 
 Bascially, all routers on the network have a local routing table. Routers examine the destination IP address of the IP packet and matches it against the list of network addresses in its routing table. The matching network determines where in the network hierarchy the subnet exists. This kind of mechanism is used to determine the best route for the IP packet. 
 
-In contrast, MAC addresses are flat and burned-in. While a device's MAC address is permanent, a device's IP address is relative to the network it is connected to.
+In contrast, MAC addresses are flat and burned-in. While a device's MAC address is permanent, a device's IP address is dependent on the network it is connected to.
 
 __Internet Protocol__
-* The dominant protocol (for the Internet layer)  that is responsible for the communication between hosts in different networks.
+* The dominant protocol (for the Internet layer) that is responsible for the communication between hosts in different networks.
 
 __IP Address__
 * Unique address of a device assigned according to the IP protocol.
@@ -28,12 +28,12 @@ __Packet__
 * Protocol data unit for the Network/Internet layer
 
 __IPV4 and IPV6__
-While IPv4 is a 32-bit address that uses four octets in a dotted decimal system, IPv6 is a 128-bit address that uses eight colon separated hexadecimal numbers each 16 bit.
+While IPv4 is a 32-bit address that uses four octets in a dotted decimal system, IPv6 is a 128-bit address that uses eight colon separated hexadecimal numbers (each hexadecimal beign 16 bit).
 
 __Differences between IPv4 and IPv6__
 copied from [here](https://www.guru99.com/difference-ipv4-vs-ipv6.html)
 
-* Pv4 is 32-Bit IP address whereas IPv6 is a 128-Bit IP address.
+* IPv4 is 32-Bit IP address whereas IPv6 is a 128-Bit IP address.
 * IPv4 is a numeric addressing method whereas IPv6 is an alphanumeric addressing method.
 * IPv4 binary bits are separated by a dot(.) whereas IPv6 binary bits are separated by a colon(:).
 * IPv4 offers 12 header fields whereas IPv6 offers 8 header fields.

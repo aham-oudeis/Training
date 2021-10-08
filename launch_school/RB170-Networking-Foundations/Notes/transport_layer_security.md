@@ -9,7 +9,7 @@ __Cipher Suite__
 The client and server use variety of cryptographic algorithms for different aspects of a secure message exchange. The list of algorithms is called a cipher suite.
 
 __Encryption__
-* Transforming a message into a seemingly nonsensical message in a systematic way such that the message can be recovered. 
+* Transforming a message into a seemingly nonsensical message in a systematic way such that the message can be recovered only by the one with the key to deciphering the message.
 
 * Decryption is the process of recovering the original message from the encrypted message
 
