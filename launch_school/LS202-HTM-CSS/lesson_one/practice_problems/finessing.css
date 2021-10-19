@@ -1,0 +1,16 @@
+h1 {
+  font: Georgia;
+  color: darkblue;
+}
+
+p {
+  font-size: 14px;
+  font-family: Helvetica, Arial;
+  color: darkgreen;
+}
+
+code {
+  font: monospace;
+  font-style: italic;
+  text-decoration: underline;
+}
