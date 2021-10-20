@@ -1,0 +1,30 @@
+/*html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit
+}*/
+
+section {
+  background-color: yellow;
+  border: 1px solid red;
+  box-sizing: content-box;
+  display: inline-block;
+  height: 700px;
+  margin: 0;
+  padding: 20px;
+  width: 900px;
+}
+
+article {
+  vertical-align: inherit;
+  background-color: lime;
+  border: 1px solid blue;
+  box-sizing: border-box;
+  display: inline-block;
+  height: 100%;
+  margin: 0;
+  padding: 10px;
+  width: 449px;
+}

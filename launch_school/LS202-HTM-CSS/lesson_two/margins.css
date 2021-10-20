@@ -1,0 +1,28 @@
+/*html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit
+}*/
+
+#center-margin-auto {
+  background-color: cyan;
+  border: 1px solid gray;
+  width: 780px;
+}
+
+#center-margin-auto div {
+  background-color: #ffe0e0;
+  border: 10px solid red;
+  padding: 10px;
+  width: 50%;
+}
+
+#center-margin-auto-center {
+  margin: 10px auto;
+}
+
+#center-margin-auto-right {
+  margin: 10px 10px 10px auto;
+}

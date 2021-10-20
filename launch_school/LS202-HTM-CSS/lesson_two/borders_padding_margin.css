@@ -1,0 +1,35 @@
+/*html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit
+}*/
+
+div {
+  box-sizing: border-box;
+  background-color: limegreen;
+  size: 800px;
+  margin: 100px 20px;
+}
+
+p {
+  vertical-align: bottom;
+  display: inline-block;
+  text-align: justify;
+  background-color:  #d4f0f8;
+  border:  1px solid #2db7e1;
+  box-sizing: border-box;
+  font-display: 1.5rem;
+  padding: 0.5em;
+  width: 560px;
+  margin-left: 250px;
+}
+
+em {
+  background-color: rgba(255, 255, 0, .6);
+  border:  30px solid rgba(255, 0, 64, .5);
+  margin:  40px;
+  padding: 30px;
+  padding-color: limegreen;
+}

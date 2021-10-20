@@ -1,0 +1,37 @@
+/*html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit
+}*/
+
+#auto-width {
+  background-color: cyan;
+  border: 2px solid magenta;
+  font-family: monospace;
+  text-align: center;
+  width: 730px;
+}
+
+#auto-width div {
+  background-color: greenyellow;
+  border: 10px solid red;
+  margin: 10px;
+  padding: 10px;
+  text-align: left;
+}
+
+#auto-width-auto {
+  width:  auto;
+}
+
+#auto-width-100-border {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+#auto-width-100-content {
+  box-sizing: content-box;
+  width: 100%;
+}
