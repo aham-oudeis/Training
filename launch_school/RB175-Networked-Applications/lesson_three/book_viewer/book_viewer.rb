@@ -15,3 +15,13 @@ get "/chapters/1" do
   @paragraphs = File.readlines "data/chp1.txt"
   erb :chapter
 end
+
+get "/chapters/:name" do
+  @title = "Chapter #{params['name']}"
+  @list_of_contents = File.readlines "data/toc.txt"
+  chapter_index = params['name'].to_i - 1
+  chapter_index = 0 if chapter_index >= @list_of_contents.size
+  @heading = @list_of_contents[chapter_index]
+  @paragraphs = File.readlines "data/chp#{chapter_index + 1}.txt"
+  erb :chapter 
+end
