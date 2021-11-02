@@ -1,0 +1,10 @@
+<h2><%= @user.to_s.capitalize %></h2>
+  <p>Email: <%= @users[@user][:email] %></p>
+  <p>Interests: <%= join_by_and(@users[@user][:interests]) %></p>
+  <footer>
+    <% @users.each_key do |user| %>
+      <% if user != @user %>
+        <a href="/<%= user %>"><%= user.capitalize %></a>
+      <% end %>
+    <% end %>
+  </footer>

@@ -1,0 +1,6 @@
+<h2>All users</h2>
+<% @users.keys.each do |user| %>
+  <ul>
+    <li><a href="/<%= user %>"><%= user.capitalize %></a></li>
+  </ul>
+<% end %>
