@@ -21,8 +21,10 @@
 
 ### SQL
 * Originated with E.F.Codd (1970) "A relational model for large data banks".
-> SQL is a __declarative language__; when you write an SQL statement you describe what needs to be done, but not exactly how to do it -- the exact details of how the query is executed are handled internally by the RDBMS you are using. [source](https://launchschool.com/books/sql/read/introduction)
+> SQL is a __declarative language__; when you write an SQL statement you describe what needs to be done, but not exactly how to do it -- the exact details of how the query is executed are handled internally by the RDBMS you are using. 
+
 > Creating a well-designed database is like laying the foundations of a house, and learning SQL and relational database concepts will help you build your applications on a strong foundation. Since databases are such a key part of almost all web applications, understanding the language of databases and how they work is a vital step towards becoming a well-rounded web-developer.
+> [source](https://launchschool.com/books/sql/read/introduction)
 
 ### PSQL console
 1. Metacommands
@@ -46,4 +48,81 @@
 ```sql
 SELECT * FROM orders;
 ```
-This is a select statment. The wild card character (*) acts as in identifier for all the columns. The `FROM` clause is used to identify the table `orders`. In absence of any further clause, the statement selects all the rows and all the columns from the `orders` table. 
+This is a select statment. The wild card character (*) acts as an identifier for all the columns. The `FROM` clause is used to identify the table `orders`. In absence of any further clause, the statement selects all the rows and all the columns from the `orders` table.
+
+### Altering a table
+* This falls within altering the __schema__ of the table.
+
+```sql
+ALTER TABLE table_namee
+      stuff_to_change
+      additional_arguments;
+```
+
+Examples:
+```sql
+ALTER TABLE  table_name
+  RENAME TO  new_table_name;
+```
+
+```sql
+ALTER TABLE table_name
+     RENAME column_name TO new_column_name;
+```
+
+```sql
+ALTER TABLE table_name
+ADD COLUMN  new_column new_column_type [optional constraints]
+```
+Altering the data-type of an existing column; if the column already contains values that cannot be converted into the new data_type, it will throw an error. 
+
+```sql
+ALTER TABLE table_name
+ALTER COLUMN column_name TYPE new_type;
+```
+```sql
+ALTER TABLE table_name
+ALTER COLUMN column_name
+SET NOT NULL
+```
+```sql
+ALTER TABLE table_name
+ALTER COLUMN column_name
+SET DEFAULT default_value
+```
+```sql
+ALTER TABLE table_name
+ALTER COLUMN column_name
+DROP NOT NULL
+```
+```sql
+ALTER TABLE table_name
+ALTER COLUMN column_name
+DROP DEFAULT
+```
+
+### Data Manipulation Statements
+1. INSERT
+2. SELECT
+3. UPDATE
+4. DELETE
+
+### CRUD operation
+1. Create
+2. Read
+3. Update
+4. Delete
+
+```sql
+ERROR:  invalid input syntax for integer: "John Smith"
+LINE 1: INSERT INTO users VALUES ('John Smith', false);
+```
+We get this kind of error because
+(1) we did not specify the column names after `users`
+(2) POSTGreSQL attempts to insert 'John Smith' into the first column that has the data type `integer`.
+
+### Operators
+
+1. Comparison
+2. Logical
+3. String matching
