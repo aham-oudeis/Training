@@ -1,26 +1,28 @@
-## Notes in bulk
+# Notes in bulk
 
-### Structured data
+## Structured data
 * It solves the limitation of unstructured data
 * When it comes to retrieving information from unstructured data, it is rather difficult and the difficulty compounds as the size of the data becomes larger (like finding your old favorite book in a bookshelf that has no sensible structure)
 * Benefit: easily retrieval and easy management
 
-### Database
+## Database
 * A structured set of data held in a computer, for instance a spreadsheet.
 * The whole of __spreadsheet__ can be thought of as the database and each individual __worksheet__ can be thought of as a table (relation). 
 
-### Relational Database
+## Relational Database
 * A database organized according to the relational model of data. Basically, relational model defines a set of relations (tables) and the relationship between them to determine how they interact. 
 * Requires prior setting up the architecture
 * Best suited when the data is of predictably limited kinds. 
 * Using a relational database helps us to cut down on duplicated data and provides a much more useful data structure for us to interact with.
 
-### RDBSM
+## RDBSM
 > A relational database management system, or RDBMS, is essentially a software application, or system, for managing relational databases. An RDBMS allows a user, or another application, to interact with a database by issuing commands using syntax that conforms to a certain set of conventions or standards. [source](https://launchschool.com/books/sql/read/introduction)
 * All RDBMSes share the same underlying language: SQL.
 
-### SQL
+## SQL
 * Originated with E.F.Codd (1970) "A relational model for large data banks".
+>SQL is a language used to manipulate the structure and values of datasets stored in a relational database. It is described as a __special purpose language__ because it is typically used only for a very specific purpose: interacting with relational databases. [source](https://launchschool.com/lessons/a1779fd2/assignments/7673d9a9)
+
 > SQL is a __declarative language__; when you write an SQL statement you describe what needs to be done, but not exactly how to do it -- the exact details of how the query is executed are handled internally by the RDBMS you are using. 
 
 > Creating a well-designed database is like laying the foundations of a house, and learning SQL and relational database concepts will help you build your applications on a strong foundation. Since databases are such a key part of almost all web applications, understanding the language of databases and how they work is a vital step towards becoming a well-rounded web-developer.
@@ -59,48 +61,6 @@ ALTER TABLE table_namee
       additional_arguments;
 ```
 
-Examples:
-```sql
-ALTER TABLE  table_name
-  RENAME TO  new_table_name;
-```
-
-```sql
-ALTER TABLE table_name
-     RENAME column_name TO new_column_name;
-```
-
-```sql
-ALTER TABLE table_name
-ADD COLUMN  new_column new_column_type [optional constraints]
-```
-Altering the data-type of an existing column; if the column already contains values that cannot be converted into the new data_type, it will throw an error. 
-
-```sql
-ALTER TABLE table_name
-ALTER COLUMN column_name TYPE new_type;
-```
-```sql
-ALTER TABLE table_name
-ALTER COLUMN column_name
-SET NOT NULL
-```
-```sql
-ALTER TABLE table_name
-ALTER COLUMN column_name
-SET DEFAULT default_value
-```
-```sql
-ALTER TABLE table_name
-ALTER COLUMN column_name
-DROP NOT NULL
-```
-```sql
-ALTER TABLE table_name
-ALTER COLUMN column_name
-DROP DEFAULT
-```
-
 ### Data Manipulation Statements
 1. INSERT
 2. SELECT
@@ -123,6 +83,18 @@ We get this kind of error because
 
 ### Operators
 
-1. Comparison
+1. Comparison operators and comparison predicates
 2. Logical
 3. String matching
+
+### Functions
+
+__String Functions__
+
+```sql
+SELECT trim(leading ' ' from '   hello  '); --'hello  '
+SELECT trim(trailing ' ' from ' ); --'   hello'
+```
+
+### SQL Joins
+>  JOINs are clauses in SQL statements that link two tables together, usually based on the keys that define the relationship between those two tables. There are several types of JOINs: INNER, LEFT OUTER, RIGHT OUTER, FULL OUTER and CROSS

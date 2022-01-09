@@ -28,7 +28,7 @@ A subset of a "SQL Statement". A query is a way to search, or lookup data within
    * SELECT, UPDATE, DELETE
 
 #### DCL: Data Control Language: 
-   * Used to manage permissions to various users, such as determining what they are allowed to do when interaction with a database.
+   * Used to manage permissions to various users, such as determining what they are allowed to do when interacting with a database.
    * Deals with permissions
    * GRANT/REVOKE
 
@@ -45,4 +45,58 @@ A data type classifies particular values that are allowed for that column. It sp
 > One of the key functions of a database is to maintain the integrity and quality of the data that it is storing. Keys and Constraints are rules that define what data values are allowed in certain columns. They are an important database concept and are part of a database's schema definition. Defining Keys and Constraints is part of the database design process and ensures that the data within a database is reliable and maintains its integrity. Constraints can apply to a specific column, an entire table, more than one table, or an entire schema. [source](https://launchschool.com/books/sql/read/create_table)
 
 ### serial
-> serial is a special data type available in PostgreSQL. It uses the integer data type along with a DEFAULT constraint and a function called nextval which keeps a track of the current highest value and increments this by one to be used as the next value.[source](https://launchschool.com/books/sql/read/create_table)
+> serial is a special [pseudo] data type available in PostgreSQL. It uses the integer data type along with a DEFAULT constraint and a function called nextval which keeps a track of the current highest value and increments this by one to be used as the next value.[source](https://launchschool.com/books/sql/read/create_table)
+
+### Normalization
+The process of splitting up data into different tables to remove duplication and improve data integrity is known as normalization.
+
+1. The reason for normalization is to reduce redundancy in data and improve data integrity (update anomaly, insertion anomaly, delete anomaly)
+2. Normalization is performedd by splitting the data across multiple tables and defining the relationships between them
+
+### Database Design
+> At a high level, the process of database design involves defining entities to represent different sorts of data and designing relationships between those entities.
+
+### ERD-Entity Relationship Diagram
+> An ERD is a graphical representation of entities and their relationships to each other, and is a commonly used tool within database design.
+
+### Keys
+> Keys are a special type of constraint used to establish relationships and uniqueness. They can be used to identify a specific row in the current table, or to refer to a specific row in another table. 
+
+> A key uniquely identifies a single row in a database table.
+
+> A __Primary Key__ is a unique identifier for a row of data.
+
+> A __natural key__ is an existing value in a dataset that can be used to uniquely identify each row of data in that dataset. On the surface there appear to be a lot of values that might be satisfactory for this use: a person's phone number, email address, social security number, or a product number, [but none of these are all that unique in terms of identifying each individual.]
+> __Composite key__ makes use of more than one value to uniqely identify a row.
+
+> A surrogate key is a value that is created solely for the purpose of identifying a row of data in a database table. Because it is created specifically for that purpose, it can avoid many of the problems associated with natural keys.
+
+> A __sequence__ is a special kind of relation that generates a series of numbers. A sequence will remember the last number it generated, so it will generate numbers in a predetermined sequence automatically.
+
+> A __Foreign Key__ allows us to associate a row in one table to a row in another table. This is done by setting a column in one table as a Foreign Key and having that column reference another table's Primary Key column.
+
+> __Referential integrity__ is the assurance that a column value within a record must reference an existing value; if it doesn't then an error is thrown. 
+
+### JOIN statements
+
+> The part of the statement that comes after the ON keyword is the __join condition__; this defines the logic by which a row in one table is joined to a row in another table.
+
+> An __INNER JOIN__ returns a result set that contains the common elements of the tables, i.e the intersection where they match on the joined condition.
+
+> A __LEFT JOIN__ or a __LEFT OUTER JOIN__ takes all the rows from one table, defined as the LEFT table, and joins it with a second table.
+
+> A RIGHT JOIN [is a kind of JOIN where] all the rows on the second table are included along with any matching rows from the first table.
+
+> A FULL JOIN or FULL OUTER JOIN is essentially a combination of LEFT JOIN and RIGHT JOIN. 
+
+> A CROSS JOIN, also known as a Cartesian JOIN, returns all rows from one table crossed with every row from the second table. In other words, the join table of a cross join contains every possible combination of rows from the tables that have been joined. 
+
+## Aliasing
+> Aliasing allows us to specify another name for a column or table and then use that name in later parts of a query to allow for more concise syntax. 
+
+Benefits:
+1. Shortening the queries by using short aliases
+2. Displaying more meaningful information by giving appropriate names to the columns
+
+## Subquery
+> Imagine executing a SELECT query, and then using the results of that SELECT query as a condition in another SELECT query. This is called nesting, and the query that is nested is referred to as a __subquery__.
