@@ -1,5 +1,5 @@
 practice*.rb
 practice*.*
-test.sql
+test*.sql
 script*.sh
 .DS_Store
