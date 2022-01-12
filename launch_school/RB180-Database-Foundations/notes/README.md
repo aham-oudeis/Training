@@ -3,7 +3,7 @@
 * Name and define the three sublanguages of SQL and be able to classify different statements by sublanguage. [sublangauges](sublanguages.md)
 * Write SQL statements using INSERT, UPDATE, DELETE, CREATE/ALTER/DROP TABLE, ADD/ALTER/DROP COLUMN.
 * Understand how to use GROUP BY, ORDER BY, WHERE, and HAVING. [understanding GROUP BY](https://medium.com/@iandaustin/grokking-group-by-bd0bfd7082ea)
-* Understand how to create and remove constraints, including CHECK constraints [working_with_constraints](constraints.md)
+* Understand how to create and remove constraints, including CHECK constraints [constraints](constraints.md)
 * Be familiar with using [subqueries](subquery.md) 
 
 ## PostgreSQL
