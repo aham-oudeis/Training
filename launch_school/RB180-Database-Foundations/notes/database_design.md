@@ -24,7 +24,7 @@ The minimum number of objects on the either side of the relationship is called t
 * In Crow's Foot notation, the cardinality of many is denoted with three splitting lines and cardinality of one is  denoted with a single line. Modality of 0 is denoted with a tiny circle on the line, and modality of 1 is denoted with a little-line perpendicular to the connecting line.
 
 ## Normalization
-The process of splitting up data into different tables to remove duplication and improve data integrity is known as normalization.
+The process of splitting up data into different tables to remove duplication and improve data integrity is known as __normalization__.
 
 1. The reason for normalization is to reduce redundancy in data and improve data integrity (update anomaly, insertion anomaly, deletion anomaly)
 2. Normalization is performedd by splitting the data across multiple tables and defining the relationships between them

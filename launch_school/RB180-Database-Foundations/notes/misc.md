@@ -95,6 +95,3 @@ __String Functions__
 SELECT trim(leading ' ' from '   hello  '); --'hello  '
 SELECT trim(trailing ' ' from ' ); --'   hello'
 ```
-
-### SQL Joins
->  JOINs are clauses in SQL statements that link two tables together, usually based on the keys that define the relationship between those two tables. There are several types of JOINs: INNER, LEFT OUTER, RIGHT OUTER, FULL OUTER and CROSS

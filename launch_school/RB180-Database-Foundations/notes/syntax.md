@@ -1,4 +1,4 @@
-## Syntax for altering a table
+# Syntax for altering a table
 
 ## Syntax for renaming
 Alter a table name:
@@ -55,10 +55,15 @@ ALTER TABLE table_name
 ADD COLUMN  new_column new_column_type [optional constraints]
 ```
 
-## Syntax for updating data
+# Syntax for updating data
 
+```sql
+UPDATE table_name
+SET column_name = value
+WHERE condition;
+```
 
-## JOIN syntax
+# JOIN syntax 
 
 ```sql
 SELECT table_name.column_name, ...
@@ -66,3 +71,5 @@ SELECT table_name.column_name, ...
        [INNER/LEFT/RIGHT/FULL/CROSS] JOIN table_name2
        ON join_condition;
 ```
+
+See [JOIN statements](join.md)

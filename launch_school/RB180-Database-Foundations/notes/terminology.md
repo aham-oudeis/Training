@@ -16,22 +16,6 @@ A SQL command used to access/use the database or the data within that database v
 ### SQL query 	
 A subset of a "SQL Statement". A query is a way to search, or lookup data within a database, as opposed to updating or changing data.
 
-### SQL Sub-languages
-#### DDL: Data Definition Language: 
-   * Used to define the structure of a database and the tables and the columns.
-   * Deals with schema
-   * CREATE/ALTER/DROP TABLE
-
-#### DML: Data Manipulation Language: SELECT/UPDATE/DELETE
-   * Used to retrieve or modify data stored in a database
-   * Deals with content (data)
-   * SELECT, UPDATE, DELETE
-
-#### DCL: Data Control Language: 
-   * Used to manage permissions to various users, such as determining what they are allowed to do when interacting with a database.
-   * Deals with permissions
-   * GRANT/REVOKE
-
 ### Schema
 > Schema is concerned with the structure of a database. This structure is defined by things such as the names of tables and table columns, the data types of those columns and any constraints that they may have.
 
@@ -76,27 +60,3 @@ The process of splitting up data into different tables to remove duplication and
 > A __Foreign Key__ allows us to associate a row in one table to a row in another table. This is done by setting a column in one table as a Foreign Key and having that column reference another table's Primary Key column.
 
 > __Referential integrity__ is the assurance that a column value within a record must reference an existing value; if it doesn't then an error is thrown. 
-
-### JOIN statements
-
-> The part of the statement that comes after the ON keyword is the __join condition__; this defines the logic by which a row in one table is joined to a row in another table.
-
-> An __INNER JOIN__ returns a result set that contains the common elements of the tables, i.e the intersection where they match on the joined condition.
-
-> A __LEFT JOIN__ or a __LEFT OUTER JOIN__ takes all the rows from one table, defined as the LEFT table, and joins it with a second table.
-
-> A RIGHT JOIN [is a kind of JOIN where] all the rows on the second table are included along with any matching rows from the first table.
-
-> A FULL JOIN or FULL OUTER JOIN is essentially a combination of LEFT JOIN and RIGHT JOIN. 
-
-> A CROSS JOIN, also known as a Cartesian JOIN, returns all rows from one table crossed with every row from the second table. In other words, the join table of a cross join contains every possible combination of rows from the tables that have been joined. 
-
-## Aliasing
-> Aliasing allows us to specify another name for a column or table and then use that name in later parts of a query to allow for more concise syntax. 
-
-Benefits:
-1. Shortening the queries by using short aliases
-2. Displaying more meaningful information by giving appropriate names to the columns
-
-## Subquery
-> Imagine executing a SELECT query, and then using the results of that SELECT query as a condition in another SELECT query. This is called nesting, and the query that is nested is referred to as a __subquery__.
