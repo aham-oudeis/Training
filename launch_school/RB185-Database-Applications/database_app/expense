@@ -1,0 +1,66 @@
+#! /usr/bin/env ruby
+
+require 'pg'
+
+CONNECTION = PG.connect(dbname: 'rb185')
+
+def display_data
+  result =CONNECTION.exec "SELECT * FROM expenses"
+
+  result.each do |record|
+    record_value = [record['id'].rjust(2),
+                    record['created_on'].center(15),
+                    record['amount'].rjust(10),
+                    record['memo'].ljust(15)
+                    ]
+    puts record_value.join(' | ')
+  end
+end
+
+def display_help
+  puts <<~INFO
+  An expense recording system
+  
+  Commands:
+  
+  add AMOUNT MEMO [DATE] - record a new expense
+  clear - delete all expenses
+  list = list all expenses
+  delete NUMBER - remove expense with id NUMBER
+  search QUERY - list expenses with a matching memo field
+  
+  INFO
+end 
+
+def num?(str)
+  str.to_i.to_s == str || str.to_f.to_s == str
+end
+
+def error_msg(argv)
+  if argv.size <= 2
+    "You must provide an amount and memo"
+  elsif !num?(argv[1])
+    "You must enter a number for the amount"
+  end
+end
+
+def add_data(argv)
+  error = error_msg(argv)
+  if error
+    puts error
+  elsif argv.size == 3
+    amount = argv[1]
+    memo = argv[2].gsub("'", "''")
+    sql = "INSERT INTO expenses (amount, memo)
+                             VALUES (#{amount}, '#{memo}');"
+  CONNECTION.exec(sql)
+  end
+end
+
+command = ARGV.first
+
+case command
+when nil then display_help
+when 'list' then display_data
+when 'add' then add_data(ARGV)
+end
