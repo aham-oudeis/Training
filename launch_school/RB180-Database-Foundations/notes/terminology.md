@@ -30,6 +30,7 @@ A data type classifies particular values that are allowed for that column. It sp
 
 ### serial
 > serial is a special [pseudo] data type available in PostgreSQL. It uses the integer data type along with a DEFAULT constraint and a function called nextval which keeps a track of the current highest value and increments this by one to be used as the next value.[source](https://launchschool.com/books/sql/read/create_table)
+* Imposes a NOT NULL constraint.
 
 ### Normalization
 The process of splitting up data into different tables to remove duplication and improve data integrity is known as normalization.

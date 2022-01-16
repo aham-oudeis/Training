@@ -3,7 +3,7 @@
 ## Structured data
 * It solves the limitation of unstructured data
 * When it comes to retrieving information from unstructured data, it is rather difficult and the difficulty compounds as the size of the data becomes larger (like finding your old favorite book in a bookshelf that has no sensible structure)
-* Benefit: easily retrieval and easy management
+* Benefit: easy retrieval and management
 
 ## Database
 * A structured set of data held in a computer, for instance a spreadsheet.
@@ -30,7 +30,7 @@
 
 ### PSQL console
 1. Metacommands
-   > The syntax for a psql console meta-command is a backslash \ followed by the command and any optional arguments. Meta-commands can be used for a number of different things, such as connecting to a different database, listing tables, describing the structure of a particular table, setting environment variables, and so on.
+   > The syntax for a psql console meta-command is a backslash \ followed by the command and any optional arguments. Meta-commands can be used for a number of different things, such as connecting to a different database (\c), listing tables (\l), describing the structure of a particular table (\d table_name), setting environment variables, and so on.
 
 2. SQL statement
    * Issued to the database using SQL syntax.

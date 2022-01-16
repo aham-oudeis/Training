@@ -42,5 +42,3 @@ Likewise, if two independent entities are tied up in one table, deleting the rec
 
 > Normalization is the process of designing schema that minimize or eliminate the possible occurrence of these anomalies. The basic procedure of normalization involves extracting data into additional tables and using foreign keys to tie it back to its associated data. [Source](https://launchschool.com/lessons/5ae760fa/assignments/e94816bd)
 
-
-

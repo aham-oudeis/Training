@@ -14,7 +14,7 @@ CREATE TABLE students (
 ```
 ## NOT NULL CONSTRAINT
 
-When we have a database for storing information about students, we would want to make certain information required. For instance, we want to make sure that the student has a first_name, last_name, and an email. To ensure that these values are not left empy, we can impose the NOT NULL constraint as follows:
+When we have a database for storing information about students, we would want to make certain information required. For instance, we want to make sure that the student has a first_name, last_name, email, and enrolled. To ensure that these values are not left empty, we can impose the NOT NULL constraint as follows:
 
 ```sql
 ALTER TABLE students
@@ -40,7 +40,7 @@ ALTER COLUMN middle_name DROP NOT NULL;
 
 ## UNIQUE
 
-UNIQUE constraint ensures that the column or the columns on which the constraint is applied only has unique value or tuples of unique values (if the constraint is applied on more than one column).
+UNIQUE constraint ensures that the column (or the columns on which the constraint is applied) only has unique value or a unique combination of values (if the constraint is applied on more than one column).
 
 In the case of students, it is reasonable that we want students to have unique emails. So, let's add that constraint:
 

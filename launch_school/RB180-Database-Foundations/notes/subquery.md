@@ -20,7 +20,6 @@ Basically, subquery is a query that is used by another query in the same stateme
 
 > NOT IN is similar to IN except that the result of NOT IN is 'true' if an equal row is not found, and 'false' otherwise.
 
-
 ### ANY/SOME
 
 > ANY and SOME are synonyms, and can be used interchangeably. These expressions are used along with an operator (e.g. =, <, >, etc). The result of ANY / SOME is 'true' if any true result is obtained when the expression to the left of the operator is evaluated using that operator against the results of the nested query.

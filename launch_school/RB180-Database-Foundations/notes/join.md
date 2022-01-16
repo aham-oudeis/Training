@@ -61,10 +61,3 @@ A __RIGHT JOIN__ [is a kind of JOIN where] all the rows on the second table are 
 A combination of LEFT JOIN and RIGHT JOIN is called the __FULL JOIN__ or __FULL OUTER JOIN__.
 
 A __CROSS JOIN__, aka Cartesian JOIN, returns all rows from one table crossed with every row from the second table.
-
-## Aliasing
-> Aliasing allows us to specify another name for a column or table and then use that name in later parts of a query to allow for more concise syntax. 
-
-Benefits:
-1. Shortening the queries by using short aliases
-2. Displaying more meaningful information by giving appropriate names to the columns

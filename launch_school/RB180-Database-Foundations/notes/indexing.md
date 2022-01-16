@@ -40,8 +40,8 @@ If we want to drop the index,  we can invoke the following command:
 DROP INDEX price_index;
 ```
 
-Although indexing facilitates faster look up, there is a significant cost to adding indexes on unnecessary columns. Indexes occupy extra space and requires extra resources to update or modify existing data, given that not only the column but the respective index has to be updated or modified. 
+Although indexing facilitates faster look up, there is a significant cost to adding indexes on unnecessary columns. Indexes not only occupy extra space but also require extra resources to update or modify existing data. This is because when updating or modifying a value,the respective index has to be updated or modified. 
 
 There are two major rules of thumb for determining when it is useful to create index:
-> 1. Indexes are best used in cases where sequential reading would be too costly and ineffective. For example: columns that are frequently used as part of an ORDER BY clause, or columns that aid in mapping relationships (such as Foreign Key columns) are good candidates for indexing.
+> 1. Indexes are best used in cases where sequential reading would be too costly and/or ineffective. For example: columns that are frequently used as part of an ORDER BY clause, or columns that aid in mapping relationships (such as Foreign Key columns) are good candidates for indexing.
 > 2. They are best used in tables and/ or columns where the data will be read much more frequently than it is created or updated.

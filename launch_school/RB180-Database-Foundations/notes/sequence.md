@@ -17,7 +17,7 @@ DROP SEQUENCE counter;
 CREATE SEQUENCE counter;
 
 CREATE TABLE test (
-  id integer DEFAULT nextval('counter'),
+  id integer NOT NULL DEFAULT nextval('counter'),
   name text
 )
 ```
