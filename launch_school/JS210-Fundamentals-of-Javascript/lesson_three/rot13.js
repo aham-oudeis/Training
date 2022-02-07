@@ -1,8 +1,8 @@
 const ROTATION = 13;
-const MID_ASCII_CODE_OF_UPPER_CASE = 'N'.charCodeAt(); //78
-const MID_ASCII_CODE_OF_LOWER_CASE = 'n'.charCodeAt(); //110
+const MID_ASCII_CODE_OF_UPPER_CASE = 'N'.charCodeAt(); // 78
+const MID_ASCII_CODE_OF_LOWER_CASE = 'n'.charCodeAt(); // 110
 
-function rotateChar13(asciiCode, midCode) {
+function rotateAlphabet13(asciiCode, midCode) {
   if (asciiCode < midCode) {
     return String.fromCharCode(asciiCode + ROTATION);
   } else {
@@ -19,20 +19,21 @@ function rot13(str) {
     let asciiCode = char.charCodeAt();
 
     if (/[A-Z]/.test(char)) {
-      rotatedStr += rotateChar13(asciiCode, MID_ASCII_CODE_OF_UPPER_CASE);
+      rotatedStr += rotateAlphabet13(asciiCode, MID_ASCII_CODE_OF_UPPER_CASE);
     } else if (/[a-z]/.test(char)) {
-      rotatedStr += rotateChar13(asciiCode, MID_ASCII_CODE_OF_LOWER_CASE);
+      rotatedStr += rotateAlphabet13(asciiCode, MID_ASCII_CODE_OF_LOWER_CASE);
     } else {
       rotatedStr += char;
-    }
-  }
+    };
+  };
 
   return rotatedStr;
 }
 
-rot13('Teachers open the door, but you must enter by yourself.');
-rot13(rot13('abcdefghijklmnopqrstuvwxyz'));
-rot13(rot13('abcdefghijklmnopqrstuvwxyz'.toUpperCase()));
+console.log(rot13('Teachers open the door, but you must enter by yourself.'));
 
 // logs:
 // Grnpuref bcra gur qbbe, ohg lbh zhfg ragre ol lbhefrys.
+
+console.log(rot13(rot13('abcdefghijklmnopqrstuvwxyz')));
+console.log(rot13(rot13('abcdefghijklmnopqrstuvwxyz'.toUpperCase())));
