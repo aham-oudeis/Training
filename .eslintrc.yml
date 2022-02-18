@@ -182,12 +182,4 @@ rules:
     - words: true
       nonwords: false
   vars-on-top: error
-  "extends": [
-    "prettier",
-  ],
-  "rules": {
-    "prettier/prettier": "error",
-  },
-  "plugins": [
-    "prettier"
-  ]
+

@@ -13,8 +13,10 @@
     "readline-sync": "^1.4.10"
   },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/eslint-plugin": "^7.16.5",
+    "babel-eslint": "^8.2.6",
+    "eslint": "^7.12.1",
     "eslint-cli": "^1.1.1"
   }
 }
