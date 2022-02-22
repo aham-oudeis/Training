@@ -13,8 +13,6 @@ JavaScript has five so-called primitive data types:
 
 Data type values can be represented by literals. A literal is any notation that lets you represent a fixed value in source code. 
 
-I wonder if `+[]` counts as a literal for representing `0`. 
-
 A string is a list of characters in a specific sequence.
 
 An expression is anything that JavaScript can evaluate to a value, even if that value is undefined or null.
@@ -25,7 +23,7 @@ A variable is simply a named area of a program's memory space where the program 
 
 A variable declaration is a statement that asks the JavaScript engine to reserve space for a variable with a particular name. Optionally, it also specifies an initial value for the variable. JavaScript supplies several ways to declare variables, but the preferred way in modern JavaScript uses the let keyword:
 
-```js
+```javascript
 let something; //declaration
 let somethingElse = 'hello'; //declaration with an initializer
 ```
