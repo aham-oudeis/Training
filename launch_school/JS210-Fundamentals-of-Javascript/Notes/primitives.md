@@ -24,7 +24,7 @@ doSomethingStrange(a);
 console.log(a);
 ```
 
-The beauty of immutability of strings is that without having to read any of the code inside the function body of the `doSomethingStrange` function, we can infer that that the code logs `hello` to the console (assuming that the `doSomethingStrange` function invocation does not throw an error). You can't make that inference if the value stored in `a` were not a primitive value.
+The beauty of immutability of strings is that without having to read any of the code inside the function body of the `doSomethingStrange` function (as long as there is no variable reassignment insidee the function), we can infer that that the code logs `hello` to the console (assuming that the `doSomethingStrange` function invocation does not throw an error). You can't make that inference if the value stored in `a` were not a primitive value.
 
 Given this sort of behavior of primitive types, we can say that JS is pass-by-value when it comes to primitive types. 
 

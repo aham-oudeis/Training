@@ -27,6 +27,7 @@ A variable declaration is a statement that asks the JavaScript engine to reserve
 let something; //declaration
 let somethingElse = 'hello'; //declaration with an initializer
 ```
+
 When used in a declaration, the = is just a syntactic token that tells JavaScript that you're going to supply an initial value for the variable. However, in an assignment, the = is called the __assignment operator__.
 
 Constants have an immutable binding to their values. Unlike an ordinary variable, once you declare a constant, you cannot assign it a new value. The constant will continue to have that value until the constant is no longer needed.

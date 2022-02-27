@@ -8,3 +8,4 @@ When comparing strings, the comparison is character-by-character. JavaScript mov
 
 JavaScript evaluates parentheses in the usual algebraic order. That is, it evaluates the expression in the innermost set of parentheses first, then works its way out to the outermost part of the expression. When multiple parenthesized subexpressions appear at the same depth, it evaluates them from left to right. Once it evaluates the parenthesized expressions, it evaluates the final expression value.
 
+Switch statementt compares a single value against multiple values with the strict equality operator

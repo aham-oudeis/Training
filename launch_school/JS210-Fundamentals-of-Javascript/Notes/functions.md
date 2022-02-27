@@ -15,32 +15,47 @@ __Nested Functions__: They are created and destroyed every time the outer functi
 __Function composition__:Using function invocations as an argument to another function. For example: `console.log(String(undefined))`.
 
 
-# Arity
+## Three ways to define a function
 
-```javascript
-function takeTwo(a, b) {
-  console.log(a);
-  console.log(b);
-  console.log(a + b);
+__Function declaration__: line starts with function keyword
+* function declarations are hoisted
+
+```js
+function hello() {
+  console.log('hello');
 }
-
-takeTwo(1, 2);
-
-// logs:
-1
-2
-3
-
-takeTwo(1);
-
-// logs:
-1
-undefined
-NaN
 ```
 
- 1. Calling a function with too few arguments does not raise an error.
- 2. Within a function, an argument that wasn't provided in the call will have the value undefined.
- 3. The `NaN `result is caused by the fact that `b` is undefined; it isn't a direct result of the missing parameter. It is merely JavaScript's standard behavior when a number and undefined are added.
+__Function expression__: line does not start with function keyword.
+* function expressions are not hoisted
 
+```js
+(function hello() {
+  console.log('hello');
+})
 
+const hi = function () {
+  console.log('hi')
+}
+
+function makeGreeter(name) {
+  //the following is a function expression
+  return function greeter() {
+    console.log("Hi, " + name + "!");
+  }
+}
+```
+
+__Arrow functions__: concise syntax
+* we can omit return statement when the function body contains a single expression
+    * in such cases, the expression is written without a block
+* if you use a block, you need to include the return statement
+* when there is only one parameter, the brackets around it can be omitted
+
+```js
+let add = (x, y) => {
+  return x + y;
+}
+
+let add = (a, b) => a + b;
+```
