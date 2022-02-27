@@ -51,6 +51,7 @@ __Arrow functions__: concise syntax
     * in such cases, the expression is written without a block
 * if you use a block, you need to include the return statement
 * when there is only one parameter, the brackets around it can be omitted
+* Should not be used to define methods for objects
 
 ```js
 let add = (x, y) => {
