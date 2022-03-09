@@ -3,5 +3,6 @@
   "spellcheck": true,
   "tabSize": 2,
   "vimMode": true,
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "promptDelete": false
 }
