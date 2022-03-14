@@ -4,9 +4,9 @@
 //take the string and spread it on the railfence
 //since rail fence has three layers, we have to spread it on three lines
 //this can be implemented with an array
-//if the count reaches three, push in reverse direction
-//if the count reaches  zero, push in the forward direction
-//this can be implemented by using the value +1 or -1 depending on the direction
+//if the count reaches three, push in reverse forward
+//if the count reaches  zero, push in the forward forward
+//this can be implemented by using the value +1 or -1 depending on the forward
 //
 //Algorithm
 //initialize an array with three sub arrays: [[], [], []]
@@ -16,63 +16,64 @@
 //by the end of the iteration, the array should be populated with the cipher text
 //join the array, after flattening the array
 //
+function removeSpaces(text) {
+  return text.replace(/\s/g, '');
+}
 
-function encodeRailFenceCipher(text) {
-  text = text.replace(/\s/g, '');
-  let arr = [[], [], []];
+function nestedArrOfSize(num) {
+  let arr = [];
 
+  for (let i = 1; i <= num; i++) {
+    arr.push([]);
+  }
+
+  return arr;
+}
+
+function fillZigZag(text, arr, numOfRails) {
   let count = 0;
-  let direction;
+  const lastIdx = numOfRails - 1;
+  let forward;
 
   [...text].forEach(char => {
     if (count === 0) {
-      direction = true;
+      forward = true;
     }
 
-    if (count === 2) {
-      direction = false;
+    if (count === lastIdx) {
+      forward = false;
     }
 
     arr[count].push(char);
 
-    let adjust = direction ? 1 : -1;
+    let adjust = forward ? 1 : -1;
 
     count += adjust;
   });
+
+  return arr;
+}
+
+function encodeRailFenceCipher(text, numOfRails = 3) {
+  text = removeSpaces(text);
+  let arr = nestedArrOfSize(numOfRails);
+
+  arr = fillZigZag(text, arr, numOfRails);
 
   return arr.flat().join('');
 }
 
-console.log(encodeRailFenceCipher("WE ARE DISCOVERED FLEE AT ONCE"));
+function lineSizesRailFence(text, numOfRails = 3) {
+  text = removeSpaces(text);
+  let arr = nestedArrOfSize(numOfRails)
 
-function lineSizesRailFence(text) {
-  text = text.replace(/\s/g, '');
-  let arr = [[], [], []];
-
-  let count = 0;
-  let direction;
-
-  [...text].forEach(char => {
-    if (count === 0) {
-      direction = true;
-    }
-
-    if (count === 2) {
-      direction = false;
-    }
-
-    arr[count].push(char);
-
-    let adjust = direction ? 1 : -1;
-
-    count += adjust;
-  });
+  arr = fillZigZag(text, arr, numOfRails);
 
   return arr.map(subArr => subArr.length);
 }
 
-function cipherLines(text) {
-  let linesLength = lineSizesRailFence(text);
+function cipherLines(text, numOfRails) {
+  let linesLength = lineSizesRailFence(text, numOfRails);
   let startIdx = 0;
 
   return linesLength.map(length => {
@@ -82,31 +83,40 @@ function cipherLines(text) {
   });
 }
 
-function decodeRailFenceCipher(text) {
-  let lineStrings = cipherLines(text).map(str => [...str]);
+function extractZigZag(lines, numOfRails) {
+  const lastIdx = numOfRails - 1;
+  const linesAreNonEmpty = () => lines.some(arr => arr.some(String));
 
   let decodedChars = [];
   let index = 0;
-  let direction;
+  let forward;
 
-  while (lineStrings.some(arr => arr.some(String))) {
-    let char = lineStrings[index].shift();
+  while (linesAreNonEmpty()) {
+    let char = lines[index].shift();
 
     decodedChars.push(char);
 
     if (index === 0) {
-      direction = true;
+      forward = true;
     }
 
-    if (index === 2) {
-      direction = false;
+    if (index === lastIdx) {
+      forward = false;
     }
 
-    let adjust = direction ? 1 : -1;
+    let adjust = forward ? 1 : -1;
     index += adjust;
   }
+
+  return decodedChars;
+}
+
+function decodeRailFenceCipher(text, numOfRails = 3) {
+  let arrOfLines = cipherLines(text, numOfRails).map(str => [...str]);
+  let decodedChars = extractZigZag(arrOfLines, numOfRails);
 
   return decodedChars.join('');
 }
 
-console.log(decodeRailFenceCipher("WECRLTEERDSOEEFEAOCAIVDEN"));
+console.log(encodeRailFenceCipher("WE ARE DISCOVERED FLEE AT ONCE", 4));
+console.log(decodeRailFenceCipher("WIREEEDSEEEACAECVDLTNROFO", 4));
