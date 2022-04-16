@@ -1,0 +1,21 @@
+## Study Guide
+-   Objects
+    -   [Organizing code into appropriate objects](#Object Orientation)
+    -   [Object factories](Function as Object Factories)
+-   Determining/setting function execution context (`this`)
+    -   Implicit function execution context
+    -   Explicit function execution context
+    -   Dealing with context loss
+    -   Lexical scope
+-   Scope and Closures
+    -   Higher-order functions
+    -   Creating and using private data
+    -   Garbage collection
+    -   IIFEs
+    -   Partial Function Application
+-   Object creation patterns
+    -   Constructor functions
+    -   Prototype objects
+    -   Behavior delegation
+    -   OLOO and Pseudo-Classical patterns
+    -   `class` syntax

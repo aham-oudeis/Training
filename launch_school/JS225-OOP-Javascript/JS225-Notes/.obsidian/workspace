@@ -1,29 +1,32 @@
 {
   "main": {
-    "id": "c5af1cc30f551a92",
+    "id": "7d1c59c05a13a75d",
     "type": "split",
     "children": [
       {
-        "id": "8d6fc0dba24d07a3",
+        "id": "b388a53ed5dd2813",
         "type": "leaf",
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "Function Execution Context.md",
+            "mode": "source"
+          }
         }
       }
     ],
     "direction": "vertical"
   },
   "left": {
-    "id": "1e7b7fd077a105f3",
+    "id": "c53e8d3bf2984333",
     "type": "split",
     "children": [
       {
-        "id": "f2b53604c391f896",
+        "id": "802823884ddaeaca",
         "type": "tabs",
         "children": [
           {
-            "id": "1bce55e0217ff4a7",
+            "id": "56b7e3b4d2731bd3",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -31,7 +34,7 @@
             }
           },
           {
-            "id": "89324d1aa4edbc87",
+            "id": "b5d7d6cd63435160",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -52,19 +55,20 @@
     "width": 300
   },
   "right": {
-    "id": "89387f35b5e24e8b",
+    "id": "f1c3a9a46821f621",
     "type": "split",
     "children": [
       {
-        "id": "5d4520a4c5bf2bbb",
+        "id": "c5cecca59237d6f5",
         "type": "tabs",
         "children": [
           {
-            "id": "0e429107124db2c6",
+            "id": "7382cd70bfe9252a",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Function Execution Context.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -82,12 +86,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "8d6fc0dba24d07a3",
+  "active": "b388a53ed5dd2813",
   "lastOpenFiles": [
-    "meta characters.md",
-    "white space.md",
-    "repeat modifiers.md",
-    "alternative execution.md",
-    "literal characters.md"
+    "Function Execution Context.md",
+    "Function as Object Factories.md",
+    "Execution context.md",
+    "concise property and method syntax.md",
+    "Bound Function.md",
+    "OLOO.md",
+    "Prototypal Behavior Sharing.md",
+    "README.md",
+    "Scopes and Closures.md",
+    "Garbage Collection.md"
   ]
 }
