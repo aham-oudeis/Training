@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Function Execution Context.md",
+            "file": "Inheritance chain.md",
             "mode": "source"
           }
         }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Function Execution Context.md",
+                "file": "Inheritance chain.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,15 +88,15 @@
   },
   "active": "b388a53ed5dd2813",
   "lastOpenFiles": [
-    "Function Execution Context.md",
+    "Inheritance chain.md",
+    "Prototypal Behavior Sharing.md",
+    "Object Orientation.md",
+    "Object Creation.md",
     "Function as Object Factories.md",
+    "OLOO.md",
+    "Function Execution Context.md",
     "Execution context.md",
     "concise property and method syntax.md",
-    "Bound Function.md",
-    "OLOO.md",
-    "Prototypal Behavior Sharing.md",
-    "README.md",
-    "Scopes and Closures.md",
-    "Garbage Collection.md"
+    "Bound Function.md"
   ]
 }

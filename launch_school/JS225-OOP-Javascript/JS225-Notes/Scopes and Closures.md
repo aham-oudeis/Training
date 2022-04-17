@@ -65,7 +65,8 @@ The downside of this approach is that anytime we want to add a method to the obj
 
 Hence, if adding methods incrementally is not a concern, then the use of closures is a pretty nice way of making data private.
 
-## [[Garbage Collection]]
+## [Garbage Collection](/Garbage Collection)
+[[Garbage Collection]]
 
 ## IIFE
 - Functions that we define and invoke immediately

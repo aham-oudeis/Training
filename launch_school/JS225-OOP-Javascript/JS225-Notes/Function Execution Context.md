@@ -1,10 +1,10 @@
 Summary: In function invocations, the value of`this` resolves to the global object and in method invocations, the value of `this` resolves to the calling object. One exception to this is bound function for which the value of `this` is already set to some object. In strict mode, the value of `this` resolves to `undefined` for function invocations. 
 
-Aside: I think it is confusing to refer to the value of `this` as the function execution context. See [[Execution context]] for more details, but LS uses this phrase 'fucntion execution context' to refer to the value of `this`. Hence, I'll keep the notes following LS convention.
+Aside: I think it is confusing to refer to the value of `this` as the function execution context. See [Execution Context](/Execution Context) for more details, but LS uses this phrase 'fucntion execution context' to refer to the value of `this`. Hence, I'll keep the notes following LS convention.
 
 > Every time a JavaScript function is invoked, it has access to an object called the **execution context** of that function. This execution context is accessible through the keyword `this`. A JavaScript function can be invoked in a variety of ways. Which object `this` refers to depends on how the function was invoked.
 
-(source)[https://launchschool.com/lessons/c9200ad2/assignments/4cc36fd6]
+[source](https://launchschool.com/lessons/c9200ad2/assignments/4cc36fd6)
 
 Then there are two types of execution contexts:
 1. Implicit: This is an execution context that JS 'implicitly' sets

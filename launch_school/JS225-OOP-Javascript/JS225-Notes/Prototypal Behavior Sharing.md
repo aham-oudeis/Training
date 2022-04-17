@@ -5,7 +5,7 @@ If we want to implement a system that allows for some kind of property sharing o
 1. A container or repository for shared behaviors
 2. A mechanism for looking up the next repository
 
-It's like just any other sharing practice. If you're familiar with either car share or bike share, you know that to access a car or a bike, you need to know the location where these bikes or cars are stored. 
+It's like just any other sharing practice. If you're familiar with either car share or bike share, you know that to access a car or a bike, you need to know the location where these bikes or cars are stored. If there was no systematic way of locating the shared resource, sharing would not be feasible. It is no different in programming.
 
 Say, there are two objects A and B inside a program, and all the common behaviors between A and B are stored in some repository C. 
 
@@ -17,7 +17,7 @@ Now we have the basic ingredients for property sharing. A and B can share all th
 How does JS makes these two ingredients available? 
 1. Unlike other languages that use classes as a repository, in JS objects themselves are the repository for shared behaviors.
    > When it comes to inheritance, JavaScript only has one construct: objects. Each object has a private property which holds a link to another object called its **prototype**. That prototype object has a prototype of its own, and so on until an object is reached with `null` as its prototype. By definition, `null` has no prototype, and acts as the final link in this **prototype chain**.
-3. JS provides a hidden `[[Prototype]]` on each object that points to the repository of shared behaviors. 
+3. JS provides a hidden `[[Prototype]]` property on each object that points to the repository of shared behaviors available for that object.
 
 To access the object that the `[[Prototype]]` property points to, we can use a method `Object.getPrototypeOf(obj)`. Although this `[[Prototype]]` is not directly accesssible, we can rely on a deprecated feature: `__proto__` to access the repository. Let's see how that works:
 
