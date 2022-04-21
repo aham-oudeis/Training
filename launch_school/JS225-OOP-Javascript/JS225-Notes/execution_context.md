@@ -39,4 +39,4 @@ Given that there used to be alerts when LS's usage of a term deviates from what 
 
 If I'm getting things wrong here, TAs can correct me. Otherwise, I just wanted to alert the students about the different usage of the term 'execution context' in LS lessons and materials outside of LS.
 
-[[Inheritance chain]]
+[[inheritance_chain]]

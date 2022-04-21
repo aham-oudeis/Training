@@ -132,5 +132,5 @@ console.log(Object.getPrototypeOf(bikeA) === Bikes.prototype)
 
 That's what the `new` keyword does under the hood.
 
-[[Pseudo Classical Pattern]]
+[[pseudo_classical_pattern]]
 [[OLOO]]

@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Inheritance chain.md",
+            "file": "primitives_and_objects.md",
             "mode": "source"
           }
         }
@@ -68,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Inheritance chain.md",
+                "file": "primitives_and_objects.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -88,15 +88,15 @@
   },
   "active": "b388a53ed5dd2813",
   "lastOpenFiles": [
-    "Inheritance chain.md",
-    "Prototypal Behavior Sharing.md",
-    "Object Orientation.md",
-    "Object Creation.md",
-    "Function as Object Factories.md",
-    "OLOO.md",
-    "Function Execution Context.md",
-    "Execution context.md",
-    "concise property and method syntax.md",
-    "Bound Function.md"
+    "primitives_and_objects.md",
+    "object_creation.md",
+    "functions_and_methods.md",
+    "setting_`this`_explicitly.md",
+    "scopes_and_closures.md",
+    "pseudo_classical_pattern.md",
+    "prototypal_behavior_sharing.md",
+    "object_orientation.md",
+    "losing_track_of_`this`.md",
+    "inheritance_chain.md"
   ]
 }

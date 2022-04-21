@@ -58,4 +58,4 @@ test.call(obj, "Karim");
 
 test.apply(obj, ['Karim']); //you will get an error if you omit the array
 ```
-[[Bound Function]]
+[[bound_Function]]

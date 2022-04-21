@@ -4,7 +4,7 @@
 
 The iteration methods available on array objects, such as `forEach`, `map`, `filter`, `reduuce` are all higher order functions because they take functions are their arguments.
 
-The `bind` method available on function objects is also a higher order function, because it returns a function. See [[Bound Function]]
+The `bind` method available on function objects is also a higher order function, because it returns a function. See [[bound_Function]]
 
 ## Private Data
 -functions create a new execution context
@@ -66,7 +66,7 @@ The downside of this approach is that anytime we want to add a method to the obj
 Hence, if adding methods incrementally is not a concern, then the use of closures is a pretty nice way of making data private.
 
 ## [Garbage Collection](/Garbage Collection)
-[[Garbage Collection]]
+[[garbage_collection]]
 
 ## IIFE
 - Functions that we define and invoke immediately

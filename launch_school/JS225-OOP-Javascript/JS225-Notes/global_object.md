@@ -21,4 +21,4 @@ But this kind of variable assignment without declaration raises an error in stri
 
 Aside: In non-browser environments, such as Node, the global object is not window, but global. 
 
-[[Function Execution Context]]
+[[function_execution_context]]

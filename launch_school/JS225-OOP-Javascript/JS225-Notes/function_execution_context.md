@@ -66,4 +66,4 @@ outsideTest(); // 'value of this is: [object Window]'
 
 One way to understand this is to think of `this` as a value that JS passes to the function invocation just like JS passes an `arguments` object. Just as the value of that `arguments` object is set at the time of function invocation, the value of `this` is also set at the time of function invocation. Contrast lexical scope, which is set based on where the function is defined. 
 
-[[Setting `this` explicitly]]
+[[setting_`this`_explicitly]]
