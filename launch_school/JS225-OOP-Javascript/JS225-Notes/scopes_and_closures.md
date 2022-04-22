@@ -11,7 +11,7 @@ The `bind` method available on function objects is also a higher order function,
 -and this new execution context sits on top of the previous execution context
 -when we return a function from this execution context, the data inside the closure of the function remains inaccessible to other part of the codebase and only accessible to the returned function
 
-```js
+```javascript
 function makeCounter() {
 	let count = 0;
 	
@@ -34,7 +34,7 @@ counter(); // increments the private count variable and logs the value
 ```
 Capitalizing on closures, we can return objects with methods that have access to some private data. We can access the private data through the provided interface. For example:
 
-```js
+```javascript
 function clubMembers() {
 	let members = [];
 	
@@ -74,7 +74,7 @@ Hence, if adding methods incrementally is not a concern, then the use of closure
 - Useful for creating private data
 - Sometimes, while working with a large codebase, it is safer to work with a local scope than creating new variables in the main scope.
 
-```js
+```javascript
 (function () {
 	console.log('hello');
 })();

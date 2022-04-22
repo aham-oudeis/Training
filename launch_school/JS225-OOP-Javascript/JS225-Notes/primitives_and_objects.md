@@ -9,7 +9,7 @@
 
 The memory that the values stored in the stack use are allocated and released differently than the values stored in the heap. While the values stored in the heap is garbage collected, the values in the stack are released in a different manner.
 
-```js
+```javascript
 function test() {
 	let a = 1;
 	let b = 'hi';

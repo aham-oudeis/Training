@@ -3,7 +3,7 @@
 - If a function is invoked with an explicit receiver, then it is a method invocation
 - Otherwise, it's a function invocation
 
-```js
+```javascript
 let person = {
 	name: "Herman",
 	speak: function() {

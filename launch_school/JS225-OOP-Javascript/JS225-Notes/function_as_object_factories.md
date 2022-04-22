@@ -50,7 +50,7 @@ The downside of this approach is that it is rather resource-intensive, because a
 
 Second downside is that the objects do not carry information about which function created the object. However, this issue could easily be resolved by changing the constructor property of the object within the factory function:
 
-```js
+```javascript
 function makeCar(rate) {
   let car = {
 		speed: 0,

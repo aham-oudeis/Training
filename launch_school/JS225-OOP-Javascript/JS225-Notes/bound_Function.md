@@ -2,7 +2,7 @@
 
 Here is how the bind method might be defined:
 
-```js
+```javascript
 Function.prototype.bind = function (...args) {
 	// extract the first argument that is to be used as the value of this
 	let thisArg = args.shift();

@@ -24,7 +24,7 @@ JS implements a mark-and-sweep algorithm to find the values that are no longer i
 ## GC and Closures
 Since closures store references to all the variables it can access, as long as the closure exists, those variables remain in existence, which means that the values that are accessible to the closure remain in memory. Hence, those values are not eligible for GC. If the closure is no longer useful, the it is better to reassign the variable to null so that all the values accessible to the closure can be garbage collected. 
 
-```js
+```javascript
 function makeArrayLogger(arr) {
 	return function() {
 		console.log(arr);

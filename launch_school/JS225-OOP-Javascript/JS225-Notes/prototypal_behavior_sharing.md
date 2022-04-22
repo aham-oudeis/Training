@@ -21,7 +21,7 @@ How does JS makes these two ingredients available?
 
 To access the object that the `[[Prototype]]` property points to, we can use a method `Object.getPrototypeOf(obj)`. Although this `[[Prototype]]` is not directly accesssible, we can rely on a deprecated feature: `__proto__` to access the repository. Let's see how that works:
 
-```js
+```javascript
 let obj = {};
 let arr = [];
 
@@ -36,7 +36,7 @@ console.log(Object.getPrototypeOf(arr) === arr.__proto__); // true
 
 Let's see how we can connect a repository with the objects using these components so far:
 
-```js
+```javascript
 const Repository = {
   speedUp() {
     console.log("I am speeding!")
@@ -74,7 +74,7 @@ We need to go through a sequence of steps to forge a connection bewteen the obje
 
 This sequence of steps can be easily put into a method that we can invoke to get the newly minted object.
 
-```js
+```javascript
 const mintBike = function(repository) {
 	let obj = {};
 	Object.setPrototypeOf(obj, Repository);
@@ -102,7 +102,7 @@ When the functions play this double role, they are called constructor functions 
 
 Aside: all objects have their coresponding constructor functions. Even strings and numbers have their corresponding constructor functions. `obj.constructor` gives you the function that constructed the obj.
 
-```js
+```javascript
 function Bikes() {
 	let obj = {};
 	
@@ -122,7 +122,7 @@ This is not the end of it. JS allows us to simplify this whole process even furt
 
 That is, the above code can be replaced as:
 
-```js
+```javascript
 function Bikes() {
 }
 

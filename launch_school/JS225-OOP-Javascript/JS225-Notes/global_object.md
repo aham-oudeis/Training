@@ -1,6 +1,6 @@
 Javscript creates a **global execution context** when it starts running along with a **global object** and this global object is the value of `this` within the global execution context. The value of `this` in the global execution context is also the global object in the strict mode.
 
-```js
+```javascript
 'use strict';
 
 console.log(this); // Window {...}
@@ -10,7 +10,7 @@ The global values such as `Infinity`, `NaN` and other global functions are prope
 
 In the global execution context, variables declares with `var` keyword or without any declarations and function declarations are assigned as the properties on the global object.
 
-```js
+```javascript
 a = 'hi';
 
 this.a; // 'hi'

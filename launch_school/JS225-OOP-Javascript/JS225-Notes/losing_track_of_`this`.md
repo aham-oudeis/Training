@@ -4,7 +4,7 @@ Given the peculiarity of how the value of `this` is supplied by JS at function i
 ### Case 1:
 When a method is taken out of the object and assigned to a variable, the value of `this` is no longer the object where the function is located.
 
-```js
+```javascript
 let obj = {
 	a: 'hi',
 	greet() {
@@ -26,7 +26,7 @@ One way to deal with this situation is to hard bind the function with the object
 ### Case 2:
 Function inside of a method when invoked as a function (without a caller) has the value of `this` set to the global object.
 
-```js
+```javascript
 let person = {
 	name: 'Mosh',
 	msg1: "How are you?",
@@ -48,7 +48,7 @@ The function invocation `message()` inside of the `greet` method invocation retu
 #### Solution 1
 One way to handle this problem is to capture the value of `this` in the outer scope and use that value inside the function:
 
-```js
+```javascript
 let person = {
 	name: 'Mosh',
 	msg1: "How are you?",
@@ -69,7 +69,7 @@ person.greet(); // Mosh Are you happy?
 #### Solution 2
 Another way to address this issue is to use arrow function, since arrow functions inherit the value of `this` from their lexical scope.
 
-```js
+```javascript
 let person = {
 	name: 'Mosh',
 	msg1: "How are you?",
@@ -89,7 +89,7 @@ person.greet(); // Mosh Are you happy?
 #### Solution 3
 Or, pass the value of `this` while calling the function or bind the function with the value of `this`;
 
-```js
+```javascript
 let person = {
 	name: 'Mosh',
 	msg1: "How are you?",
@@ -109,7 +109,8 @@ person.greet(); // Mosh Are you happy?
 #### Solution 4
 
 Using Bind
-```js
+
+```javascript
 let person = {
 	name: 'Mosh',
 	msg1: "How are you?",
@@ -129,7 +130,7 @@ person.greet(); // Mosh Are you happy?
 ### Case 3
 When the callback functions have a reference to `this` that gets invoked as a functions from inside another function.
 
-```js
+```javascript
 function repeatThreeTimes(func) {
 	func(); //if func has a reference to `this`, then this will be a problem
 	func();

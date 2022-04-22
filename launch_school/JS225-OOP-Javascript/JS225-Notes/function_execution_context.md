@@ -1,6 +1,6 @@
 Summary: In function invocations, the value of`this` resolves to the global object and in method invocations, the value of `this` resolves to the calling object. 
 
-Bound functions are slightly tricky. Although the value of `this` is assigned dynamically, the inner function is already set to call another function with a different value of `this`. 
+Bound functions are slightly tricky. Although the value of `this` is assigned dynamically, the inner function is already set to call another function with a different value of `this`.
 
 In strict mode, the value of `this` resolves to `undefined` for function invocations. 
 
@@ -18,7 +18,7 @@ Again: It is much cleaner to think of 'implicit' and 'explicit' value of `this` 
 
 Basically, when a function is invoked without a receiver/caller, then the implicit binding of the function is the window object. 
 
-```js
+```javascript
 function test() {
 	return 'value of this is:' + this;
 }
@@ -30,7 +30,7 @@ When a function is invoked in this way, JS sets the value of `this` to the globa
 
 However, when a function is invoked on some object, i.e. as a method, the value of `this` is set to the receiver or calling object.
 
-```js
+```javascript
 let obj = {
 	test() {
 		return 'value of this is:' + this; 	
@@ -42,7 +42,7 @@ obj.test(); // 'value of this is: [object object]'
 
 A bit weird example, but works the same:
 
-```js
+```javascript
 let listOfFuncs = [
 	function() {return this[1];},
 	'greetings!'
@@ -53,7 +53,7 @@ listOfFuncs[0](); //since the value of this is set to the current array, this[1]
 
 But, when the function is not invoked with an explicit caller, the value of `this` is changed to the global object.
 
-```js
+```javascript
 let obj = {
 	test() {
 		return 'value of this is:' + this; 	

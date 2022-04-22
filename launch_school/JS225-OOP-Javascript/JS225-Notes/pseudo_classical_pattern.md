@@ -1,7 +1,7 @@
 # Prototype pattern
 Pseudo classical pattern is simply a way of creating objects while mimicking some of the features of the classical pattern of creating objects using classes. 
 
-```js
+```javascript
 function Bike(size) {
 	//state is initialized inside the constructor function
 	this.size = size;
@@ -16,7 +16,7 @@ let bikeA = new Bike('medium');
 
 Or, we could rely on JS's syntactic sugar and go full classical:
 
-```js
+```javascript
 class Bike {
 	constructor(size) {
 		this.size = size;

@@ -1,6 +1,6 @@
 Javscript allows us to set the value of `this` explicitly when calling a method. 
 
-```js
+```javascript
 let obj = {
 	a: 'greetings, ',
 	b: 'my friend!'
@@ -20,7 +20,7 @@ test.call(obj); // greetings, my friend!
 
 Likewise, we can use `apply` to explicitly set the value of `this`.
 
-```js
+```javascript
 let obj = {
 	a: 'greetings, ',
 	b: 'my friend!'
@@ -40,7 +40,7 @@ test.apply(obj); // greetings, my friend!
 
 The main difference between `call` and `apply` is that when arguments are passed in, `apply` takes an array of arguments, whereas `call` takes the arguments one after the other. 
 
-```js
+```javascript
 let obj = {
 	a: 'greetings, ',
 	b: 'my friend '
