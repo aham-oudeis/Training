@@ -1,4 +1,8 @@
-Summary: In function invocations, the value of`this` resolves to the global object and in method invocations, the value of `this` resolves to the calling object. One exception to this is bound function for which the value of `this` is already set to some object. In strict mode, the value of `this` resolves to `undefined` for function invocations. 
+Summary: In function invocations, the value of`this` resolves to the global object and in method invocations, the value of `this` resolves to the calling object. 
+
+Bound functions are slightly tricky. Although the value of `this` is assigned dynamically, the inner function is already set to call another function with a different value of `this`. 
+
+In strict mode, the value of `this` resolves to `undefined` for function invocations. 
 
 Aside: I think it is confusing to refer to the value of `this` as the function execution context. See [Execution Context](/Execution Context) for more details, but LS uses this phrase 'fucntion execution context' to refer to the value of `this`. Hence, I'll keep the notes following LS convention.
 

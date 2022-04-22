@@ -1,10 +1,13 @@
+## Object Factories
+
 - An object is a tool for bundling data with behaviors
 - When we have to work with multitude of objects with same set of behaviors, it is tedious to create a new object every time we need one.
 - Creating a new object everytime in this manner would violate the DRY principle
 - Functions can be used to create objects that have the same set of behaviors
 
 For example, consider this following code:
-```js
+
+```javascript
 let sedan = {
   speed: 0,
   rate: 8,
@@ -24,7 +27,7 @@ let coupe = {
 
 Here, two objects with the same behavior is created with slightly different initial state. We can easily move this into a function:
 
-```js
+```javascript
 function makeCar(rate) {
 	return {
 		speed: 0,
