@@ -8,7 +8,7 @@
     -   [Explicit function execution context](setting_`this`_explicitly.md)
     -   [Dealing with context loss](losing_track_of_`this`.md)
     -   Lexical scope: arrow functions acquire the value of `this` from lexical scope
-  
+
 - [Scope and Closures](scopes_and_closures.md)
     -   [Higher-order functions](scopes_and_closures.md#higher-order-functions)
     -   [Creating and using private data](scopes_and_closures.md#iife)

@@ -32,7 +32,7 @@ console.log(Object.getPrototypeOf(obj) === obj.__proto__); // true
 console.log(Object.getPrototypeOf(arr) === arr.__proto__); // true
 ```
  
- The repository that `[[Prototype]]` points to is called the **prototype of an object**.  At the end of the chain,  `[[Prototype]]`  points to `null`.  That marks the end of the prototypal chain.
+ The repository that `[[Prototype]]` points to is called the **prototype of an object** or **object prototype**.  At the end of the chain,  `[[Prototype]]`  points to `null`.  That marks the end of the prototype chain.
 
 Let's see how we can connect a repository with the objects using these components so far:
 
@@ -49,13 +49,17 @@ const Repository = {
 let bikeA = {}; // creates an empty object
 let bikeB = {};
 
-// prototype of both bikeA and bikeB is is a repository of methods
+// prototype of both bikeA and bikeB is a repository of methods
 // available to all objects, including the repository
-console.log(Object.getPrototypeOf(bikeA));
+// when we use object literal notation, the prototype of the object is set
+// the object referenced by the `prototype` property of the `Object` function
+// hence the following code logs true
 console.log(Object.getPrototypeOf(bikeA) === Object.getPrototypeOf(Repository));
 bikeA.speedUp; // undefined
 
 //let's change the prototype of both bikeA and bikeB
+//Javascript allows us to change the prototype of an object to another object
+//warning: setPrototypeOf is a rather slow function
 Object.setPrototypeOf(bikeA, Repository);
 Object.setPrototypeOf(bikeB, Repository);
 
@@ -63,14 +67,16 @@ Object.setPrototypeOf(bikeB, Repository);
 console.log(Object.getPrototypeOf(bikeA)); 
 console.log(Object.getPrototypeOf(bikeA));
 
+//now when JS does not find the speedUp method in the object, it looks in 
+//its prototype, i.e., Repository, and finds it there.
 bikeA.speedUp; // returns a function 
 bikeA.speedUp();
 bikeA.SlowDown();
 ```
 
-We need to go through a sequence of steps to forge a connection bewteen the object and its prototype:
+Notice, we need to go through a sequence of steps to forge a connection between the object and its prototype:
 1. create an object
-2. Set its `[[Prototype]]` property to the repository
+2. Set its `[[Prototype]]` property to point to the repository
 
 This sequence of steps can be easily put into a method that we can invoke to get the newly minted object.
 
@@ -98,9 +104,9 @@ Back to the `prototype` property. This `prototype` property is something a funct
 
 That is, what used to be an external repository can be moved inside the function object and the same function can do double-duty: create an object and set up the prototypal chain. That is , the function can play the role of creating an object and and the role of storing the repository of the shared behaviors.
 
-When the functions play this double role, they are called constructor functions or **constructors**. To distinguish between ordinary functions that are not used in the role of constructors, the naming convention is to write the function name in Pascal Case, i.e, capitalizing all the first letters.
+When the functions play this double role, they are called constructor functions or **constructors**. (However, we can use the constructor functions without relying on the function's prototype property.) To distinguish between ordinary functions that are not used in the role of constructors, the naming convention is to write the function name in Pascal Case, i.e, capitalizing all the first letters.
 
-Aside: all objects have their coresponding constructor functions. Even strings and numbers have their corresponding constructor functions. `obj.constructor` gives you the function that constructed the obj.
+Aside: all objects have their corresponding constructor functions. Even strings and numbers have their corresponding constructor functions. `obj.constructor` gives you the function that constructed the obj. This `constructor` property is stored in the object referenced by the `prototype` property of the constructor function. Hence, when we try to find the `constructor` property on an object, it returns the value stored in the `contructor` property of the object referenced by the `prototype` property of the function that created the object.
 
 ```javascript
 function Bikes() {
@@ -130,7 +136,7 @@ let bikeA = new Bikes();
 console.log(Object.getPrototypeOf(bikeA) === Bikes.prototype)
 ```
 
-That's what the `new` keyword does under the hood.
+That's what the `new` keyword does under the hood. See [how new keyword works](object_creation.md#constructor-pattern)
 
 [[pseudo_classical_pattern]]
 [[OLOO]]
