@@ -46,7 +46,15 @@ function Doctor(firstName, lastName, age, gender, specialization) {
 //to the current constructor.
 //This introduces a further problem that the constructor property becomes enumerable
 //To correct this again, use defineProperty to make the property non-enumerable
-Object.setPrototypeOf(Doctor.prototype, Person.prototype);
+// Object.setPrototypeOf(Doctor.prototype, Person.prototype);
+
+Doctor.prototype = Object.create(Person.prototype);
+Object.defineProperties(Doctor.prototype, {
+  constructor: {
+    value: Doctor,
+    enumerable: false
+  }
+});
 
 Doctor.prototype.diagnose = function () {
   console.log('Diagnosing');
@@ -61,7 +69,14 @@ function Professor(firstName, lastName, age, gender, subject) {
   }
 }
 
-Object.setPrototypeOf(Professor.prototype, Person.prototype);
+//Object.setPrototypeOf(Professor.prototype, Person.prototype);
+Professor.prototype = Object.create(Person.prototype);
+Object.defineProperties(Professor.prototype, {
+  constructor: {
+    value: Professor,
+    enumerable: false,
+  }
+});
 
 Professor.prototype.teach = function () {
   console.log('teaching');
@@ -76,7 +91,14 @@ function Student(firstName, lastName, age, gender, degree) {
   }
 }
 
-Object.setPrototypeOf(Student.prototype, Person.prototype);
+//Object.setPrototypeOf(Student.prototype, Person.prototype);
+Student.prototype = Object.create(Person.prototype);
+Object.defineProperties(Student.prototype, {
+  constructor: {
+    value: Student,
+    enumerable: false,
+  }
+});
 
 Student.prototype.study = function () {
   console.log('studying');
@@ -91,7 +113,14 @@ function GraduateStudent(firstName, lastName, age, gender, degree, graduateDegre
   }
 }
 
-Object.setPrototypeOf(GraduateStudent.prototype, Student.prototype);
+//Object.setPrototypeOf(GraduateStudent.prototype, Student.prototype);
+GraduateStudent.prototype = Object.create(Student.prototype);
+Object.defineProperties(GraduateStudent.prototype, {
+  constructor: {
+    value: Student.prototpye,
+    enumerable: false,
+  }
+});
 
 GraduateStudent.prototype.research = function () {
   console.log('Researching a topic for dissertation');
