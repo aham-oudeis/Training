@@ -4,8 +4,8 @@
 //take the string and spread it on the railfence
 //since rail fence has three layers, we have to spread it on three lines
 //this can be implemented with an array
-//if the count reaches three, push in reverse forward
-//if the count reaches  zero, push in the forward forward
+//if the count reaches three, push in reverse direction
+//if the count reaches  zero, push in the forward direction
 //this can be implemented by using the value +1 or -1 depending on the forward
 //
 //Algorithm
