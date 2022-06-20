@@ -18,7 +18,7 @@ In the tree, HTML is the root node that has two children: HEAD and BODY.
 
 BODY in turn has two children nodes: P and H1. And H1 has one child node: EM.
 
-Permissiveness: browsers always do their best to supply the missing elements.
+__Permissiveness__: browsers always do their best to supply the missing elements. That is, they don't throw errors when elements are missing as would happen in other scripts.
 
 While the above picture represents the tree structure of the elements, the actual DOM also includes various whitespaces as the text element. So, the actual picture would look something like this:
 
@@ -54,7 +54,7 @@ It's preferable for the sake of clarity to use the constant names as opposed to 
 
 Text nodes have values though and it is simply the textual content  of the node.
 
-`textContent` : represents the textual content of all the nodes inside the Element. Basically, all the nodeValue of all the element's child nodes are concatanated together.
+`textContent` : represents the textual content of __all the nodes inside the Element__. Basically, all the nodeValue of all the element's child nodes are concatanated together.
 
 ### Key Points 
 - All DOM objects are nodes
@@ -87,7 +87,6 @@ Text nodes have values though and it is simply the textual content  of the node.
 				- SVGRectElement
 
 Almost every HTML tag, excepting `HTMLTableDataCellElement` and `HTMLTableHeaderCellElement`, has its own Element subtype
-
 
 ### Determining Node's type
 
@@ -169,7 +168,7 @@ How do we add the second paragraph element?
 </body>
 ...
 ```
-Walking the whole document is cumbersome. 
+Walking the whole DOM is cumbersome. 
 
 The nifty solution is to use the `getElementsByTagName` and `getElementsByClassName` methods that return a live collection: a HTML collection or NodeList
 
