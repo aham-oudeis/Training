@@ -40,7 +40,7 @@ Note: __Properties of the event depend on the event type__
 ### Capturing and Bubbling
 Adding event listeners to every element of interest is cumbersome in larger applications. 
 
-1. You can't add an events listener to an element until the DOM is ready, which means that you must wait until the `DOMContentLoaded` event fires. 
+1. You can't add events listener to an element until the DOM is ready, which means that you must wait until the `DOMContentLoaded` event fires. 
 2. You must add event handlers manually when you add new elements to the page after `DOMContentLoaded` fires.
 3. Adding handlers to many elements can be slow, and can lead to complicated, difficult to maintain code. For instance, a page that is like a large spreadsheet with hundreds and thousands of cells. It would be awfully difficult to take into account all the clicks and keyboard events.
 
