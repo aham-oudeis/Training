@@ -4,13 +4,15 @@ var inventory;
   inventory = {
     lastId: 0,
     collection: [],
+    template: '',
     setDate: function() {
       var date = new Date();
-      $("#order_date").text(date.toUTCString());
+      document.getElementById("order_date").textContent = date.toUTCString();
     },
     cacheTemplate: function() {
-      var $iTmpl = $("#inventory_item").remove();
-      this.template = $iTmpl.html();
+      var iTmpl = document.getElementById('inventory_item');
+      this.template = iTmpl.textContent;
+      iTmpl.remove();
     },
     add: function() {
       this.lastId++;
@@ -41,32 +43,53 @@ var inventory;
 
       return found_item;
     },
-    update: function($item) {
-      var id = this.findID($item),
+    update: function(item) {
+      var id = this.findID(item),
           item = this.get(id);
 
-      item.name = $item.find("[name^=item_name]").val();
-      item.stock_number = $item.find("[name^=item_stock_number]").val();
-      item.quantity = $item.find("[name^=item_quantity]").val();
+      let elementsWithName = Array.from(item.querySelectorAll('[name]'));
+
+      for (let element of elementsWithName) {
+        let name = element.getAttribute('name');
+
+        if (name.startsWith('item_name')) item.name = element.value;
+        if (name.startsWith('item_stock_number')) item.stock_number = element.value;
+        if (name.startsWith('item_quantity')) item.quantity = element.value;
+      }
     },
     newItem: function(e) {
       e.preventDefault();
-      var item = this.add(),
-          $item = $(this.template.replace(/ID/g, item.id));
+      var item = this.add();
+      let compileTemplate = Handlebars.compile(this.template);
+      let itemHtml = compileTemplate(item);
+      
+      let inventoryTable = document.getElementById('inventory');
+      let newTableRow = document.createElement('tr');
 
-      $("#inventory").append($item);
+      newTableRow.innerHTML = itemHtml;
+
+      inventoryTable.appendChild(newTableRow);
     },
     findParent: function(e) {
-      return $(e.target).closest("tr");
+      let closest = e.target;
+
+      while (closest.tagName !== 'TR') {
+        let parent = closest.parentNode;
+        closest = parent;
+      }
+
+      return closest; 
     },
-    findID: function($item) {
-      return +$item.find("input[type=hidden]").val();
+    findID: function(item) {
+      return Number(item.querySelector("input[type='hidden']").value);
+      //return +$item.find("input[type=hidden]").val();
     },
     deleteItem: function(e) {
       e.preventDefault();
-      var $item = this.findParent(e).remove();
+      var itemToDel = this.findParent(e);
 
-      this.remove(this.findID($item));
+      this.remove(this.findID(itemToDel));
+      itemToDel.remove();
     },
     updateItem: function(e) {
       var $item = this.findParent(e);
@@ -74,9 +97,29 @@ var inventory;
       this.update($item);
     },
     bindEvents: function() {
-      $("#add_item").on("click", $.proxy(this.newItem, this));
-      $("#inventory").on("click", "a.delete", $.proxy(this.deleteItem, this));
-      $("#inventory").on("blur", ":input", $.proxy(this.updateItem, this));
+      document.getElementById("add_item")
+              .addEventListener("click", this.newItem.bind(this));
+      let inventory = document.getElementById('inventory');
+      let self = this;
+
+      inventory.addEventListener('click', (event) => {
+        let listOfLinks = Array.from(inventory.querySelectorAll('a.delete'));
+
+        if (listOfLinks.includes(event.target)) {
+          self.deleteItem.call(self, event);
+        };
+      });
+
+      inventory.addEventListener('blur', (event) => {
+        let selectors = 'input, textarea, select, button';
+        let inputs = Array.from(inventory.querySelectorAll(selectors));
+
+        if (inputs.includes(event.target)) { 
+          self.updateItem.call(self, event);
+        }
+      });
+      
+      //$(inventory).on('blur', ':input', this.updateItem.bind(this));
     },
     init: function() {
       this.setDate();
@@ -86,4 +129,4 @@ var inventory;
   };
 })();
 
-$($.proxy(inventory.init, inventory));
+$(inventory.init.bind(inventory));
