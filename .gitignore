@@ -7,3 +7,5 @@ answers.md
 test_*.sql
 script*.sh
 .DS_Store
+/node_modules
+*.env
