@@ -4,7 +4,7 @@ Having some sort of data or identifier present in the HTML for the purpose of yo
 	2. when you click the first tab, the block of content that is linked to it should be shown and the rest of the content blocks should be hidden.
 	3. While it is possible to use the index of the clicked tab to find the content block that matches the index, but if you want to put the tabs in a different order later you also have to remember to reorder the content blocks.
 
-Data attributes can be added to any HTML element, and the bear no significance other than to store data for you.
+Data attributes can be added to any HTML element, and  it bears no significance other than to store data for you.
 
 Data attributes always start with `data-` and need at least one character after the hyphen, but what comes after the hyphen can be anything.
 
@@ -14,7 +14,7 @@ The point of this whole thing is to forge a connection between two different ele
 
 In JQuery, there are two ways of accessing the data attribute:
 1. Using the `.attr` method, which allows you to specify the attribute name and get the value of the attribute.
-2. Using the `.data` method. Caution: it can be be for two different data sets (see example below). If you want to obtain the value of the data-block attribute on one of the tab links, you can use the data method and pass the nae of the data attribute minus the `data-` at the beginning of it.
+2. Using the `.data` method. Caution: it can be for two different data sets (see example below). If you want to obtain the value of the data-block attribute on one of the tab links, you can use the data method and pass the nae of the data attribute minus the `data-` at the beginning of it.
 
 ```javascript
 $link.data('block');

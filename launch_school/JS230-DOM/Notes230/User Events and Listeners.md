@@ -45,15 +45,13 @@ Adding event listeners to every element of interest is cumbersome in larger appl
 3. Adding handlers to many elements can be slow, and can lead to complicated, difficult to maintain code. For instance, a page that is like a large spreadsheet with hundreds and thousands of cells. It would be awfully difficult to take into account all the clicks and keyboard events.
 
 ### How is capturing and bubbling related to the drawbacks of adding event listener?
-Don't have an answer yet.
-
-When there are nested elements, events propagate throughout the chain. 
+When there are nested elements, events propagate throughout the chain. Hence, this feature can be capitalized to add event listeners to elements that are added dynamically to the page.
 
 If there is an event listener associated with an element, then the event is triggered for all the nested elements. That means, if we are interested in having a event listener for all the nested elements and we want the behavior to be different based on which nested element initiated the event, then we can attach the event listener to the outermost element and process the event differently inside the callback function.
 
 Hence, the number of elements you can interact with is equal to the element the event listener is attached to __plus__ the number pf its nested elements.
 
-	__Capturing__ and __Bubbling__ are phases that an event goes through after it initially fires. The event first gets dispatched to the global `window` object, then to the `document` object, all the way down to the target element, which is the element on which the event was originally fired. 
+__Capturing__ and __Bubbling__ are phases that an event goes through after it initially fires. The event first gets dispatched to the global `window` object, then to the `document` object, all the way down to the target element, which is the element on which the event was originally fired. 
 
 This means, events do not start and end on the target element or the element that an event was triggered on.
 

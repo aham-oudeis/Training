@@ -8,8 +8,7 @@ The job of the event loop is to look into the call stack and determine if the ca
 
 __DOM events__ trigger the specific function that reside in the web APIs environment. The event listeners sit in the web API environment waiting for certain event to happen, and when that event happens, then the callback function is placed in the message queue waiting to be executed.
 
-
-	“It helps to think of synchronous executions as a line of people waiting to buy movie tickets. If you are at the end of the line, you can’t buy a ticket until all the people in front of you have bought theirs. Think of asynchronous executions like ordering food in a restaurant. You don’t have to wait for other people who have come earlier to get their food before you can order yours. Everyone can order food at any time and receive it when it’s ready. Depending on the type of food you order, you may get your food sooner or later than other people.”
+“It helps to think of synchronous executions as a line of people waiting to buy movie tickets. If you are at the end of the line, you can’t buy a ticket until all the people in front of you have bought theirs. Think of asynchronous executions like ordering food in a restaurant. You don’t have to wait for other people who have come earlier to get their food before you can order yours. Everyone can order food at any time and receive it when it’s ready. Depending on the type of food you order, you may get your food sooner or later than other people.”
 
 Excerpt From
 Modern Asynchronous JavaScript

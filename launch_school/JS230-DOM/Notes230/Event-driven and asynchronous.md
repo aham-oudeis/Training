@@ -56,7 +56,6 @@ function stopCounting() {
 }
 ```
 
-
 ## User Interfaces and Events
 
 First, it is helpful to think how different systems are interacting here. The workload is distributed among the browser and javascript code. Second, the distributed systems are interacting with each other based on some common protocol. 

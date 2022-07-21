@@ -54,7 +54,7 @@ $(function() {
 
 However, if you want the `load` event to fire, then you would have to use the following:
 
-```javscript
+```javascript
 $(window).load(function() {
 
 });
